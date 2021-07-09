@@ -4,6 +4,7 @@ import get from 'lodash/get'
 import { Helmet } from 'react-helmet'
 import Layout from '../components/Layout'
 import ProgramPreview from '../components/ProgramPreview'
+import '../styles/sass/styles.scss'
 
 class ProgramIndex extends React.Component {
   render() {

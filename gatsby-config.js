@@ -56,22 +56,13 @@ module.exports = {
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-sass',
     {
-      resolve: `gatsby-transformer-remark`,
+      resolve: `gatsby-plugin-modal-routing`,
       options: {
-        plugins: [
-          {
-            resolve: `gatsby-remark-prismjs`,
-          },
-          `gatsby-remark-autolink-headers`,
-          {
-            resolve: `gatsby-remark-images-contentful`,
-            options: {
-              maxWidth: 650,
-              backgroundColor: 'white',
-              linkImagesToOriginal: false,
-            },
-          },
-        ],
+        appElement: '#___gatsby',
+        modalProps: {
+          className: 'modalClass',
+          ariaHideApp: false,
+        },
       },
     },
     `gatsby-plugin-catch-links`,

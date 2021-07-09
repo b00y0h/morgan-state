@@ -19,13 +19,13 @@
 //////////////
 @mixin animation($animate...) {
   $max: length($animate);
-  $animations: "";
+  $animations: '';
 
   @for $i from 1 through $max {
     $animations: #{$animations + nth($animate, $i)};
 
     @if $i < $max {
-      $animations: #{$animations + ", "};
+      $animations: #{$animations + ', '};
     }
   }
   -webkit-animation: $animations;
@@ -91,7 +91,7 @@
   }
 
   &::after {
-    content: "";
+    content: '';
     display: block;
     position: absolute;
     width: 0.6em;
@@ -110,7 +110,7 @@
     // content: $i-arrow;
     // font-family: $f-icons;
     // color: $icon-color !important;
-    content: "";
+    content: '';
     display: block;
     position: absolute;
     width: 1.5em;
@@ -162,9 +162,9 @@ $x-fontFix: 0;
   }
 
   @font-face {
-    font-family: "#{$_f-font-family}";
-    src: url("#{$_p-file-name}.woff") format("woff"),
-      url("#{$_p-file-name}.ttf") format("truetype");
+    font-family: '#{$_f-font-family}';
+    src: url('#{$_p-file-name}.woff') format('woff'),
+      url('#{$_p-file-name}.ttf') format('truetype');
     font-weight: $_f-font-weight;
     font-style: $_f-font-style;
   }
@@ -208,8 +208,8 @@ $x-fontFix: 0;
   // - must be a REM value
   ////
 
-  $_d-mid: "";
-  $_importantx: "";
+  $_d-mid: '';
+  $_importantx: '';
 
   @for $_x-i from 1 through length($_d-maxRem) {
     $_d-iMin: nth($_d-minRem, $_x-i);
@@ -225,13 +225,12 @@ $x-fontFix: 0;
 
     $_d-iMid: calc(
       #{$_d-iMin} +
-        #{($_d-iMax - $_d-iMin) /
-        1rem} *
-        ((100vw - #{$_mq-min}) / #{($_mq-max - $_mq-min) / 1rem})
+        math.div($_d-iMax - $_d-iMin, 1rem) *
+        math.div(100vw-$_mq-min, math.div($_mq-max-$_mq-min, 1rem))
     );
 
     @if ($_x-i > 1) {
-      $_d-mid: $_d-mid + " ";
+      $_d-mid: $_d-mid + ' ';
     }
 
     $_d-mid: $_d-mid + $_d-iMid;
