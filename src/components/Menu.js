@@ -45,8 +45,16 @@ const activeLinkStyle = {
   color: 'white',
 }
 
+function isProgram() {
+  const pageUrl = window.location.href.indexOf('program')
+
+  if (pageUrl != -1) {
+  }
+}
+
 const Menu = () => {
   const { menuLinks } = useSiteMetadata()
+  isProgram()
   return (
     <Header>
       <Nav>
