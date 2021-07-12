@@ -42,7 +42,7 @@ const StyledImg = styled(Img)`
   border-top-right-radius: 1px;
 `
 
-const Title = styled.h2`
+const Title = styled.h3`
   font-size: 1.5em;
   font-weight: 600;
   text-transform: capitalize;
@@ -67,9 +67,9 @@ const Excerpt = styled.p`
 const Card = ({ slug, heroImage, title, body, ...props }) => {
   return (
     <>
-      {heroImage && body && (
+      {title && (
         <Post featured={props.featured}>
-          <Link to={`${props.basePath}/${slug}/`}>
+          <Link to={`/program/${slug}/`}>
             <StyledImg
               fluid={heroImage && heroImage.fluid}
               backgroundColor={'#eeeeee'}

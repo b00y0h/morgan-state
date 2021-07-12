@@ -1,7 +1,6 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 import styled from 'styled-components'
-import Carousel, { slidesToShowPlugin } from '@brainhubeu/react-carousel'
 import '@brainhubeu/react-carousel/lib/style.css'
 
 import Layout from '../components/Layout'
@@ -14,17 +13,21 @@ import SEO from '../components/SEO'
 import Card from '../components/Card'
 import CardList from '../components/CardList'
 import Testimonial from '../components/Testimonial'
+import ImageSlider from '../components/Slider'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { BLOCKS, INLINES } from '@contentful/rich-text-types'
 import StatCard from '../components/StatCard'
 import { Button } from '@theme-ui/components'
 
-const CarouselContent = props => (
-  <div id={props.id}>
-    <img src={props.image.fluid.src} />
-    <p>{props.description}</p>
-  </div>
-)
+const carouselSettings = {
+  dot: true,
+  infinite: true,
+  speed: 500,
+  arrows: true,
+  slidesToShow: 4,
+  slidesToScroll: 4,
+  cssEase: 'linear',
+}
 
 const StatBlock = styled.div`
   padding: 1rem;
@@ -55,6 +58,13 @@ const RelatedPrograms = styled.div`
 const CareerDetails = styled.div`
   background: lightpink;
 `
+const PreContentBlock = styled.div`
+  background: plum;
+`
+const CarouselPreText = styled.div`
+  background: grey;
+`
+
 const RICHTEXT_OPTIONS = {
   renderNode: {
     [INLINES.HYPERLINK]: (node, children) => {
@@ -118,8 +128,10 @@ const ProgramTemplate = ({ data, pageContext }) => {
     whyMorganStateStats,
     relatedSchoolCollege,
     programDetailUrl,
+    preContentBlock,
     skillsAndJobs,
     careerDetails,
+    carouselPreText,
     carouselContent,
     testimonial,
     relatedPrograms,
@@ -135,12 +147,32 @@ const ProgramTemplate = ({ data, pageContext }) => {
     ogImage = null
   }
 
+  const normalizedCarousel =
+    carouselContent &&
+    carouselContent.map(item => ({
+      id: item.id,
+      title: item.title,
+      src: item.image,
+      description: item.description,
+    }))
+
+  const normalizedRelated =
+    relatedPrograms &&
+    relatedPrograms.map(item => ({
+      id: item.id,
+      title: item.fullProgramName,
+      src: item.heroImage,
+      description: item.metaDescription
+        ? item.metaDescription.metaDescription
+        : null,
+    }))
+
   return (
     <Layout>
       <SEO
         title={title}
         description={
-          metaDescription ? metaDescription.internal.content : 'Title Needed'
+          metaDescription ? metaDescription.metaDescription : 'Title Needed'
         }
         image={ogImage}
       />
@@ -160,18 +192,24 @@ const ProgramTemplate = ({ data, pageContext }) => {
                 </>
               ))}
           </ul>
-          <StatBlock>
-            <span>{creditHours}</span>
-            Credit Hours
-          </StatBlock>
-          <StatBlock>
-            <span>{monthsToComplete}</span>
-            Months to Complete
-          </StatBlock>
-          <StatBlock>
-            <span>{programTracks}</span>
-            Program Tracks
-          </StatBlock>
+          {creditHours && (
+            <StatBlock>
+              <span>{creditHours}</span>
+              Credit Hours
+            </StatBlock>
+          )}
+          {monthsToComplete && (
+            <StatBlock>
+              <span>{monthsToComplete}</span>
+              Months to Complete
+            </StatBlock>
+          )}
+          {programTracks && (
+            <StatBlock>
+              <span>{programTracks}</span>
+              Program Tracks
+            </StatBlock>
+          )}
           <h2>
             Change Your Future with a {typeOfDegree} in {fullProgramName}
           </h2>
@@ -188,52 +226,44 @@ const ProgramTemplate = ({ data, pageContext }) => {
                 ))}
             </CardList>
           </WhyMorganState>
-          <h2>Move Forward in Your Professional Career</h2>
-          <p>
-            Lorem ipsum dolor sit amet eiusmod imperdiet libero incididunt eget
-            volutpat aenean curabitur iaculis. Tristique faucibus condimentum
-            sodales posuere luctus laoreet congue. Condimentum vel libero
-            interdum quisque pharetra sed proin netus venenatis pretium molestie
-            ac libero. Rhoncus nibh dapibus fringilla consequat eros lacinia
-            vulputate eu. Nec dui urna rhoncus tempor phasellus elementum lectus
-            nec posuere quam vel egestas.
-          </p>
-          <SkillsAndJobs>
-            {/* <h2>Learn In Demand Skills</h2> */}
-            {skillsAndJobs &&
-              documentToReactComponents(skillsAndJobs.json, RICHTEXT_OPTIONS)}
-          </SkillsAndJobs>
-          <CareerDetails>
-            {/* <h2>Get the job you want</h2> */}
-            {careerDetails &&
-              documentToReactComponents(careerDetails.json, RICHTEXT_OPTIONS)}
-          </CareerDetails>
 
-          {carouselContent &&
-            carouselContent.map(node => (
-              <CarouselContent key={node.id} {...node} />
-            ))}
+          {preContentBlock && (
+            <PreContentBlock>
+              {documentToReactComponents(
+                preContentBlock.json,
+                RICHTEXT_OPTIONS
+              )}
+            </PreContentBlock>
+          )}
+          {skillsAndJobs && (
+            <SkillsAndJobs>
+              {/* <h2>Content block 1</h2> */}
+              {documentToReactComponents(skillsAndJobs.json, RICHTEXT_OPTIONS)}
+            </SkillsAndJobs>
+          )}
 
-          {/* https://brainhubeu.github.io/react-carousel/docs/gettingStarted */}
-          {/* {carouselContent && (
-            <Carousel
-              plugins={[
-                'centered',
-                'arrows',
-                'infinite',
-                {
-                  resolve: slidesToShowPlugin,
-                  options: {
-                    numberOfSlides: 2,
-                  },
-                },
-              ]}
-            >
-              {carouselContent.map(node => (
-                <CarouselContent key={node.id} {...node} />
-              ))}
-            </Carousel>
-          )} */}
+          {careerDetails && (
+            <CareerDetails>
+              {/* <h2>Content block 2</h2> */}
+              {documentToReactComponents(careerDetails.json, RICHTEXT_OPTIONS)}
+            </CareerDetails>
+          )}
+
+          {carouselPreText && (
+            <CarouselPreText>
+              {documentToReactComponents(
+                carouselPreText.json,
+                RICHTEXT_OPTIONS
+              )}
+            </CarouselPreText>
+          )}
+          {normalizedCarousel && (
+            <ImageSlider
+              data={normalizedCarousel}
+              settings={carouselSettings}
+            />
+          )}
+
           <AchieveSuccess>
             <h2>Achieve Success Like Our Alumni</h2>
             <p>
@@ -260,19 +290,15 @@ const ProgramTemplate = ({ data, pageContext }) => {
             <p>Lorem ipsum dolor sit amet ac urna ullamcorper nisi.</p>
             <Button>Request Information</Button>
           </DiscoverProgramCTA>
-          <RelatedPrograms>
-            <h2>Related Programs</h2>
-            {relatedSchoolCollege &&
-              relatedSchoolCollege.program.map(program => (
-                <Card
-                  key={program.id}
-                  slug={program.slug}
-                  heroImage={program.heroImage}
-                  title={program.fullProgramName}
-                  body={program.metaDescription.metaDescription}
-                />
-              ))}
-          </RelatedPrograms>
+          {normalizedRelated && (
+            <RelatedPrograms>
+              <h2>Explore Related Programs</h2>
+              <ImageSlider
+                data={normalizedRelated}
+                settings={carouselSettings}
+              />
+            </RelatedPrograms>
+          )}
         </PageBody>
       </Container>
       {/* <PostLinks
@@ -310,25 +336,17 @@ export const query = graphql`
           }
         }
       }
-      relatedSchoolCollege {
-        program {
-          slug
-          metaDescription {
-            metaDescription
-          }
-          heroImage {
-            fluid {
-              src
-            }
-          }
-          fullProgramName
-        }
-      }
       programDetailUrl
       skillsAndJobs {
         json
       }
+      preContentBlock {
+        json
+      }
       careerDetails {
+        json
+      }
+      carouselPreText {
         json
       }
       carouselContent {
@@ -353,14 +371,16 @@ export const query = graphql`
         }
       }
       metaDescription {
-        internal {
-          content
-        }
+        metaDescription
       }
       relatedPrograms {
         fullProgramName
         id
         slug
+        typeOfDegree
+        metaDescription {
+          metaDescription
+        }
         heroImage {
           fluid(maxWidth: 350, maxHeight: 196, resizingBehavior: SCALE) {
             ...GatsbyContentfulFluid_withWebp_noBase64
