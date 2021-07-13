@@ -176,7 +176,7 @@ const ProgramTemplate = ({ data, pageContext }) => {
         }
         image={ogImage}
       />
-      <Hero title={title} image={heroImage} height={'50vh'} />
+      <Hero title={title} image={heroImage} height={'60vh'} />
       <Container>
         {tags && <TagList tags={tags} basePath={basePath} />}
         <PageBody body="xxxxxxxxx">
