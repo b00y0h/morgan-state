@@ -12,7 +12,7 @@ export default {
   },
   sizes: {
     maxWidth: '1050px',
-    maxWidthCentered: '650px',
+    maxWidthCentered: '90rem',
   },
   responsive: {
     small: '35em',

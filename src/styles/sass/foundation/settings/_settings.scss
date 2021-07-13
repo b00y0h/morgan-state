@@ -51,7 +51,7 @@ $c-basecopyblack: darken(
   10%
 ); // Base color for all copy blocks and regular text.
 $c-links: $c-red; // Base color for all links.
-$c-cta: $c-red; // Base color for all CTAs
+$c-cta: yellow; // Base color for all CTAs
 $c-ctahover: darken($c-red, 20%);
 
 // ===========================

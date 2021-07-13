@@ -4,9 +4,9 @@
 
 .button,
 button,
-input[type="button"],
-input[type="reset"],
-input[type="submit"] {
+input[type='button'],
+input[type='reset'],
+input[type='submit'] {
   @include buttons($c-cta);
 }
 
