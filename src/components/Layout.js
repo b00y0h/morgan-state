@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import styled from '@emotion/styled'
 import { Global } from '@emotion/core'
-import Menu from '../components/Menu'
+import Head from './Head'
 import Footer from '../components/Footer'
 import { globalStyles } from '../styles/globalStyles.js'
 import 'styles/sass/styles.scss'
@@ -36,7 +36,7 @@ const Layout = props => {
         <Skip href="#main" id="skip-navigation">
           Skip to content
         </Skip>
-        <Menu />
+        <Head />
         <div id="main">{props.children}</div>
       </div>
       <Footer />
