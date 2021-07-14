@@ -6,7 +6,7 @@ import '@brainhubeu/react-carousel/lib/style.css'
 import Layout from '../components/Layout'
 import Hero from '../components/Hero'
 import Container from '../components/Container'
-import PageBody from '../components/PageBody'
+// import PageBody from '../components/PageBody'
 import TagList from '../components/TagList'
 import PostLinks from '../components/PostLinks'
 import SEO from '../components/SEO'
@@ -177,129 +177,115 @@ const ProgramTemplate = ({ data, pageContext }) => {
         image={ogImage}
       />
       <Hero title={title} image={heroImage} height={'60vh'} />
-      <Container constraints="centered">
+      <Container constraints="center">
         {tags && <TagList tags={tags} basePath={basePath} />}
-        <PageBody>
-          <h1>
-            {typeOfDegree} in {fullProgramName}
-          </h1>
-          <ul>
-            {availableMethodsOfStudy &&
-              availableMethodsOfStudy.map(method => (
-                <>
-                  <b>Learning Mode: </b>
-                  <span key={method}>{method}</span>
-                </>
+        <h1>
+          {typeOfDegree} in {fullProgramName}
+        </h1>
+        <ul>
+          {availableMethodsOfStudy &&
+            availableMethodsOfStudy.map(method => (
+              <>
+                <b>Learning Mode: </b>
+                <span key={method}>{method}</span>
+              </>
+            ))}
+        </ul>
+        {creditHours && (
+          <StatBlock>
+            <span>{creditHours}</span>
+            Credit Hours
+          </StatBlock>
+        )}
+        {monthsToComplete && (
+          <StatBlock>
+            <span>{monthsToComplete}</span>
+            Months to Complete
+          </StatBlock>
+        )}
+        {programTracks && (
+          <StatBlock>
+            <span>{programTracks}</span>
+            Program Tracks
+          </StatBlock>
+        )}
+        <h2>
+          Change Your Future with a {typeOfDegree} in {fullProgramName}
+        </h2>
+        <Description>
+          {description &&
+            documentToReactComponents(description.json, RICHTEXT_OPTIONS)}
+        </Description>
+        <h2>Why Morgan State?</h2>
+        <WhyMorganState>
+          <CardList>
+            {whyMorganStateStats &&
+              whyMorganStateStats.map(node => (
+                <StatCard key={node.id} {...node} />
               ))}
-          </ul>
-          {creditHours && (
-            <StatBlock>
-              <span>{creditHours}</span>
-              Credit Hours
-            </StatBlock>
-          )}
-          {monthsToComplete && (
-            <StatBlock>
-              <span>{monthsToComplete}</span>
-              Months to Complete
-            </StatBlock>
-          )}
-          {programTracks && (
-            <StatBlock>
-              <span>{programTracks}</span>
-              Program Tracks
-            </StatBlock>
-          )}
-          <h2>
-            Change Your Future with a {typeOfDegree} in {fullProgramName}
-          </h2>
-          <Description>
-            {description &&
-              documentToReactComponents(description.json, RICHTEXT_OPTIONS)}
-          </Description>
-          <h2>Why Morgan State?</h2>
-          <WhyMorganState>
-            <CardList>
-              {whyMorganStateStats &&
-                whyMorganStateStats.map(node => (
-                  <StatCard key={node.id} {...node} />
-                ))}
-            </CardList>
-          </WhyMorganState>
+          </CardList>
+        </WhyMorganState>
 
-          {preContentBlock && (
-            <PreContentBlock>
-              {documentToReactComponents(
-                preContentBlock.json,
-                RICHTEXT_OPTIONS
-              )}
-            </PreContentBlock>
-          )}
-          {skillsAndJobs && (
-            <SkillsAndJobs>
-              {/* <h2>Content block 1</h2> */}
-              {documentToReactComponents(skillsAndJobs.json, RICHTEXT_OPTIONS)}
-            </SkillsAndJobs>
-          )}
+        {preContentBlock && (
+          <PreContentBlock>
+            {documentToReactComponents(preContentBlock.json, RICHTEXT_OPTIONS)}
+          </PreContentBlock>
+        )}
+        {skillsAndJobs && (
+          <SkillsAndJobs>
+            {/* <h2>Content block 1</h2> */}
+            {documentToReactComponents(skillsAndJobs.json, RICHTEXT_OPTIONS)}
+          </SkillsAndJobs>
+        )}
 
-          {careerDetails && (
-            <CareerDetails>
-              {/* <h2>Content block 2</h2> */}
-              {documentToReactComponents(careerDetails.json, RICHTEXT_OPTIONS)}
-            </CareerDetails>
-          )}
+        {careerDetails && (
+          <CareerDetails>
+            {/* <h2>Content block 2</h2> */}
+            {documentToReactComponents(careerDetails.json, RICHTEXT_OPTIONS)}
+          </CareerDetails>
+        )}
 
-          {carouselPreText && (
-            <CarouselPreText>
-              {documentToReactComponents(
-                carouselPreText.json,
-                RICHTEXT_OPTIONS
-              )}
-            </CarouselPreText>
-          )}
-          {normalizedCarousel && (
-            <ImageSlider
-              data={normalizedCarousel}
-              settings={carouselSettings}
-            />
-          )}
+        {carouselPreText && (
+          <CarouselPreText>
+            {documentToReactComponents(carouselPreText.json, RICHTEXT_OPTIONS)}
+          </CarouselPreText>
+        )}
+        {normalizedCarousel && (
+          <ImageSlider data={normalizedCarousel} settings={carouselSettings} />
+        )}
 
-          <AchieveSuccess>
-            <h2>Achieve Success Like Our Alumni</h2>
-            <p>
-              Lorem ipsum dolor sit amet nunc diam curabitur pretium lectus non
-              sodales. Ut risus a lacus curabitur turpis incididunt quisque quam
-              aliquet. Est orci aliqua pharetra mi senectus quisque volutpat
-              laoreet. Velit arcu facilisis enim eu curabitur quam augue
-              sodales. At hac luctus aliqua mattis nullam semper neque posuere
-              nisi dapibus nulla sollicitudin.
-            </p>
-          </AchieveSuccess>
-          {testimonial && (
-            <Testimonial
-              image={testimonial.image}
-              quote={testimonial.quote}
-              author={testimonial.author}
-            ></Testimonial>
-          )}
+        <AchieveSuccess>
+          <h2>Achieve Success Like Our Alumni</h2>
+          <p>
+            Lorem ipsum dolor sit amet nunc diam curabitur pretium lectus non
+            sodales. Ut risus a lacus curabitur turpis incididunt quisque quam
+            aliquet. Est orci aliqua pharetra mi senectus quisque volutpat
+            laoreet. Velit arcu facilisis enim eu curabitur quam augue sodales.
+            At hac luctus aliqua mattis nullam semper neque posuere nisi dapibus
+            nulla sollicitudin.
+          </p>
+        </AchieveSuccess>
+        {testimonial && (
+          <Testimonial
+            image={testimonial.image}
+            quote={testimonial.quote}
+            author={testimonial.author}
+          ></Testimonial>
+        )}
 
-          <DiscoverProgramCTA>
-            <h3>
-              Discover the {typeOfDegree} in {fullProgramName}
-            </h3>
-            <p>Lorem ipsum dolor sit amet ac urna ullamcorper nisi.</p>
-            <Button>Request Information</Button>
-          </DiscoverProgramCTA>
-          {normalizedRelated && (
-            <RelatedPrograms>
-              <h2>Explore Related Programs</h2>
-              <ImageSlider
-                data={normalizedRelated}
-                settings={carouselSettings}
-              />
-            </RelatedPrograms>
-          )}
-        </PageBody>
+        <DiscoverProgramCTA>
+          <h3>
+            Discover the {typeOfDegree} in {fullProgramName}
+          </h3>
+          <p>Lorem ipsum dolor sit amet ac urna ullamcorper nisi.</p>
+          <Button>Request Information</Button>
+        </DiscoverProgramCTA>
+        {normalizedRelated && (
+          <RelatedPrograms>
+            <h2>Explore Related Programs</h2>
+            <ImageSlider data={normalizedRelated} settings={carouselSettings} />
+          </RelatedPrograms>
+        )}
       </Container>
       {/* <PostLinks
         previous={previous}

@@ -1,14 +1,10 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import styled from '@emotion/styled'
 import { Global } from '@emotion/core'
 import Head from './Head'
 import Footer from '../components/Footer'
 import { globalStyles } from '../styles/globalStyles.js'
 import 'styles/sass/styles.scss'
-
-const Root = styled.div`
-  font-family: ${props => props.theme.fonts.body};
-`
 
 const Skip = styled.a`
   font-family: ${props => props.theme.fonts.body};
@@ -31,17 +27,19 @@ const Skip = styled.a`
 
 const Layout = props => {
   return (
-    <Root className="siteRoot">
+    <>
       <div className="siteContent">
         <Skip href="#main" id="skip-navigation">
           Skip to content
         </Skip>
         <Head />
-        <div id="main">{props.children}</div>
+        <main id="main" role="main">
+          {props.children}
+        </main>
       </div>
       <Footer />
       <Global styles={globalStyles} />
-    </Root>
+    </>
   )
 }
 

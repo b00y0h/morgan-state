@@ -125,6 +125,7 @@ body {
   display: block;
   background: $c-primary-01;
   color: white;
+  font-family: $f-sans;
 
   .wrapper {
     background: rgba(black, 0.3);
@@ -141,6 +142,7 @@ body {
     .tel {
       color: white;
       text-decoration: none;
+      font-size: 0.8rem;
     }
   }
 
@@ -158,4 +160,8 @@ body {
 figure {
   position: relative;
   margin-top: 0;
+}
+
+.siteContent {
+  font-family: $f-sans;
 }

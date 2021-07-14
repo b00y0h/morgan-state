@@ -4,17 +4,17 @@
 
 .logo {
   display: block;
-  @include fluidRem(width, 5rem, 8rem);
-  @include fluidRem(height, 1.5rem, 3rem);
+  @include fluidRem(width, 8rem, 15rem);
+  @include fluidRem(height, 2.3rem, 5.6rem);
   text-indent: -999em;
   position: relative;
-  font-family: 'Open Sans', sans-serif;
+  background: $c-primary-01;
 
   &::before {
     content: '';
     display: block;
-    width: 100%;
-    height: 100%;
+    width: 90%;
+    height: 90%;
     background: url(./../../assets/msu-logo-horizontal.svg) no-repeat center;
     background-size: contain;
     position: absolute;
