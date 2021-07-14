@@ -1,53 +1,15 @@
 import React from 'react'
-import styled from '@emotion/styled'
 
-const Wrapper = styled.footer`
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin: 0 auto;
-  max-width: ${props => props.theme.sizes.maxWidth};
-`
-
-const List = styled.ul`
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-between;
-  align-items: flex-start;
-  width: 100%;
-  border-top: 1px solid ${props => props.theme.colors.secondary};
-  padding: 1em 0 2em;
-  margin: 0 1.5em;
-`
-
-const Item = styled.li`
-  display: inline-block;
-  padding: 0.25em 0;
-  width: 100%;
-  @media screen and (min-width: ${props => props.theme.responsive.small}) {
-    width: auto;
-  }
-  a {
-    font-weight: 600;
-    transition: all 0.2s;
-    color: ${props => props.theme.colors.text};
-    &:hover {
-      color: ${props => props.theme.colors.highlight};
-    }
-    &:visited {
-      color: ${props => props.theme.colors.text};
-    }
-  }
-`
-
-const Footer = () => (
-  <Wrapper>
-    <List>
-      <Item>footer</Item>
-      <Item></Item>
-    </List>
-  </Wrapper>
-)
+const Footer = () => {
+  return (
+    <footer className="site-footer">
+      <div className="wrapper centered">
+        <div className="logo-footer">Morgan State University</div>
+        <address>1700 East Cold Spring Lane, Baltimore, Maryland 21251</address>
+        <div className="tel">443-885-3333</div>
+      </div>
+    </footer>
+  )
+}
 
 export default Footer

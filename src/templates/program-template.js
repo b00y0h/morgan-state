@@ -177,9 +177,9 @@ const ProgramTemplate = ({ data, pageContext }) => {
         image={ogImage}
       />
       <Hero title={title} image={heroImage} height={'60vh'} />
-      <Container>
+      <Container constraints="centered">
         {tags && <TagList tags={tags} basePath={basePath} />}
-        <PageBody body="xxxxxxxxx">
+        <PageBody>
           <h1>
             {typeOfDegree} in {fullProgramName}
           </h1>

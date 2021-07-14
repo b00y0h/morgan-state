@@ -225,8 +225,9 @@ $x-fontFix: 0;
 
     $_d-iMid: calc(
       #{$_d-iMin} +
-        math.div($_d-iMax - $_d-iMin, 1rem) *
-        math.div(100vw-$_mq-min, math.div($_mq-max-$_mq-min, 1rem))
+        #{($_d-iMax - $_d-iMin) /
+        1rem} *
+        ((100vw - #{$_mq-min}) / #{($_mq-max - $_mq-min) / 1rem})
     );
 
     @if ($_x-i > 1) {
@@ -255,6 +256,93 @@ $x-fontFix: 0;
 
     @media (min-width: #{$_mq-max}) {
       #{$_x-prop}: #{$_d-maxRem};
+    }
+  }
+}
+
+// =============================================================
+// Slick Buttons
+
+@mixin slickNavBtns($mainSlickColor) {
+  .slick-slider {
+    position: relative;
+
+    .slick-arrow {
+      display: none !important  ;
+      position: absolute;
+      width: 2em;
+      height: 2em;
+      padding: 0;
+      text-indent: -999em;
+      background: transparent !important;
+      border: none !important;
+      z-index: 100;
+      top: 50%;
+      @include transform(translateY(-50%));
+
+      &::before {
+        content: $i-arrow;
+        font-family: $f-icons;
+        display: block;
+        color: rgba($mainSlickColor, 0.6);
+        text-indent: 0;
+        font-size: 2em;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        @include transform(translateY(-50%) translateX(-50%));
+      }
+
+      @media (min-width: $mq-900) {
+        display: block !important;
+      }
+
+      &:hover {
+        &::before {
+          color: $mainSlickColor;
+        }
+      }
+    }
+    .slick-prev {
+      left: 1em;
+      &::before {
+        @include transform(translateY(-50%) translateX(-50%) rotate(180deg));
+      }
+    }
+    .slick-next {
+      right: 1em;
+    }
+    .slick-dots {
+      display: block;
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      @include transform(translateX(-50%));
+      @include flexbox();
+
+      li {
+        margin-right: 0.3em;
+
+        &:last-child {
+          margin-right: 0;
+        }
+
+        button {
+          text-indent: -999em;
+          border-radius: 100% !important;
+          width: 1em !important;
+          height: 1em !important;
+          padding: 0 !important;
+          border: 1px solid $mainSlickColor !important;
+          background: rgba($mainSlickColor, 0.5) !important;
+        }
+
+        &.slick-active {
+          button {
+            background: $mainSlickColor !important;
+          }
+        }
+      }
     }
   }
 }

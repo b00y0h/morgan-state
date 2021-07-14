@@ -37,3 +37,25 @@ a {
   font-size: 1rem;
   margin: 0.5em 0;
 }
+
+// ===========================
+// Check if this is being used anywhere
+.buttons {
+  display: flex;
+  flex-direction: column;
+
+  @media (min-width: $mq-600) {
+    flex-direction: row;
+    justify-content: flex-start;
+
+    a,
+    .button,
+    button {
+      margin: 0 1em 1em 0;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+}

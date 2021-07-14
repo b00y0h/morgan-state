@@ -1,16 +1,13 @@
 import React from 'react'
-import styled from '@emotion/styled'
-
-const Wrapper = styled.section`
-  margin: 0 auto auto;
-  width: 100%;
-  max-width: ${props => props.theme.sizes.maxWidth};
-  padding: 3em 1.5em 2em;
-  flex-grow: 1;
-`
 
 const Container = props => {
-  return <Wrapper>{props.children}</Wrapper>
+  if (props.constraints === 'fill-container') {
+    return <div className="wrapper fill-container">{props.children}</div>
+  } else if (props.constraints === 'centered') {
+    return <div className="wrapper centered">{props.children}</div>
+  } else {
+    return <div className="wrapper">{props.children}</div>
+  }
 }
 
 export default Container

@@ -12,15 +12,15 @@ body {
 %wrapper {
   display: block;
   width: 100%;
-  max-width: $mq-1300;
-  margin: 0 auto;
-
-  &.narrow {
-    max-width: $mq-1000;
-  }
 
   &.centered {
     text-align: center;
+    max-width: $mq-1300;
+    margin: 0 auto;
+
+    &.narrow {
+      max-width: $mq-1000;
+    }
   }
 }
 
@@ -39,7 +39,7 @@ body {
 // ================================
 // Hero Images
 
-[aria-hidden="true"] {
+[aria-hidden='true'] {
   display: none;
   visibility: hidden;
 }
@@ -86,7 +86,7 @@ body {
     }
   }
 
-  & [class*="col"] {
+  & [class*='col'] {
     margin-bottom: 1em;
 
     @media (min-width: $mq-800) {
@@ -118,88 +118,38 @@ body {
   }
 }
 
-.buttons {
-  display: flex;
-  flex-direction: column;
-
-  @media (min-width: $mq-600) {
-    flex-direction: row;
-    justify-content: flex-start;
-
-    a,
-    .button,
-    button {
-      margin: 0 1em 1em 0;
-
-      &:last-child {
-        margin-right: 0;
-      }
-    }
-  }
-}
-
 // ============================
 // Footer
 
 .site-footer {
   display: block;
-  background: $c-gray;
-  @include fluidRem(padding, 1rem, 3rem);
+  background: $c-primary-01;
   color: white;
 
-  div[class*="Container"] {
-    align-items: flex-start;
+  .wrapper {
+    background: rgba(black, 0.3);
+    max-width: 16em;
+    @include fluidRem(padding, 1rem, 3rem);
 
-    div[class*="Flex"] {
-      a {
-        margin-right: 0.5em;
-        padding: 0.5em 1em;
-        background: lighten($c-gray, 15%);
-        border-color: lighten($c-gray, 15%);
-
-        &:hover,
-        &:focus {
-          background: $c-darkgrey;
-        }
-
-        &:after {
-          display: none;
-        }
-
-        &:last-child {
-          margin: 0;
-        }
-      }
+    address {
+      color: white;
+      line-height: 1.5;
+      margin-bottom: 1em;
+      font-size: 0.8rem;
     }
-  }
 
-  div[class*="Details"] {
-    width: 100%;
-  }
-  div[class*="Links"] {
-    width: 100%;
-    div[class*="Flex"] {
-      flex-direction: row;
-      width: 60%;
-      justify-content: center;
-      margin: 0 auto;
-      @media (min-width: 680px) {
-        margin: 0 0 0 auto;
-      }
+    .tel {
+      color: white;
+      text-decoration: none;
     }
   }
 
   .logo-footer {
-    @extend .logo;
-    width: 5em;
-    height: 1.5em;
-    margin-bottom: 0.5em;
-    @media (max-width: 680px) {
-      margin-left: auto;
-      margin-right: auto;
-    }
+    @extend .logo-footer;
+    margin: 0 auto 1rem;
   }
 }
+//============================
 
 .no-break {
   display: inline;
