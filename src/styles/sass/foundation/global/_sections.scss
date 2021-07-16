@@ -1,0 +1,32 @@
+@charset "UTF-8";
+
+#requestInfoCta {
+  background: $c-primary-01;
+  z-index: 90;
+  position: fixed;
+  bottom: 0;
+  padding: 1.1rem !important;
+
+  @media (min-width: $mq-1000) {
+    position: sticky;
+    top: 0;
+    bottom: initial;
+  }
+
+  .ctaContent {
+    @extend %wrapper;
+    @include fluidRem(padding, 0 1rem, 0 4rem);
+    display: flex;
+    align-items: center;
+    max-width: $mq-800 !important;
+
+    p {
+      color: white;
+      margin: 0;
+    }
+
+    button {
+      flex-shrink: 0;
+    }
+  }
+}

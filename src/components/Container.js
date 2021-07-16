@@ -1,26 +1,38 @@
 import React from 'react'
 
 const FullWidthCont = props => {
-  return <div className="wrapper fill-container">{props.children}</div>
+  return (
+    <section id={props.id} className="wrapper fill-container">
+      {props.children}
+    </section>
+  )
 }
 
 const CenteredCont = props => {
-  return <div className="wrapper centered">{props.children}</div>
+  return (
+    <section id={props.id} className="wrapper centered">
+      {props.children}
+    </section>
+  )
 }
 
 const CenterNarrowCont = props => {
-  return <div className="wrapper narrow">{props.children}</div>
+  return (
+    <section id={props.id} className="wrapper narrow">
+      {props.children}
+    </section>
+  )
 }
 
 const Container = props => {
   return (
     <>
       {props.constraints === 'narrow' ? (
-        <CenterNarrowCont>{props.children}</CenterNarrowCont>
+        <CenterNarrowCont id={props.id}>{props.children}</CenterNarrowCont>
       ) : props.constraints === 'center' ? (
-        <CenteredCont>{props.children}</CenteredCont>
+        <CenteredCont id={props.id}>{props.children}</CenteredCont>
       ) : (
-        <FullWidthCont>{props.children}</FullWidthCont>
+        <FullWidthCont id={props.id}>{props.children}</FullWidthCont>
       )}
     </>
   )

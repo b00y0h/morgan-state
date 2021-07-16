@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { Link } from 'gatsby'
 import { useSiteMetadata } from '../hooks/use-site-metadata'
+import { container } from 'webpack'
 
 function Logo() {
   const pageUrl = window.location.href.indexOf('program')
@@ -13,9 +14,23 @@ function Logo() {
 }
 
 const Head = () => {
+  const [offset, setOffset] = useState(0)
+
+  // useEffect(() => {
+  //   window.onscroll = () => {
+  //     setOffset(window.pageYOffset)
+  //   }
+  //   //   // console.log(offset)
+
+  //   // return cleanUp=()=>{}
+  // }, [])
+
   return (
     <header className="page-header">
       <Logo />
+      <div className="container" ref="container">
+        test
+      </div>
     </header>
   )
 }

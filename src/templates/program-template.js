@@ -14,6 +14,9 @@ import Card from '../components/Card'
 import CardList from '../components/CardList'
 import Testimonial from '../components/Testimonial'
 import ImageSlider from '../components/Slider'
+
+import ProgramStat from '../components/ProgramStat'
+
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { BLOCKS, INLINES } from '@contentful/rich-text-types'
 import StatCard from '../components/StatCard'
@@ -25,18 +28,18 @@ const carouselSettings = {
   speed: 500,
   arrows: true,
   slidesToShow: 4,
-  slidesToScroll: 4,
+  slidesToScroll: 1,
   cssEase: 'linear',
 }
 
-const StatBlock = styled.div`
-  padding: 1rem;
-  background: lightblue;
-  float: left;
-  & span {
-    display: block;
-  }
-`
+// const StatBlock = styled.div`
+//   padding: 1rem;
+//   background: lightblue;
+//   float: left;
+//   & span {
+//     display: block;
+//   }
+// `
 const Description = styled.div`
   background: lightcoral;
 `
@@ -176,39 +179,62 @@ const ProgramTemplate = ({ data, pageContext }) => {
         }
         image={ogImage}
       />
-      <Hero title={title} image={heroImage} height={'60vh'} />
-      <Container constraints="center">
-        {tags && <TagList tags={tags} basePath={basePath} />}
+      <Hero title={title} image={heroImage} />
+
+      {tags && <TagList tags={tags} basePath={basePath} />}
+      <Container id="programDetails" constraints="narrow">
         <h1>
           {typeOfDegree} in {fullProgramName}
         </h1>
-        <ul>
-          {availableMethodsOfStudy &&
-            availableMethodsOfStudy.map(method => (
-              <>
-                <b>Learning Mode: </b>
-                <span key={method}>{method}</span>
-              </>
-            ))}
-        </ul>
-        {creditHours && (
-          <StatBlock>
-            <span>{creditHours}</span>
-            Credit Hours
-          </StatBlock>
-        )}
-        {monthsToComplete && (
-          <StatBlock>
-            <span>{monthsToComplete}</span>
-            Months to Complete
-          </StatBlock>
-        )}
-        {programTracks && (
-          <StatBlock>
-            <span>{programTracks}</span>
-            Program Tracks
-          </StatBlock>
-        )}
+        <div className="learningMode">
+          <p>Learning Mode:</p>
+          <ul className="no-list">
+            {availableMethodsOfStudy &&
+              availableMethodsOfStudy.map(method => (
+                <>
+                  <li key={method}>{method}</li>
+                </>
+              ))}
+          </ul>
+        </div>
+        <div className="programIntro">
+          <p>
+            Sit in molestie facilisis quisque nisl. Elementum sed ut sed risus
+            porttitor. Quis volutpat viverra lacus leo pellentesque. Diam
+            integer massa molestie in. Morbi neque a, praesent eros, mi iaculis
+            a magna. Commodo, ipsum pretium donec condimentum nulla non vitae
+            enim. Ipsum tellus imperdiet arcu nec, mattis elit est integer.
+            Eleifend egestas orci, vivamus diam massa enim consequat, non augue.
+            Volutpat et sodales vestibulum placerat.
+          </p>
+        </div>
+        <div className="programStats">
+          {creditHours && (
+            <ProgramStat stat={creditHours} description="Credit Hours" />
+          )}
+          {monthsToComplete && (
+            <ProgramStat
+              stat={monthsToComplete}
+              description="Months to Complete"
+            />
+          )}
+          {programTracks && (
+            <ProgramStat stat={programTracks} description="Program Tracks" />
+          )}
+        </div>
+      </Container>
+      <Container id="requestInfoCta">
+        <div className="ctaContent narrow">
+          <p>
+            In enim sem orci adipiscing cras tempus.{' '}
+            <strong>
+              Malesuada odio egestas aliquet sed neque lectus cras.
+            </strong>
+          </p>
+          <button>Request Information</button>
+        </div>
+      </Container>
+      <Container constraints="center">
         <h2>
           Change Your Future with a {typeOfDegree} in {fullProgramName}
         </h2>
@@ -216,6 +242,8 @@ const ProgramTemplate = ({ data, pageContext }) => {
           {description &&
             documentToReactComponents(description.json, RICHTEXT_OPTIONS)}
         </Description>
+      </Container>
+      <Container constraints="center">
         <h2>Why Morgan State?</h2>
         <WhyMorganState>
           <CardList>
@@ -225,7 +253,8 @@ const ProgramTemplate = ({ data, pageContext }) => {
               ))}
           </CardList>
         </WhyMorganState>
-
+      </Container>
+      <Container constraints="center">
         {preContentBlock && (
           <PreContentBlock>
             {documentToReactComponents(preContentBlock.json, RICHTEXT_OPTIONS)}
@@ -253,40 +282,40 @@ const ProgramTemplate = ({ data, pageContext }) => {
         {normalizedCarousel && (
           <ImageSlider data={normalizedCarousel} settings={carouselSettings} />
         )}
-
-        <AchieveSuccess>
-          <h2>Achieve Success Like Our Alumni</h2>
-          <p>
-            Lorem ipsum dolor sit amet nunc diam curabitur pretium lectus non
-            sodales. Ut risus a lacus curabitur turpis incididunt quisque quam
-            aliquet. Est orci aliqua pharetra mi senectus quisque volutpat
-            laoreet. Velit arcu facilisis enim eu curabitur quam augue sodales.
-            At hac luctus aliqua mattis nullam semper neque posuere nisi dapibus
-            nulla sollicitudin.
-          </p>
-        </AchieveSuccess>
-        {testimonial && (
-          <Testimonial
-            image={testimonial.image}
-            quote={testimonial.quote}
-            author={testimonial.author}
-          ></Testimonial>
-        )}
-
-        <DiscoverProgramCTA>
-          <h3>
-            Discover the {typeOfDegree} in {fullProgramName}
-          </h3>
-          <p>Lorem ipsum dolor sit amet ac urna ullamcorper nisi.</p>
-          <Button>Request Information</Button>
-        </DiscoverProgramCTA>
-        {normalizedRelated && (
-          <RelatedPrograms>
-            <h2>Explore Related Programs</h2>
-            <ImageSlider data={normalizedRelated} settings={carouselSettings} />
-          </RelatedPrograms>
-        )}
       </Container>
+
+      <AchieveSuccess>
+        <h2>Achieve Success Like Our Alumni</h2>
+        <p>
+          Lorem ipsum dolor sit amet nunc diam curabitur pretium lectus non
+          sodales. Ut risus a lacus curabitur turpis incididunt quisque quam
+          aliquet. Est orci aliqua pharetra mi senectus quisque volutpat
+          laoreet. Velit arcu facilisis enim eu curabitur quam augue sodales. At
+          hac luctus aliqua mattis nullam semper neque posuere nisi dapibus
+          nulla sollicitudin.
+        </p>
+      </AchieveSuccess>
+      {testimonial && (
+        <Testimonial
+          image={testimonial.image}
+          quote={testimonial.quote}
+          author={testimonial.author}
+        ></Testimonial>
+      )}
+
+      <DiscoverProgramCTA>
+        <h3>
+          Discover the {typeOfDegree} in {fullProgramName}
+        </h3>
+        <p>Lorem ipsum dolor sit amet ac urna ullamcorper nisi.</p>
+        <Button>Request Information</Button>
+      </DiscoverProgramCTA>
+      {normalizedRelated && (
+        <RelatedPrograms>
+          <h2>Explore Related Programs</h2>
+          <ImageSlider data={normalizedRelated} settings={carouselSettings} />
+        </RelatedPrograms>
+      )}
       {/* <PostLinks
         previous={previous}
         next={next}

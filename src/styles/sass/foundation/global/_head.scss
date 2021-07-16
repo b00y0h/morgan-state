@@ -7,5 +7,84 @@
   @include fluidRem(margin-bottom, -2.3rem, -5.6rem);
   position: sticky;
   top: 0;
-  z-index: 999;
+  z-index: 99;
+}
+
+.hero {
+  display: block;
+  width: 100%;
+  @include fluidRem(height, 10rem, 40rem);
+  background: lighten(black, 90%);
+}
+
+#programDetails {
+  &.wrapper {
+    background: white;
+    width: 90%;
+    margin-top: -10rem;
+    position: relative;
+  }
+
+  h1 {
+    margin-bottom: 1.5rem;
+  }
+
+  .learningMode {
+    display: flex;
+    @include fluidRem(font-size, 0.9rem, 1.2rem);
+
+    p {
+      text-transform: uppercase;
+      font-weight: 300;
+      color: $c-secondary-02;
+      font-size: 1em;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      font-size: 1em;
+
+      li {
+        color: $c-primary-01;
+        text-transform: uppercase;
+        padding: 0 0.5em;
+        line-height: 1;
+        margin: 0;
+        font-size: 1em;
+        border-right: 1px solid $c-primary-01;
+
+        &:last-child {
+          border: none;
+        }
+      }
+    }
+  }
+}
+
+.programStats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .programStat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    @include fluidRem(padding, 1rem 1rem, 2rem 4rem);
+    border-right: 1px solid $c-secondary-01;
+    color: $c-primary-01;
+
+    &:last-child {
+      border: none;
+    }
+
+    span {
+      @include fluidRem(font-size, 2rem, 5rem);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+  }
 }

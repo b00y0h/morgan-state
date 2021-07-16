@@ -14,18 +14,18 @@ body {
   width: 100%;
 
   &.centered {
-    text-align: center;
     max-width: $mq-1300;
     margin: 0 auto;
+  }
 
-    &.narrow {
-      max-width: $mq-1000;
-    }
+  &.narrow {
+    max-width: $mq-1000;
+    margin: 0 auto;
   }
 }
 
 %padding {
-  @include fluidRem(padding, 2rem 1rem, 5rem 2rem);
+  @include fluidRem(padding, 1rem 1rem, 2rem 2rem);
 }
 
 .wrapper {

@@ -37,9 +37,28 @@ h6 {
   clear: both;
 }
 
+// =========
+// Deco title
+
+%colorBar {
+  &::after {
+    content: '';
+    display: block;
+    @include fluidRem(width, 5rem, 10rem);
+    height: 0.3rem;
+    background: $c-primary-02;
+  }
+}
+
+// =========
+
 h1 {
   font-family: $f-sans !important;
-  @include fluidRem('font-size', 1.5rem, 3rem);
+  @include fluidRem('font-size', 1.5rem, 4.25rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+
+  @extend %colorBar;
 }
 
 h2 {
@@ -50,6 +69,8 @@ h2 {
   strong {
     font-weight: bold;
   }
+
+  @extend %colorBar;
 }
 
 h3 {
@@ -108,7 +129,7 @@ ul {
       width: 3px;
       height: 3px;
       border-radius: 50%;
-      background: $c-darkgrey;
+      background: $c-darkgray;
       position: absolute;
       left: 0.3em;
       top: 0.7em;

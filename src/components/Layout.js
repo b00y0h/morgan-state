@@ -3,7 +3,7 @@ import styled from '@emotion/styled'
 import { Global } from '@emotion/core'
 import Head from './Head'
 import Footer from '../components/Footer'
-import { globalStyles } from '../styles/globalStyles.js'
+// import { globalStyles } from '../styles/globalStyles.js'
 import 'styles/sass/styles.scss'
 
 const Skip = styled.a`
@@ -38,7 +38,7 @@ const Layout = props => {
         </main>
       </div>
       <Footer />
-      <Global styles={globalStyles} />
+      {/* <Global styles={globalStyles} /> */}
     </>
   )
 }

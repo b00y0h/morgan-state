@@ -39,6 +39,7 @@
     "gatsby-source-contentful": "^2.1.85",
     "gatsby-transformer-remark": "^2.6.50",
     "lodash": "^4.17.15",
+    "lottie-web": "^5.7.12",
     "moment": "^2.24.0",
     "path": "^0.12.7",
     "prismjs": "^1.19.0",
