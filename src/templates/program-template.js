@@ -32,17 +32,9 @@ const carouselSettings = {
   cssEase: 'linear',
 }
 
-// const StatBlock = styled.div`
-//   padding: 1rem;
-//   background: lightblue;
-//   float: left;
-//   & span {
-//     display: block;
-//   }
+// const Description = styled.div`
+//   background: lightcoral;
 // `
-const Description = styled.div`
-  background: lightcoral;
-`
 const WhyMorganState = styled.div`
   background: lightcyan;
 `
@@ -234,16 +226,19 @@ const ProgramTemplate = ({ data, pageContext }) => {
           <button>Request Information</button>
         </div>
       </Container>
-      <Container constraints="center">
-        <h2>
-          Change Your Future with a {typeOfDegree} in {fullProgramName}
-        </h2>
-        <Description>
+      <Container className="cols" constraints="center">
+        <figure className="col-50">
+          <img src="https://images.unsplash.com/photo-1578496479939-722d9dd1cc5b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" />
+        </figure>
+        <div className="programDescription col-50">
+          <h2>
+            Change Your Future with a {typeOfDegree} in {fullProgramName}
+          </h2>
           {description &&
             documentToReactComponents(description.json, RICHTEXT_OPTIONS)}
-        </Description>
+        </div>
       </Container>
-      <Container constraints="center">
+      <Container className="drkbg" constraints="center">
         <h2>Why Morgan State?</h2>
         <WhyMorganState>
           <CardList>

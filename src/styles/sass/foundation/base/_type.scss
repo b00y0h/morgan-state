@@ -47,6 +47,7 @@ h6 {
     @include fluidRem(width, 5rem, 10rem);
     height: 0.3rem;
     background: $c-primary-02;
+    margin-top: 0.5rem;
   }
 }
 
@@ -56,6 +57,7 @@ h1 {
   font-family: $f-sans !important;
   @include fluidRem('font-size', 1.5rem, 4.25rem);
   line-height: 1.1;
+  font-weight: normal;
   letter-spacing: -0.02em;
 
   @extend %colorBar;
@@ -65,7 +67,7 @@ h2 {
   font-family: $f-sans;
   font-weight: normal;
   line-height: 1.1;
-  @include fluidRem('font-size', 1.2rem, 2rem);
+  @include fluidRem('font-size', 1.3rem, 3rem);
   strong {
     font-weight: bold;
   }

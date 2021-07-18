@@ -30,3 +30,16 @@
     }
   }
 }
+
+.cols {
+  figure {
+    img {
+      box-shadow: -1em 1em 0 $c-primary-02;
+    }
+  }
+}
+
+.programDescription {
+  display: flex;
+  flex-direction: column;
+}

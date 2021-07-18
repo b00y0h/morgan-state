@@ -14,7 +14,7 @@ body {
   width: 100%;
 
   &.centered {
-    max-width: $mq-1300;
+    max-width: $mq-1200;
     margin: 0 auto;
   }
 
@@ -25,7 +25,7 @@ body {
 }
 
 %padding {
-  @include fluidRem(padding, 1rem 1rem, 2rem 2rem);
+  @include fluidRem(padding, 1rem 1rem, 3rem 3rem);
 }
 
 .wrapper {
