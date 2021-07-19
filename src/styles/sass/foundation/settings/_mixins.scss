@@ -65,7 +65,7 @@
   background: $primary-color;
   color: $text-color;
   text-decoration: none;
-  padding: 0.85em 2em 0.85em 1.1em;
+  padding: 0.85em 2.7em 0.85em 1.1em;
   font-size: 1rem;
   font-weight: bold;
   font-family: $f-sans;
@@ -91,19 +91,20 @@
     // @include arrownav($icon-color);
   }
 
-  &::after {
-    content: '';
-    display: block;
-    position: absolute;
-    width: 0.6em;
-    height: 0.6em;
-    border-right: 3px solid $icon-color;
-    border-top: 3px solid $icon-color;
-    right: 0.8em;
-    top: 50%;
-    transform: translateY(-50%) rotate(45deg);
-    transition: all 0.2s;
-  }
+  @include arrownav($icon-color);
+  // &::after {
+  //   content: '';
+  //   display: block;
+  //   position: absolute;
+  //   width: 0.6em;
+  //   height: 0.6em;
+  //   border-right: 3px solid $icon-color;
+  //   border-top: 3px solid $icon-color;
+  //   right: 0.8em;
+  //   top: 50%;
+  //   transform: translateY(-50%) rotate(45deg);
+  //   transition: all 0.2s;
+  // }
 }
 
 @mixin arrownav($icon-color) {
@@ -111,20 +112,16 @@
     // content: $i-arrow;
     // font-family: $f-icons;
     // color: $icon-color !important;
-    content: '';
+    content: $i-rightArrow1;
+    font-family: $f-icons;
+    color: $icon-color;
+    font-size: 0.8em;
     display: block;
     position: absolute;
-    width: 1.5em;
-    height: 1.5em;
-    border-right: 2px solid $icon-color;
-    border-bottom: 2px solid $icon-color;
+    width: 1.8em;
     right: 0.8em;
     top: 50%;
-    transform: translateY(-50%) rotate(45deg);
-    // @include transform(translateY(-50%));
-    // font-size: 1.5em;
-    // font-weight: normal;
-    // line-height: 0;
+    transform: translateY(-50%);
     transition: all 0.2s;
   }
 }

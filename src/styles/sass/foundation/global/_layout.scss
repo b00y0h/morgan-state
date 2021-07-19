@@ -101,6 +101,7 @@ body {
 
 .group {
   display: block;
+  @include fluidRem(padding, 1rem 0, 3rem 0);
   margin-bottom: 3em;
 
   &.buttons {
@@ -116,6 +117,10 @@ body {
       }
     }
   }
+}
+
+.drkbg {
+  background: $c-secondary-01;
 }
 
 // ============================

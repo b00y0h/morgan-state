@@ -21,6 +21,7 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { BLOCKS, INLINES } from '@contentful/rich-text-types'
 import StatCard from '../components/StatCard'
 import { Button } from '@theme-ui/components'
+import Group from '../components/common/Container/Group'
 
 const carouselSettings = {
   dot: true,
@@ -32,12 +33,6 @@ const carouselSettings = {
   cssEase: 'linear',
 }
 
-// const Description = styled.div`
-//   background: lightcoral;
-// `
-const WhyMorganState = styled.div`
-  background: lightcyan;
-`
 const SkillsAndJobs = styled.div`
   background: lightsteelblue;
 `
@@ -53,9 +48,9 @@ const RelatedPrograms = styled.div`
 const CareerDetails = styled.div`
   background: lightpink;
 `
-const PreContentBlock = styled.div`
-  background: plum;
-`
+// const PreContentBlock = styled.div`
+//   background: plum;
+// `
 const CarouselPreText = styled.div`
   background: grey;
 `
@@ -227,46 +222,38 @@ const ProgramTemplate = ({ data, pageContext }) => {
         </div>
       </Container>
       <Container className="cols" constraints="center">
-        <figure className="col-50">
-          <img src="https://images.unsplash.com/photo-1578496479939-722d9dd1cc5b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" />
-        </figure>
-        <div className="programDescription col-50">
-          <h2>
-            Change Your Future with a {typeOfDegree} in {fullProgramName}
-          </h2>
+        <Group className="programDescription cols">
           {description &&
             documentToReactComponents(description.json, RICHTEXT_OPTIONS)}
-        </div>
+        </Group>
       </Container>
-      <Container className="drkbg" constraints="center">
-        <h2>Why Morgan State?</h2>
-        <WhyMorganState>
+      <Container id="whyMorganState" className="drkbg">
+        <Container constraints="center">
+          <h2>Why Morgan State?</h2>
           <CardList>
             {whyMorganStateStats &&
               whyMorganStateStats.map(node => (
                 <StatCard key={node.id} {...node} />
               ))}
           </CardList>
-        </WhyMorganState>
+        </Container>
       </Container>
-      <Container constraints="center">
+      <Container constraints="center" className="cols-container">
         {preContentBlock && (
-          <PreContentBlock>
+          <Group>
             {documentToReactComponents(preContentBlock.json, RICHTEXT_OPTIONS)}
-          </PreContentBlock>
+          </Group>
         )}
         {skillsAndJobs && (
-          <SkillsAndJobs>
-            {/* <h2>Content block 1</h2> */}
+          <Group className="cols">
             {documentToReactComponents(skillsAndJobs.json, RICHTEXT_OPTIONS)}
-          </SkillsAndJobs>
+          </Group>
         )}
 
         {careerDetails && (
-          <CareerDetails>
-            {/* <h2>Content block 2</h2> */}
+          <Group className="cols">
             {documentToReactComponents(careerDetails.json, RICHTEXT_OPTIONS)}
-          </CareerDetails>
+          </Group>
         )}
 
         {carouselPreText && (
@@ -340,6 +327,9 @@ export const query = graphql`
       whyMorganStateStats {
         title
         id
+        description {
+          json
+        }
         statisticImage {
           fluid(maxWidth: 400) {
             ...GatsbyContentfulFluid_withWebp_noBase64
