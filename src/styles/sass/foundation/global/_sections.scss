@@ -46,11 +46,6 @@
   @extend .no-list;
   @extend .cols;
 
-  @media (min-width: $mq-600) {
-    flex-flow: row wrap;
-    justify-content: center;
-  }
-
   li {
     display: flex;
     flex-direction: column;
@@ -59,11 +54,6 @@
     margin: 1em !important;
     width: 100%;
     color: $c-primary-01;
-
-    @media (min-width: $mq-600) {
-      width: calc(100% - 2em);
-      max-width: calc(33% - 2em);
-    }
 
     picture {
       display: block;
@@ -94,6 +84,28 @@
     }
     p {
       color: $c-primary-01;
+    }
+  }
+
+  &.one-row {
+    li {
+      @media (min-width: $mq-600) {
+        width: calc(100% - 2em);
+        flex-grow: 0;
+      }
+    }
+  }
+
+  &.two-rows {
+    @media (min-width: $mq-600) {
+      flex-flow: row wrap;
+      justify-content: center;
+    }
+    li {
+      @media (min-width: $mq-600) {
+        width: calc(100% - 2em);
+        max-width: calc(33% - 2em);
+      }
     }
   }
 }

@@ -147,6 +147,8 @@ const ProgramTemplate = ({ data, pageContext }) => {
         : null,
     }))
 
+  const statsCardsAmount = whyMorganStateStats.length
+
   return (
     <Layout>
       <SEO
@@ -175,15 +177,7 @@ const ProgramTemplate = ({ data, pageContext }) => {
           </ul>
         </div>
         <div className="programIntro">
-          <p>
-            Sit in molestie facilisis quisque nisl. Elementum sed ut sed risus
-            porttitor. Quis volutpat viverra lacus leo pellentesque. Diam
-            integer massa molestie in. Morbi neque a, praesent eros, mi iaculis
-            a magna. Commodo, ipsum pretium donec condimentum nulla non vitae
-            enim. Ipsum tellus imperdiet arcu nec, mattis elit est integer.
-            Eleifend egestas orci, vivamus diam massa enim consequat, non augue.
-            Volutpat et sodales vestibulum placerat.
-          </p>
+          <p>{metaDescription.metaDescription}</p>
         </div>
         <div className="programStats">
           {creditHours && (
@@ -220,7 +214,7 @@ const ProgramTemplate = ({ data, pageContext }) => {
       <Container id="whyMorganState" className="drkbg">
         <Container constraints="center">
           <h2>Why Morgan State?</h2>
-          <CardList>
+          <CardList rows={`${statsCardsAmount <= 4 ? 'one-row' : 'two-rows'}`}>
             {whyMorganStateStats &&
               whyMorganStateStats.map(node => (
                 <StatCard key={node.id} {...node} />
