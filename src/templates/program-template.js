@@ -28,32 +28,20 @@ const carouselSettings = {
   infinite: true,
   speed: 500,
   arrows: true,
-  slidesToShow: 4,
+  slidesToShow: 1,
   slidesToScroll: 1,
   cssEase: 'linear',
 }
 
-const SkillsAndJobs = styled.div`
-  background: lightsteelblue;
-`
-const AchieveSuccess = styled.div`
-  background: lightslategray;
-`
-const DiscoverProgramCTA = styled.div`
-  background: lightskyblue;
-`
-const RelatedPrograms = styled.div`
-  background: lightsalmon;
-`
-const CareerDetails = styled.div`
-  background: lightpink;
-`
-// const PreContentBlock = styled.div`
-//   background: plum;
-// `
-const CarouselPreText = styled.div`
-  background: grey;
-`
+const carouselSettings2 = {
+  dot: true,
+  infinite: true,
+  speed: 500,
+  arrows: true,
+  slidesToShow: 3,
+  slidesToScroll: 1,
+  cssEase: 'linear',
+}
 
 const RICHTEXT_OPTIONS = {
   renderNode: {
@@ -122,8 +110,10 @@ const ProgramTemplate = ({ data, pageContext }) => {
     skillsAndJobs,
     careerDetails,
     carouselPreText,
+    testimonialPreText,
     carouselContent,
     testimonial,
+    financialAidOptions,
     relatedPrograms,
   } = data.contentfulProgram
   const previous = pageContext.prev
@@ -255,54 +245,74 @@ const ProgramTemplate = ({ data, pageContext }) => {
             {documentToReactComponents(careerDetails.json, RICHTEXT_OPTIONS)}
           </Group>
         )}
+      </Container>
 
+      <Container constraints="center">
         {carouselPreText && (
-          <CarouselPreText>
+          <Group className="wrapper centered narrow">
             {documentToReactComponents(carouselPreText.json, RICHTEXT_OPTIONS)}
-          </CarouselPreText>
+          </Group>
         )}
         {normalizedCarousel && (
           <ImageSlider data={normalizedCarousel} settings={carouselSettings} />
         )}
       </Container>
 
-      <AchieveSuccess>
-        <h2>Achieve Success Like Our Alumni</h2>
-        <p>
-          Lorem ipsum dolor sit amet nunc diam curabitur pretium lectus non
-          sodales. Ut risus a lacus curabitur turpis incididunt quisque quam
-          aliquet. Est orci aliqua pharetra mi senectus quisque volutpat
-          laoreet. Velit arcu facilisis enim eu curabitur quam augue sodales. At
-          hac luctus aliqua mattis nullam semper neque posuere nisi dapibus
-          nulla sollicitudin.
-        </p>
-      </AchieveSuccess>
-      {testimonial && (
-        <Testimonial
-          image={testimonial.image}
-          quote={testimonial.quote}
-          author={testimonial.author}
-        ></Testimonial>
-      )}
+      <Container id="testimonials">
+        {testimonialPreText && (
+          <Group className="wrapper centered narrow">
+            {documentToReactComponents(
+              testimonialPreText.json,
+              RICHTEXT_OPTIONS
+            )}
+          </Group>
+        )}
+        {testimonial && (
+          <Testimonial
+            image={testimonial.image}
+            quote={testimonial.quote}
+            author={testimonial.author}
+          ></Testimonial>
+        )}
+      </Container>
 
-      <DiscoverProgramCTA>
-        <h3>
-          Discover the {typeOfDegree} in {fullProgramName}
-        </h3>
-        <p>Lorem ipsum dolor sit amet ac urna ullamcorper nisi.</p>
-        <Button>Request Information</Button>
-      </DiscoverProgramCTA>
-      {normalizedRelated && (
-        <RelatedPrograms>
-          <h2>Explore Related Programs</h2>
-          <ImageSlider data={normalizedRelated} settings={carouselSettings} />
-        </RelatedPrograms>
-      )}
-      {/* <PostLinks
+      <Container constraints="center" className="cols-container">
+        {financialAidOptions && (
+          <Group>
+            {documentToReactComponents(
+              financialAidOptions.json,
+              RICHTEXT_OPTIONS
+            )}
+          </Group>
+        )}
+      </Container>
+
+      <Container id="discoverProgram">
+        <div className="wrapper centered">
+          <h3>
+            Discover the {typeOfDegree} in {fullProgramName}
+          </h3>
+          <p>Lorem ipsum dolor sit amet ac urna ullamcorper nisi.</p>
+          <Button>Request Information</Button>
+        </div>
+      </Container>
+
+      <Container id="relatedPrograms" constraints="center">
+        {normalizedRelated && (
+          <div>
+            <h2>Explore Related Programs</h2>
+            <ImageSlider
+              data={normalizedRelated}
+              settings={carouselSettings2}
+            />
+          </div>
+        )}
+        {/* <PostLinks
         previous={previous}
         next={next}
         basePath={`${basePath}/program`}
       /> */}
+      </Container>
     </Layout>
   )
 }
@@ -349,6 +359,9 @@ export const query = graphql`
       carouselPreText {
         json
       }
+      financialAidOptions {
+        json
+      }
       carouselContent {
         id
         title
@@ -358,6 +371,9 @@ export const query = graphql`
             ...GatsbyContentfulFluid_withWebp_noBase64
           }
         }
+      }
+      testimonialPreText {
+        json
       }
       testimonial {
         author

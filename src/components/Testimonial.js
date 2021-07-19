@@ -19,14 +19,8 @@ const RICHTEXT_OPTIONS = {
   },
 }
 
-const Figure = styled.figure`
-  width: 100%;
-`
-
 const Quote = styled.blockquote`
   position: relative;
-  border: 1px solid red;
-  border-radius: 2px;
   margin: 0 0 1em 0;
   width: 100%;
   transition: background 0.2s;
@@ -37,10 +31,6 @@ const Quote = styled.blockquote`
   @media screen and (min-width: ${props => props.theme.responsive.medium}) {
     flex: ${props => (props.featured ? '0 0 100%' : '0 0 32%')};
   }
-`
-
-const StyledImg = styled(Img)`
-  border: 5px solid #000;
 `
 
 const Author = styled.figcaption`
@@ -54,13 +44,15 @@ const Testimonial = ({ quote, author, image, ...props }) => {
   return (
     <>
       {quote && (
-        <Figure>
+        <figure className="testimonial">
           <Quote>
-            <StyledImg fluid={image.fluid} backgroundColor={'#eeeeee'} />
-            {documentToReactComponents(quote.json, RICHTEXT_OPTIONS)}
-            <Author>- {author}</Author>
+            <Img fluid={image.fluid} backgroundColor={'#eeeeee'} />
+            <div className="description">
+              {documentToReactComponents(quote.json, RICHTEXT_OPTIONS)}
+              <Author>- {author}</Author>
+            </div>
           </Quote>
-        </Figure>
+        </figure>
       )}
     </>
   )

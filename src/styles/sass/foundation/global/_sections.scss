@@ -134,3 +134,61 @@
     }
   }
 }
+
+#testimonials {
+  padding: 0;
+
+  .testimonial {
+    background: $c-secondary-02;
+    @extend .wrapper;
+
+    &::before {
+      content: $i-quote;
+      font-family: $f-icons;
+      color: $c-primary-02;
+      display: block;
+      text-align: center;
+      @include fluidRem(font-size, 1.8rem, 3.5rem);
+    }
+
+    blockquote {
+      display: flex;
+      max-width: $mq-1200;
+      @extend %padding;
+      margin: 0 auto;
+    }
+
+    .gatsby-image-wrapper {
+      @include fluidRem(width, 5rem, 15rem);
+      @include fluidRem(height, 5rem, 15rem);
+      flex-shrink: 0;
+      margin-right: 1.5rem;
+      border: 2px solid white;
+    }
+
+    .description {
+      p {
+        color: white;
+      }
+      figcaption {
+        display: block;
+        color: white;
+        font-size: 0.8em;
+        text-align: right;
+        padding: 0;
+        font-weight: normal;
+        font-style: italic;
+      }
+    }
+  }
+}
+
+#discoverProgram {
+  background: $c-secondary-02;
+
+  //   .slick-track {
+  .slick-slide {
+    margin-right: 1rem !important;
+  }
+  //   }
+}
