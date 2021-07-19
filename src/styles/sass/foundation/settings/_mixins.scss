@@ -2,6 +2,8 @@
 //MIXINS
 ///////////////////
 
+@use 'sass:math';
+
 ////////////
 //Transitions
 ////////////
@@ -223,9 +225,8 @@ $x-fontFix: 0;
 
     $_d-iMid: calc(
       #{$_d-iMin} +
-        #{($_d-iMax - $_d-iMin) /
-        1rem} *
-        ((100vw - #{$_mq-min}) / #{($_mq-max - $_mq-min) / 1rem})
+        #{math.div(($_d-iMax - $_d-iMin), 1rem)} *
+        ((100vw - #{$_mq-min}) / #{math.div(($_mq-max - $_mq-min), 1rem)})
     );
 
     @if ($_x-i > 1) {
