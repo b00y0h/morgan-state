@@ -40,7 +40,7 @@ const ImageSlider = ({ data, settings }) => {
           <div className="slick-slide" key={item.id}>
             {item.src && <img src={item.src.fluid.src} alt={item.title} />}
             <div className="slick-caption">
-              <h3>{item.title}</h3>
+              <h4>{item.title}</h4>
               <p>{item.description}</p>
             </div>
           </div>

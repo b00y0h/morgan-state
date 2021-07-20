@@ -88,32 +88,16 @@
   &:hover,
   &:focus {
     cursor: pointer;
-    background: darken($primary-color, 15%);
-    color: $text-color;
-    // @include arrownav($icon-color);
+    background: $text-color;
+    color: $primary-color;
+    @include arrownav($primary-color);
   }
 
   @include arrownav($icon-color);
-  // &::after {
-  //   content: '';
-  //   display: block;
-  //   position: absolute;
-  //   width: 0.6em;
-  //   height: 0.6em;
-  //   border-right: 3px solid $icon-color;
-  //   border-top: 3px solid $icon-color;
-  //   right: 0.8em;
-  //   top: 50%;
-  //   transform: translateY(-50%) rotate(45deg);
-  //   transition: all 0.2s;
-  // }
 }
 
 @mixin arrownav($icon-color) {
   &::after {
-    // content: $i-arrow;
-    // font-family: $f-icons;
-    // color: $icon-color !important;
     content: $i-rightArrow1;
     font-family: $f-icons;
     color: $icon-color;
@@ -163,8 +147,7 @@ $x-fontFix: 0;
 
   @font-face {
     font-family: '#{$_f-font-family}';
-    src: url('#{$_p-file-name}.woff') format('woff'),
-      url('#{$_p-file-name}.ttf') format('truetype');
+    src: url('#{$_p-file-name}.woff') format('woff');
     font-weight: $_f-font-weight;
     font-style: $_f-font-style;
   }

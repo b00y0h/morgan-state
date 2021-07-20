@@ -14,6 +14,7 @@ import Card from '../components/Card'
 import CardList from '../components/CardList'
 import Testimonial from '../components/Testimonial'
 import ImageSlider from '../components/Slider'
+import Img from 'gatsby-image'
 
 import ProgramStat from '../components/ProgramStat'
 
@@ -114,6 +115,7 @@ const ProgramTemplate = ({ data, pageContext }) => {
     carouselContent,
     testimonial,
     financialAidOptions,
+    discoverProgramImage,
     relatedPrograms,
   } = data.contentfulProgram
   const previous = pageContext.prev
@@ -282,12 +284,13 @@ const ProgramTemplate = ({ data, pageContext }) => {
       </Container>
 
       <Container id="discoverProgram">
+        <Img fluid={discoverProgramImage.fluid} className="discoverBgImg" />
         <div className="wrapper centered">
           <h3>
             Discover the {typeOfDegree} in {fullProgramName}
           </h3>
-          <p>Lorem ipsum dolor sit amet ac urna ullamcorper nisi.</p>
-          <Button>Request Information</Button>
+          <p>{discoverProgramImage.description}</p>
+          <button>Request Information</button>
         </div>
       </Container>
 
@@ -395,6 +398,13 @@ export const query = graphql`
           fluid(maxWidth: 350, maxHeight: 196, resizingBehavior: SCALE) {
             ...GatsbyContentfulFluid_withWebp_noBase64
           }
+        }
+      }
+      discoverProgramImage {
+        description
+
+        fluid(maxWidth: 800) {
+          ...GatsbyContentfulFluid_withWebp_noBase64
         }
       }
     }
