@@ -24,6 +24,10 @@ import StatCard from '../components/StatCard'
 import { Button } from '@theme-ui/components'
 import Group from '../components/common/Container/Group'
 
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
+import Slider from 'react-slick'
+
 const carouselSettings = {
   dot: true,
   infinite: true,
@@ -34,7 +38,7 @@ const carouselSettings = {
   cssEase: 'linear',
 }
 
-const carouselSettings2 = {
+const relatedProgramSettings = {
   dot: true,
   infinite: true,
   speed: 500,
@@ -250,7 +254,11 @@ const ProgramTemplate = ({ data, pageContext }) => {
           </Group>
         )}
         {normalizedCarousel && (
-          <ImageSlider data={normalizedCarousel} settings={carouselSettings} />
+          <ImageSlider
+            className="research-interships"
+            data={normalizedCarousel}
+            settings={carouselSettings}
+          />
         )}
       </Container>
 
@@ -295,20 +303,21 @@ const ProgramTemplate = ({ data, pageContext }) => {
       </Container>
 
       <Container id="relatedPrograms" constraints="center">
-        {normalizedRelated && (
-          <div>
-            <h2>Explore Related Programs</h2>
-            <ImageSlider
-              data={normalizedRelated}
-              settings={carouselSettings2}
-            />
-          </div>
-        )}
-        {/* <PostLinks
-        previous={previous}
-        next={next}
-        basePath={`${basePath}/program`}
-      /> */}
+        <Group>
+          {normalizedRelated && (
+            <div>
+              <h2>Explore Related Programs</h2>
+              <ImageSlider
+                className="related-programs"
+                data={normalizedRelated}
+                settings={relatedProgramSettings}
+              />
+            </div>
+          )}
+        </Group>
+        <div className="buttons centered">
+          <button>View all programs</button>
+        </div>
       </Container>
     </Layout>
   )

@@ -114,6 +114,9 @@
 
 // ==========================
 //! Slick Carousel
+
+// =============================
+
 .slick-slider {
   padding: 0 1rem;
   .slick-arrow {
@@ -132,26 +135,74 @@
     }
   }
 
-  .slick-slide {
-    img {
-      display: block;
-      width: 100%;
-      // height: 30rem;
-      @include fluidRem(height, 20rem, 30rem);
-      object-fit: cover;
-    }
-    .slick-caption {
-      text-align: center;
-      width: 90%;
-      max-width: $mq-800;
-      margin: 0 auto;
-      @include fluidRem(padding, 1rem, 2rem);
-      h3 {
-        margin-bottom: 0.5rem;
+  .slick-dots {
+    list-style: none;
+    li {
+      &::before {
+        display: none;
       }
-      // p {
+    }
+  }
 
-      // }
+  .slick-slide {
+    // float: none;
+    .slick-slide-content {
+      img {
+        display: block;
+        width: 100%;
+        object-fit: cover;
+      }
+      .slick-caption {
+        text-align: center;
+        width: 90%;
+        max-width: $mq-800;
+        margin: 0 auto;
+        @include fluidRem(padding, 1rem, 2rem);
+        h3 {
+          margin-bottom: 0.5rem;
+        }
+      }
+    }
+  }
+
+  &.research-interships {
+    .slick-slide {
+      .slick-slide-content {
+        img {
+          @include fluidRem(height, 20rem, 30rem);
+        }
+      }
+    }
+  }
+
+  &.related-programs {
+    .slick-track {
+      display: flex;
+    }
+    .slick-slide {
+      float: none;
+      width: calc(100% - 2rem);
+      margin: 0 1em;
+      .slick-slide-content {
+        img {
+          height: 16em;
+        }
+        .slick-caption {
+          width: 100%;
+          border: 1px solid $c-secondary-01;
+
+          h4 {
+            @include fluidRem(font-size, 1rem, 1.3rem);
+            font-weight: 400;
+            line-height: 1.2;
+            text-align: left;
+          }
+
+          p {
+            text-align: left;
+          }
+        }
+      }
     }
   }
 }

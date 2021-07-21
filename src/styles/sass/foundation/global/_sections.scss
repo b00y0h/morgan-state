@@ -248,3 +248,13 @@
     left: 0;
   }
 }
+
+#relatedProgram {
+  .slick-slider {
+    .slick-slide {
+      img {
+        @include fluidRem(height, 10rem, 25rem, 1);
+      }
+    }
+  }
+}
