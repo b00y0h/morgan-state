@@ -28,6 +28,9 @@ import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import Slider from 'react-slick'
 
+import { Link } from 'gatsby'
+import handleViewport from 'react-in-viewport'
+
 const carouselSettings = {
   dot: true,
   infinite: true,
@@ -167,7 +170,63 @@ const ProgramTemplate = ({ data, pageContext }) => {
       []
   })
 
-  const statsCardsAmount = whyMorganStateStats.length
+  const statsCardsAmount = whyMorganStateStats && whyMorganStateStats.length
+
+  const CtaSectionTopC = props => {
+    const { inViewport, forwardedRef } = props
+    return (
+      <div
+        id="requestInfoCta"
+        className={`viewport-block ${
+          pos === 'sticky' ? ' sticked' : 'site-header'
+        }`}
+        ref={forwardedRef}
+      >
+        <Container>
+          <div className="ctaContent narrow">
+            <p>
+              In enim sem orci adipiscing cras tempus.{' '}
+              <strong>
+                Malesuada odio egestas aliquet sed neque lectus cras.
+              </strong>
+            </p>
+            <button>Request Information</button>
+          </div>
+        </Container>
+      </div>
+    )
+  }
+
+  const CtaSectionTop = handleViewport(
+    CtaSectionTopC /** options: {}, config: {} **/
+  )
+
+  const CtaSectionBottomC = props => {
+    const { inViewport, forwardedRef } = props
+    return (
+      <div className="viewport-block" ref={forwardedRef}>
+        <Container id="discoverProgram">
+          <Img fluid={discoverProgramImage.fluid} className="discoverBgImg" />
+          <div className="wrapper centered">
+            <h3>
+              Discover the {typeOfDegree} in {fullProgramName}
+            </h3>
+            <p>{discoverProgramImage.description}</p>
+            <button>Request Information</button>
+          </div>
+        </Container>
+      </div>
+    )
+  }
+
+  const CtaSectionBottom = handleViewport(
+    CtaSectionBottomC /** options: {}, config: {} **/
+  )
+
+  const ChangeClassBottom = () => {
+    let topCta = document.getElementById('requestInfoCta')
+    topCta.classList.toggle('hidden')
+  }
 
   return (
     <Layout>
@@ -214,20 +273,18 @@ const ProgramTemplate = ({ data, pageContext }) => {
           )}
         </div>
       </Container>
-      <Container
-        id="requestInfoCta"
-        className={pos === 'sticky' ? ' sticked' : 'site-header'}
-      >
-        <div className="ctaContent narrow">
-          <p>
-            In enim sem orci adipiscing cras tempus.{' '}
-            <strong>
-              Malesuada odio egestas aliquet sed neque lectus cras.
-            </strong>
-          </p>
-          <button>Request Information</button>
-        </div>
-      </Container>
+
+      <CtaSectionTop
+        onEnterViewport={() => {
+          console.log('enter trigger')
+          // ChangeClass()
+        }}
+        onLeaveViewport={() => {
+          console.log('leave trigger')
+          // ChangeClass()
+        }}
+      />
+
       <Container className="cols" constraints="center">
         <Group className="programDescription cols">
           {description &&
@@ -308,16 +365,14 @@ const ProgramTemplate = ({ data, pageContext }) => {
         )}
       </Container>
 
-      <Container id="discoverProgram">
-        <Img fluid={discoverProgramImage.fluid} className="discoverBgImg" />
-        <div className="wrapper centered">
-          <h3>
-            Discover the {typeOfDegree} in {fullProgramName}
-          </h3>
-          <p>{discoverProgramImage.description}</p>
-          <button>Request Information</button>
-        </div>
-      </Container>
+      <CtaSectionBottom
+        onEnterViewport={() => {
+          ChangeClassBottom()
+        }}
+        onLeaveViewport={() => {
+          ChangeClassBottom()
+        }}
+      />
 
       <Container id="relatedPrograms" constraints="center">
         <Group>
@@ -333,7 +388,9 @@ const ProgramTemplate = ({ data, pageContext }) => {
           )}
         </Group>
         <div className="buttons centered">
-          <button>View all programs</button>
+          <Link to="/" className="button">
+            View all programs
+          </Link>
         </div>
       </Container>
     </Layout>

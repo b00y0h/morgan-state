@@ -3,10 +3,19 @@
 
 @include keyframes(stickyheader) {
   0% {
-    top: -4rem;
+    top: -5rem;
   }
   100% {
     top: 0.5rem;
+  }
+}
+
+@include keyframes(stickyheaderout) {
+  0% {
+    top: 0.5rem;
+  }
+  100% {
+    top: -5rem;
   }
 }
 
@@ -16,18 +25,28 @@
   justify-content: center;
   background: $c-primary-01;
   z-index: 90;
+  width: 100%;
   position: fixed;
   bottom: 0;
-  // padding: 0 1rem !important;
-  // padding: 1rem;
+  left: 0;
   @extend %padding;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
   transition: all 0.2s ease-in;
+  box-shadow: -1em 0 1em rgba(0, 0, 0, 0.1);
 
   @media (min-width: $mq-1000) {
     position: sticky;
     bottom: initial;
-    padding: 0 !important;
+    box-shadow: none;
+    padding-bottom: 0;
+    padding-top: 0.8rem;
     @include fluidRem(height, 2.3rem, 5.6rem, 1);
+    flex: 1;
+  }
+
+  .wrapper {
+    padding: 0;
   }
 
   .ctaContent {
@@ -63,9 +82,20 @@
   }
 
   &.sticked {
+    display: block;
+
+    &.hidden {
+      display: none;
+    }
+
     @media (min-width: $mq-1000) {
-      top: 0;
+      top: -5rem;
       @include animation(stickyheader 0.3s ease-in-out forwards);
+
+      &.hidden {
+        display: block;
+        @include animation(stickyheaderout 0.3s ease-in-out forwards);
+      }
     }
     .ctaContent {
       margin: 0 0 0 auto;

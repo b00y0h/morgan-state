@@ -4,7 +4,7 @@
 
 .page-header {
   border-top: 0.5rem solid $c-primary-02;
-  @include fluidRem(border-top-width, 0.2rem, 0.5rem);
+  // @include fluidRem(border-top-width, 0.2rem, 0.5rem);
   @include fluidRem(margin-bottom, -2.3rem, -5.6rem);
   position: sticky;
   top: 0;

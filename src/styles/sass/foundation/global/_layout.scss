@@ -142,17 +142,23 @@ body {
     max-width: 16em;
     @include fluidRem(padding, 1rem, 3rem);
 
+    @media (max-width: $mq-1000) {
+      padding-bottom: 7rem !important;
+    }
+
     address {
       color: white;
       line-height: 1.5;
       margin-bottom: 1em;
       font-size: 0.8rem;
+      text-align: center;
     }
 
     .tel {
       color: white;
       text-decoration: none;
       font-size: 0.8rem;
+      text-align: center;
     }
   }
 
