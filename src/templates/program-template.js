@@ -200,7 +200,7 @@ const ProgramTemplate = ({ data, pageContext }) => {
   const CtaSectionTop = handleViewport(
     CtaSectionTopC /** options: {}, config: {} **/
   )
-
+  console.log(availableMethodsOfStudy)
   const CtaSectionBottomC = props => {
     const { inViewport, forwardedRef } = props
     return (
@@ -211,7 +211,14 @@ const ProgramTemplate = ({ data, pageContext }) => {
             <h3>
               Discover the {typeOfDegree} in {fullProgramName}
             </h3>
-            <p>{discoverProgramImage.description}</p>
+            <p>
+              Find meaningful success-both personally and professionally-width
+              the {availableMethodsOfStudy.join(' or ')} {typeOfDegree} in{' '}
+              {fullProgramName}. If you're ready to learn valuable skills for a
+              more rewarding career, why wait?{' '}
+              <strong>Request more information today</strong> and we'll reach
+              out to you with all the details you need.
+            </p>
             <button>Request Information</button>
           </div>
         </Container>
@@ -484,8 +491,6 @@ export const query = graphql`
         }
       }
       discoverProgramImage {
-        description
-
         fluid(maxWidth: 800) {
           ...GatsbyContentfulFluid_withWebp_noBase64
         }
