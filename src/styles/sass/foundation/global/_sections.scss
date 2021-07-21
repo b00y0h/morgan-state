@@ -1,39 +1,90 @@
-@charset "UTF-8";
+// Sections
+// ==================
+
+@include keyframes(stickyheader) {
+  0% {
+    top: -4rem;
+  }
+  100% {
+    top: 0.5rem;
+  }
+}
 
 #requestInfoCta {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   background: $c-primary-01;
   z-index: 90;
   position: fixed;
   bottom: 0;
-  padding: 1.1rem !important;
+  // padding: 0 1rem !important;
+  // padding: 1rem;
+  @extend %padding;
+  transition: all 0.2s ease-in;
 
   @media (min-width: $mq-1000) {
     position: sticky;
-    top: 0;
     bottom: initial;
+    padding: 0 !important;
+    @include fluidRem(height, 2.3rem, 5.6rem, 1);
   }
 
   .ctaContent {
-    @extend %wrapper;
-    @include fluidRem(padding, 0 1rem, 0 4rem);
+    display: block;
+    width: 100%;
     display: flex;
     align-items: center;
-    max-width: $mq-800 !important;
 
     p {
+      display: none;
       color: white;
       margin: 0;
+      @include fluidRem(font-size, 0.85rem, 1rem);
+      margin-right: 1em;
+      line-height: 1.1;
+      @media (min-width: $mq-600) {
+        display: block;
+      }
     }
 
     button {
       flex-shrink: 0;
+    }
+
+    @media (min-width: $mq-1000) {
+      max-width: $mq-700;
+      margin: 0 auto;
+    }
+
+    @media (min-width: $mq-1200) {
+      max-width: $mq-800;
+    }
+  }
+
+  &.sticked {
+    @media (min-width: $mq-1000) {
+      top: 0;
+      @include animation(stickyheader 0.3s ease-in-out forwards);
+    }
+    .ctaContent {
+      margin: 0 0 0 auto;
     }
   }
 }
 
 .cols {
   img {
-    box-shadow: -1em 1em 0 $c-primary-02;
+    box-shadow: -0.5em 0.5em 0 $c-primary-02;
+    @media (min-width: $mq-700) {
+      box-shadow: -0.8em 0.8em 0 $c-primary-02;
+    }
+    @media (min-width: $mq-800) {
+      box-shadow: -0.9em 0.9em 0 $c-primary-02;
+    }
+    @media (min-width: $mq-800) {
+      box-shadow: -1em 1em 0 $c-primary-02;
+    }
   }
 }
 
@@ -45,21 +96,27 @@
 .statsList {
   @extend .no-list;
   @extend .cols;
+  flex-flow: row wrap;
 
   li {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     background: white;
     @include fluidRem(padding, 1rem, 2rem, 1);
     margin: 1em !important;
     width: 100%;
     color: $c-primary-01;
 
+    span {
+      word-wrap: anywhere;
+    }
+
     picture {
       display: block;
       width: 100%;
       height: 100%;
-      min-height: 15rem;
+      min-height: 12rem;
 
       img {
         display: block;
@@ -88,17 +145,21 @@
   }
 
   &.one-row {
+    // flex-flow: row wrap;
     li {
-      @media (min-width: $mq-600) {
-        width: calc(100% - 2em);
+      @media (min-width: $mq-500) {
+        width: calc(50% - 2em);
         flex-grow: 0;
       }
+    }
+    @media (min-width: $mq-1100) {
+      flex-flow: row nowrap;
+      width: calc(100% - 2em);
     }
   }
 
   &.two-rows {
-    @media (min-width: $mq-600) {
-      flex-flow: row wrap;
+    @media (min-width: $mq-500) {
       justify-content: center;
     }
     li {
@@ -111,44 +172,105 @@
 }
 
 .group.cols {
+  display: block;
   display: grid;
-  grid-template-columns: 50% 50%;
-  grid-template-rows: auto auto auto auto auto;
-  column-gap: 2rem;
+
+  @media (min-width: $mq-700) {
+    $_columnWidth: calc(12.5% - 1.75rem);
+    display: grid;
+    grid-template-columns: repeat(8, $_columnWidth);
+    grid-template-rows: repeat(8, auto);
+    column-gap: 2rem;
+  }
 
   img {
-    grid-column-start: 1;
-    grid-column-end: 2;
-    grid-row-start: 1;
-    grid-row-end: last;
+    width: 10rem;
+    margin-bottom: 2rem;
+    @media (min-width: $mq-700) {
+      grid-column-start: 1;
+      grid-column-end: 3;
+      grid-row-start: 1;
+      grid-row-end: last;
+      width: auto;
+    }
+    @media (min-width: $mq-800) {
+      grid-column-start: 1;
+      grid-column-end: 4;
+    }
+    @media (min-width: $mq-1000) {
+      grid-column-start: 1;
+      grid-column-end: 5;
+    }
   }
 
   h2,
+  h3,
+  h4,
+  h5,
+  h6,
   ul,
   p {
-    grid-column-start: 2;
-    grid-column-end: 3;
+    @media (min-width: $mq-700) {
+      grid-column-start: 3;
+      grid-column-end: 9;
+    }
+    @media (min-width: $mq-800) {
+      grid-column-start: 4;
+      grid-column-end: 9;
+    }
+    @media (min-width: $mq-1000) {
+      grid-column-start: 5;
+      grid-column-end: 9;
+    }
   }
 }
 
 .cols-container {
   .cols:nth-child(odd) {
     img {
-      grid-column-start: 2;
-      grid-column-end: 3;
+      @media (min-width: $mq-700) {
+        grid-column-start: 7;
+        grid-column-end: 9;
+      }
+      @media (min-width: $mq-800) {
+        grid-column-start: 6;
+        grid-column-end: 9;
+      }
+      @media (min-width: $mq-1000) {
+        grid-column-start: 5;
+        grid-column-end: 9;
+      }
     }
 
     h2,
+    h3,
+    h4,
+    h5,
+    h6,
     ul,
     p {
-      grid-column-start: 1;
-      grid-column-end: 2;
+      @media (min-width: $mq-700) {
+        grid-column-start: 1;
+        grid-column-end: 7;
+      }
+      @media (min-width: $mq-800) {
+        grid-column-start: 1;
+        grid-column-end: 6;
+      }
+      @media (min-width: $mq-1000) {
+        grid-column-start: 1;
+        grid-column-end: 5;
+      }
     }
   }
 }
 
 #testimonials {
   padding: 0;
+
+  .group {
+    @extend %padding;
+  }
 
   .testimonial {
     background: $c-secondary-02;
@@ -165,9 +287,13 @@
 
     blockquote {
       display: flex;
+      flex-direction: column;
       max-width: $mq-1200;
       @extend %padding;
       margin: 0 auto;
+      @media (min-width: $mq-500) {
+        flex-direction: row;
+      }
     }
 
     .gatsby-image-wrapper {
@@ -176,6 +302,7 @@
       flex-shrink: 0;
       margin-right: 1.5rem;
       border: 2px solid white;
+      margin-bottom: 1rem;
     }
 
     .description {

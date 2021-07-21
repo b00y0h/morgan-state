@@ -5,7 +5,7 @@
 .logo {
   display: block;
   @include fluidRem(width, 8rem, 15rem);
-  @include fluidRem(height, 2.3rem, 5.6rem);
+  @include fluidRem(height, 2.3rem, 5.6rem, 1);
   text-indent: -999em;
   position: relative;
   background: $c-primary-01;
@@ -18,8 +18,9 @@
     background: url(./../../assets/msu-logo-horizontal.svg) no-repeat center;
     background-size: contain;
     position: absolute;
-    left: 0;
-    top: 0;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
   }
 }
 

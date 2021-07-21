@@ -101,8 +101,8 @@ body {
 
 .group {
   display: block;
-  @include fluidRem(padding, 1rem 0, 3rem 0);
-  margin-bottom: 3em;
+  @include fluidRem(padding, 1rem 0 0, 3rem 0 0);
+  @include fluidRem(margin-bottom, 1rem, 3rem);
 
   &:last-child {
     padding-bottom: 0;

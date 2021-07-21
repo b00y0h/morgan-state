@@ -3,7 +3,8 @@
 /////////////////
 
 .page-header {
-  border-top: 0.6rem solid $c-primary-02;
+  border-top: 0.5rem solid $c-primary-02;
+  @include fluidRem(border-top-width, 0.2rem, 0.5rem);
   @include fluidRem(margin-bottom, -2.3rem, -5.6rem);
   position: sticky;
   top: 0;
@@ -21,7 +22,8 @@
   &.wrapper {
     background: white;
     width: 90%;
-    margin-top: -10rem;
+    // margin-top: -10rem;
+    @include fluidRem(margin-top, -2rem, -10rem);
     position: relative;
   }
 
@@ -72,9 +74,17 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
-    @include fluidRem(padding, 1rem 1rem, 2rem 4rem);
+    line-height: 1;
+    padding: 1rem 0.5rem;
     border-right: 1px solid $c-secondary-01;
     color: $c-primary-01;
+    width: 33%;
+    margin-top: 1rem;
+
+    @media (min-width: $mq-700) {
+      line-height: 1.2;
+      @include fluidRem(padding, 1rem 0.5rem, 2rem 4rem);
+    }
 
     &:last-child {
       border: none;

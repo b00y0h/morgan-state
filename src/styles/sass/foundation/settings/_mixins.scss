@@ -67,8 +67,8 @@
   background: $primary-color;
   color: $text-color;
   text-decoration: none;
-  padding: 0.85em 2.7em 0.85em 1.1em;
-  font-size: 1rem;
+  padding: 0.85em 3em 0.85em 1.1em;
+  @include fluidRem(font-size, 0.85rem, 1rem);
   font-weight: bold;
   font-family: $f-sans;
   text-align: center;
@@ -80,9 +80,13 @@
   cursor: pointer;
   outline: none;
 
+  @media (min-width: $mq-500) {
+    width: 70%;
+  }
+
   @media (min-width: $mq-600) {
-    display: inline-block;
     width: auto;
+    display: inline-block;
   }
 
   &:hover,
@@ -105,7 +109,7 @@
     display: block;
     position: absolute;
     width: 1.8em;
-    right: 0.8em;
+    right: 1em;
     top: 50%;
     transform: translateY(-50%);
     transition: all 0.2s;

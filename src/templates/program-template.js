@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { graphql } from 'gatsby'
 import styled from 'styled-components'
 import '@brainhubeu/react-carousel/lib/style.css'
@@ -153,6 +153,20 @@ const ProgramTemplate = ({ data, pageContext }) => {
         : null,
     }))
 
+  const [pos, setPos] = useState('top')
+
+  useEffect(() => {
+    document.addEventListener('scroll', e => {
+      let scrolled = document.scrollingElement.scrollTop
+      if (scrolled >= 1150) {
+        setPos('sticky')
+      } else {
+        setPos('top')
+      }
+    }),
+      []
+  })
+
   const statsCardsAmount = whyMorganStateStats.length
 
   return (
@@ -200,7 +214,10 @@ const ProgramTemplate = ({ data, pageContext }) => {
           )}
         </div>
       </Container>
-      <Container id="requestInfoCta">
+      <Container
+        id="requestInfoCta"
+        className={pos === 'sticky' ? ' sticked' : 'site-header'}
+      >
         <div className="ctaContent narrow">
           <p>
             In enim sem orci adipiscing cras tempus.{' '}

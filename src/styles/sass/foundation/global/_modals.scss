@@ -169,7 +169,7 @@
     .slick-slide {
       .slick-slide-content {
         img {
-          @include fluidRem(height, 20rem, 30rem);
+          @include fluidRem(height, 15rem, 30rem);
         }
       }
     }
