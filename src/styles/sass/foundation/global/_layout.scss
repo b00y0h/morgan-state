@@ -39,10 +39,11 @@ body {
 // ================================
 // Hero Images
 
-[aria-hidden='true'] {
-  display: none;
-  visibility: hidden;
-}
+// causes slick carousel to break
+// [aria-hidden="true"] {
+//   display: none;
+//   visibility: hidden;
+// }
 
 .cols {
   display: flex;
@@ -86,7 +87,7 @@ body {
     }
   }
 
-  & [class*='col'] {
+  & [class*="col"] {
     margin-bottom: 1em;
 
     @media (min-width: $mq-800) {

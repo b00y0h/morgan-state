@@ -127,12 +127,7 @@ const ProgramTemplate = ({ data, pageContext }) => {
         <div className="learningMode">
           <p>Learning Mode:</p>
           <ul className="no-list">
-            {availableMethodsOfStudy &&
-              availableMethodsOfStudy.map((method) => (
-                <>
-                  <li key={method}>{method}</li>
-                </>
-              ))}
+            {availableMethodsOfStudy && availableMethodsOfStudy.map((method) => <li key={method}>{method}</li>)}
           </ul>
         </div>
         <div className="programIntro">
@@ -168,7 +163,10 @@ const ProgramTemplate = ({ data, pageContext }) => {
         <Container constraints="center">
           <h2>Why Morgan State?</h2>
           <CardList>
-            {whyMorganStateStats && whyMorganStateStats.map((node) => <StatCard key={node.id} {...node} />)}
+            {whyMorganStateStats &&
+              whyMorganStateStats.map((node) => (
+                <StatCard key={node.id} description={node.description} statisticImage={node.statisticImage} />
+              ))}
           </CardList>
         </Container>
       </Container>

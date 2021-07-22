@@ -6,7 +6,7 @@ import SEO from '../components/SEO'
 import Layout from '../components/Layout'
 import Container from '../components/Container'
 import ProgramPreview from '../components/ProgramPreview'
-import '../styles/sass/styles.scss'
+// import '../styles/sass/styles.scss'
 
 const ProgramIndex = ({ data }) => {
   const schools = data.allContentfulPartner.edges[0].node.school
