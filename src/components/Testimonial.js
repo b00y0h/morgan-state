@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import Img from 'gatsby-image'
+import { GatsbyImage as Img } from 'gatsby-plugin-image'
 
 const Quote = styled.blockquote`
   position: relative;
@@ -28,7 +28,7 @@ const Testimonial = ({ quote, author, image, ...props }) => (
     {quote && (
       <figure className="testimonial">
         <Quote>
-          <Img fluid={image.fluid} backgroundColor="#eeeeee" />
+          <Img image={image.gatsbyImageData} alt={image.title} />
           <div className="description">
             {quote}
             <Author>- {author}</Author>

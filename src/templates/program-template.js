@@ -1,7 +1,8 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 import '@brainhubeu/react-carousel/lib/style.css'
-import Img from 'gatsby-image'
+// import Img from 'gatsby-image'
+import { GatsbyImage as Img } from 'gatsby-plugin-image'
 
 import { renderRichText } from 'gatsby-source-contentful/rich-text'
 
@@ -51,10 +52,7 @@ const RICHTEXT_OPTIONS = {
     ),
     [BLOCKS.PARAGRAPH]: (node, children) => <p>{children}</p>,
     [BLOCKS.LIST_ITEM]: (node, children) => <li>{children}</li>,
-    [BLOCKS.EMBEDDED_ASSET]: ({ data }) => {
-      console.log('data.target:', data.target)
-      return <Img {...data.target} />
-    },
+    [BLOCKS.EMBEDDED_ASSET]: ({ data }) => <Img image={data.target.gatsbyImageData} alt={data.target.title} />,
   },
 }
 
@@ -101,6 +99,7 @@ const ProgramTemplate = ({ data, pageContext }) => {
       id: item.id,
       title: item.title,
       src: item.image,
+      image: item.image,
       description: item.description,
     }))
 
@@ -237,9 +236,8 @@ export const query = graphql`
           ... on ContentfulAsset {
             __typename
             contentful_id
-            fluid(maxWidth: 600) {
-              ...GatsbyContentfulFluid_withWebp
-            }
+            title
+            gatsbyImageData(layout: CONSTRAINED, placeholder: BLURRED, width: 600)
           }
         }
       }
@@ -261,9 +259,6 @@ export const query = graphql`
         }
         statisticImage {
           title
-          fluid(maxWidth: 400) {
-            ...GatsbyContentfulFluid_withWebp
-          }
           gatsbyImageData(layout: CONSTRAINED, placeholder: BLURRED, width: 400)
         }
       }
@@ -274,9 +269,8 @@ export const query = graphql`
           ... on ContentfulAsset {
             __typename
             contentful_id
-            fluid(maxWidth: 640) {
-              ...GatsbyContentfulFluid_withWebp
-            }
+            title
+            gatsbyImageData(layout: CONSTRAINED, placeholder: BLURRED, width: 640)
           }
         }
       }
@@ -289,9 +283,8 @@ export const query = graphql`
           ... on ContentfulAsset {
             __typename
             contentful_id
-            fluid(maxWidth: 640) {
-              ...GatsbyContentfulFluid_withWebp
-            }
+            title
+            gatsbyImageData(layout: CONSTRAINED, placeholder: BLURRED, width: 640)
           }
         }
       }
@@ -306,9 +299,8 @@ export const query = graphql`
         title
         description
         image {
-          fluid(maxWidth: 800) {
-            ...GatsbyContentfulFluid_withWebp_noBase64
-          }
+          gatsbyImageData(layout: CONSTRAINED, placeholder: BLURRED, width: 1080)
+          title
         }
       }
       testimonialPreText {
@@ -320,9 +312,8 @@ export const query = graphql`
           raw
         }
         image {
-          fluid(maxWidth: 800) {
-            ...GatsbyContentfulFluid_withWebp_noBase64
-          }
+          gatsbyImageData(layout: CONSTRAINED, placeholder: BLURRED, width: 800)
+          title
         }
       }
       metaDescription {
