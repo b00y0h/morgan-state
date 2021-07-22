@@ -260,9 +260,11 @@ export const query = graphql`
           raw
         }
         statisticImage {
+          title
           fluid(maxWidth: 400) {
-            ...GatsbyContentfulFluid_withWebp_noBase64
+            ...GatsbyContentfulFluid_withWebp
           }
+          gatsbyImageData(layout: CONSTRAINED, placeholder: BLURRED, width: 400)
         }
       }
       programDetailUrl

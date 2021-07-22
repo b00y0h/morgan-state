@@ -53,6 +53,7 @@ module.exports = {
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-sass',
     `gatsby-plugin-catch-links`,
+    `gatsby-plugin-image`,
     {
       resolve: 'gatsby-source-contentful',
       options: contentfulConfig,
