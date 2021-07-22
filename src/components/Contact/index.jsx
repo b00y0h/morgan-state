@@ -3,7 +3,7 @@ import { Container } from 'components/common';
 import { Wrapper } from './styles';
 import ContactForm from './ContactForm';
 
-export const Contact = props => {
+export const Contact = (props) => {
   const { campaign } = props;
   return (
     <Wrapper as={Container} id="contact" className="contact">

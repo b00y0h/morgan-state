@@ -8,9 +8,9 @@ const BgImg = styled(Img)`
   height: 100%;
 `
 
-const Hero = props => (
+const Hero = ({ image }) => (
   <div className="hero">
-    <BgImg fluid={props.image && props.image.fluid} />
+    <BgImg fluid={image && image.fluid} />
   </div>
 )
 

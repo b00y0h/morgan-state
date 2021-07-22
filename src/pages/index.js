@@ -14,23 +14,17 @@ const ProgramIndex = ({ data }) => {
 
   return (
     <Layout>
-      <SEO
-        title={data.site.siteMetadata.title}
-        description={data.site.siteMetadata.description}
-        image="{ogImage}"
-      />
+      <SEO title={data.site.siteMetadata.title} description={data.site.siteMetadata.description} image="{ogImage}" />
       <Container data={data} schools={schools}>
-        {schools.map(school => (
+        {schools.map((school) => (
           <>
             <h2>{school.title}</h2>
             {school.program &&
-              school.program.map(program => {
-                return (
-                  <li key={program.slug}>
-                    <ProgramPreview program={program} />
-                  </li>
-                )
-              })}
+              school.program.map((program) => (
+                <li key={program.slug}>
+                  <ProgramPreview program={program} />
+                </li>
+              ))}
           </>
         ))}
         <h2>***** Programs that don't have a college associated yet *****</h2>
@@ -59,9 +53,7 @@ export const pageQuery = graphql`
       }
     }
 
-    allContentfulPartner(
-      filter: { id: { eq: "ecd6a28f-36c2-5596-a5f1-e03afa6e09ed" } }
-    ) {
+    allContentfulPartner(filter: { id: {}, name: { eq: "Morgan State" } }) {
       edges {
         node {
           name
@@ -78,11 +70,7 @@ export const pageQuery = graphql`
       }
     }
 
-    allContentfulProgram(
-      filter: {
-        partner: { id: { eq: "ecd6a28f-36c2-5596-a5f1-e03afa6e09ed" } }
-      }
-    ) {
+    allContentfulProgram(filter: { partner: { id: { eq: "ecd6a28f-36c2-5596-a5f1-e03afa6e09ed" } } }) {
       edges {
         node {
           fullProgramName

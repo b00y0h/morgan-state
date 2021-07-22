@@ -1,5 +1,6 @@
 const config = require('../../../gatsby-config')
 const query = require('../data/query')
+
 const path = require(`path`)
 const { paginate } = require(`gatsby-awesome-pagination`)
 

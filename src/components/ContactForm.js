@@ -1,6 +1,6 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import styled from '@emotion/styled'
+import React from 'react';
+import PropTypes from 'prop-types';
+import styled from '@emotion/styled';
 
 /*
   ⚠️ This is an example of a contact form powered with Netlify form handling.
@@ -9,7 +9,7 @@ import styled from '@emotion/styled'
 */
 
 const Form = styled.form`
-  max-width: ${props => props.theme.sizes.maxWidthCentered};
+  max-width: ${(props) => props.theme.sizes.maxWidthCentered};
   margin: 0 auto;
   display: flex;
   flex-flow: row wrap;
@@ -19,8 +19,8 @@ const Form = styled.form`
   textarea {
     font-family: inherit;
     font-size: inherit;
-    background: ${props => props.theme.colors.tertiary};
-    color: ${props => props.theme.colors.text};
+    background: ${(props) => props.theme.colors.tertiary};
+    color: ${(props) => props.theme.colors.text};
     border-radius: 2px;
     padding: 1em;
     &::-webkit-input-placeholder {
@@ -49,26 +49,26 @@ const Form = styled.form`
     left: 0;
     z-index: 1;
     transition: 0.2s all;
-    opacity: ${props => (props.overlay ? '.8' : '0')};
-    visibility: ${props => (props.overlay ? 'visible' : 'hidden')};
+    opacity: ${(props) => (props.overlay ? '.8' : '0')};
+    visibility: ${(props) => (props.overlay ? 'visible' : 'hidden')};
   }
-`
+`;
 
 const Name = styled.input`
   margin: 0 0 1em 0;
   width: 100%;
-  @media (min-width: ${props => props.theme.responsive.small}) {
+  @media (min-width: ${(props) => props.theme.responsive.small}) {
     width: 49%;
   }
-`
+`;
 
 const Email = styled.input`
   margin: 0 0 1em 0;
   width: 100%;
-  @media (min-width: ${props => props.theme.responsive.small}) {
+  @media (min-width: ${(props) => props.theme.responsive.small}) {
     width: 49%;
   }
-`
+`;
 
 const Message = styled.textarea`
   width: 100%;
@@ -76,17 +76,17 @@ const Message = styled.textarea`
   line-height: 1.6;
   min-height: 250px;
   resize: vertical;
-`
+`;
 
 const Submit = styled.input`
-  background: ${props => props.theme.colors.text} !important;
+  background: ${(props) => props.theme.colors.text} !important;
   color: white !important;
   cursor: pointer;
   transition: 0.2s;
   &:hover {
-    background: ${props => props.theme.colors.highlight} !important;
+    background: ${(props) => props.theme.colors.highlight} !important;
   }
-`
+`;
 
 const Modal = styled.div`
   background: white;
@@ -103,9 +103,9 @@ const Modal = styled.div`
   flex-flow: column;
   align-items: flex-start;
   transition: 0.2s all;
-  opacity: ${props => (props.visible ? '1' : '0')};
-  visibility: ${props => (props.visible ? 'visible' : 'hidden')};
-  @media screen and (min-width: ${props => props.theme.responsive.small}) {
+  opacity: ${(props) => (props.visible ? '1' : '0')};
+  visibility: ${(props) => (props.visible ? 'visible' : 'hidden')};
+  @media screen and (min-width: ${(props) => props.theme.responsive.small}) {
     min-width: inherit;
     max-width: 400px;
   }
@@ -113,10 +113,10 @@ const Modal = styled.div`
     line-height: 1.6;
     margin: 0 0 2em 0;
   }
-`
+`;
 
 const Button = styled.div`
-  background: ${props => props.theme.colors.text};
+  background: ${(props) => props.theme.colors.text};
   font-size: 1em;
   display: inline-block;
   margin: 0 auto;
@@ -133,46 +133,45 @@ const Button = styled.div`
     outline: none;
   }
   &:hover {
-    background: ${props => props.theme.colors.highlight};
+    background: ${(props) => props.theme.colors.highlight};
   }
-`
+`;
 
-const encode = data => {
-  return Object.keys(data)
-    .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
-    .join('&')
-}
+const encode = (data) =>
+  Object.keys(data)
+    .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`)
+    .join('&');
 
 class ContactForm extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       name: '',
       email: '',
       message: '',
       showModal: false,
-    }
+    };
   }
 
-  handleInputChange = event => {
-    const target = event.target
-    const value = target.value
-    const name = target.name
+  handleInputChange = (event) => {
+    const { target } = event;
+    const { value } = target;
+    const { name } = target;
     this.setState({
       [name]: value,
-    })
-  }
+    });
+  };
 
-  handleSubmit = event => {
+  handleSubmit = (event) => {
     fetch('/?no-cache=1', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: encode({ 'form-name': 'contact', ...this.state }),
     })
       .then(this.handleSuccess)
-      .catch(error => alert(error))
-    event.preventDefault()
-  }
+      .catch((error) => alert(error));
+    event.preventDefault();
+  };
 
   handleSuccess = () => {
     this.setState({
@@ -180,12 +179,12 @@ class ContactForm extends React.Component {
       email: '',
       message: '',
       showModal: true,
-    })
-  }
+    });
+  };
 
   closeModal = () => {
-    this.setState({ showModal: false })
-  }
+    this.setState({ showModal: false });
+  };
 
   render() {
     return (
@@ -200,8 +199,7 @@ class ContactForm extends React.Component {
         <input type="hidden" name="form-name" value="contact" />
         <p hidden>
           <label>
-            Don’t fill this out:{' '}
-            <input name="bot" onChange={this.handleInputChange} />
+            Don’t fill this out: <input name="bot" onChange={this.handleInputChange} />
           </label>
         </p>
 
@@ -232,19 +230,16 @@ class ContactForm extends React.Component {
         <Submit name="submit" type="submit" value="Send" />
 
         <Modal visible={this.state.showModal}>
-          <p>
-            Thank you for reaching out. I will get back to you as soon as
-            possible.
-          </p>
+          <p>Thank you for reaching out. I will get back to you as soon as possible.</p>
           <Button onClick={this.closeModal}>Okay</Button>
         </Modal>
       </Form>
-    )
+    );
   }
 }
 
 ContactForm.propTypes = {
   data: PropTypes.object,
-}
+};
 
-export default ContactForm
+export default ContactForm;

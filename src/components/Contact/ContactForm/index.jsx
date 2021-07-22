@@ -1,20 +1,20 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable jsx-a11y/label-has-for */
-import React from 'react'
-import styled from 'styled-components'
-import { Formik, Form, ErrorMessage, useField } from 'formik'
-import * as Yup from 'yup'
-import MaskedInput from 'react-text-mask'
+import React from 'react';
+import styled from 'styled-components';
+import { Formik, Form, ErrorMessage, useField } from 'formik';
+import * as Yup from 'yup';
+import MaskedInput from 'react-text-mask';
 
-import { Button, StyledInput, StyledSelect } from 'components/common'
-import { Error, Center, InputField } from './styles'
-import { Debug } from './Debug'
+import { Button, StyledInput, StyledSelect } from 'components/common';
+import { Error, Center, InputField } from './styles';
+import { Debug } from './Debug';
 
 const TextInput = ({ label, ...props }) => {
   // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
   // which we can spread on <input> and alse replace ErrorMessage entirely.
-  const [field, meta] = useField(props)
-  const { id, name } = props
+  const [field, meta] = useField(props);
+  const { id, name } = props;
   return (
     <>
       <label htmlFor={id || name}>
@@ -25,8 +25,8 @@ const TextInput = ({ label, ...props }) => {
 
       {/* {meta.touched && meta.error ? <div className="error">{meta.error}</div> : null} */}
     </>
-  )
-}
+  );
+};
 
 // Styled components ....
 
@@ -42,17 +42,17 @@ const StyledErrorMessage = styled.div`
   @media (prefers-color-scheme: dark) {
     color: var(--red-300);
   }
-`
+`;
 
 const StyledLabel = styled.label`
   margin-top: 1rem;
-`
+`;
 
 const MultiSelect = ({ label, ...props }) => {
   // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
   // which we can spread on <input> and alse replace ErrorMessage entirely.
-  const [field, meta] = useField(props)
-  const { id, name } = props
+  const [field, meta] = useField(props);
+  const { id, name } = props;
   return (
     <>
       <StyledLabel htmlFor={id || name}>{label}</StyledLabel>
@@ -60,30 +60,17 @@ const MultiSelect = ({ label, ...props }) => {
       {/* {meta.touched && meta.error ? <StyledErrorMessage>{meta.error}</StyledErrorMessage> : null} */}
       <ErrorMessage component={Error} name={name} />
     </>
-  )
-}
+  );
+};
 
-const phoneNumberMask = [
-  /[1-9]/,
-  /\d/,
-  /\d/,
-  '-',
-  /\d/,
-  /\d/,
-  /\d/,
-  '-',
-  /\d/,
-  /\d/,
-  /\d/,
-  /\d/,
-]
-const encode = data =>
+const phoneNumberMask = [/[1-9]/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
+const encode = (data) =>
   Object.keys(data)
-    .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`)
-    .join('&')
+    .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`)
+    .join('&');
 
-const ContactForm = props => {
-  const { campaign } = props
+const ContactForm = (props) => {
+  const { campaign } = props;
   return (
     <Formik
       initialValues={{
@@ -98,17 +85,15 @@ const ContactForm = props => {
       validationSchema={Yup.object().shape({
         'First Name': Yup.string().required('Your first name is required'),
         'Last Name': Yup.string().required('Your last name is required'),
-        Email: Yup.string()
-          .email('Invalid email')
-          .required('Your email address is required'),
+        Email: Yup.string().email('Invalid email').required('Your email address is required'),
       })}
       onSubmit={(values, actions) => {
-        actions.setFieldValue(values.Campaign, campaign)
+        actions.setFieldValue(values.Campaign, campaign);
         const payload = {
           ...values,
           Campaign: campaign,
-        } // Construct the new payload
-        actions.setValues(payload)
+        }; // Construct the new payload
+        actions.setValues(payload);
         // console.log('payloadpayloadpayload', payload);
         // console.log('valuesvaluesvalues', values);
         fetch('/?no-cache=1', {
@@ -118,29 +103,21 @@ const ContactForm = props => {
         })
           .then(() => {
             // alert('Success');
-            actions.setFieldValue('success', true)
+            actions.setFieldValue('success', true);
             // alert(JSON.stringify(payload, null, 2));
             // alert(encode({ 'form-name': 'unlv-contact', ...payload }));
             // actions.resetForm();
             // navigate('/continue');
           })
           .catch(() => {
-            actions.setSubmitting(false)
-            actions.setFieldValue('success', false)
-            alert('Error')
+            actions.setSubmitting(false);
+            actions.setFieldValue('success', false);
+            alert('Error');
           })
-          .finally(() => actions.setSubmitting(false))
+          .finally(() => actions.setSubmitting(false));
       }}
     >
-      {({
-        values,
-        touched,
-        errors,
-        isSubmitting,
-        setFieldValue,
-        handleChange,
-        handleBlur,
-      }) => (
+      {({ values, touched, errors, isSubmitting, setFieldValue, handleChange, handleBlur }) => (
         <Form name="unlv-contact" className="form" data-netlify>
           <input type="hidden" name="form-name" value="unlv-contact" />
           <input type="hidden" name="Campaign" value={campaign} />
@@ -232,12 +209,9 @@ const ContactForm = props => {
                     id="dobMonth"
                     name="dobMonth"
                     value={values.dobMonth}
-                    onChange={e => {
-                      setFieldValue(
-                        'Birth date',
-                        `${e.target.value}/${values.dobDay}/${values.dobYear}`
-                      )
-                      setFieldValue('dobMonth', e.target.value)
+                    onChange={(e) => {
+                      setFieldValue('Birth date', `${e.target.value}/${values.dobDay}/${values.dobYear}`);
+                      setFieldValue('dobMonth', e.target.value);
                     }}
                   >
                     <option value="">---</option>
@@ -260,12 +234,9 @@ const ContactForm = props => {
                     name="dobDay"
                     as="select"
                     value={values.dobDay}
-                    onChange={e => {
-                      setFieldValue(
-                        'Birth date',
-                        `${values.dobMonth}/${e.target.value}/${values.dobYear}`
-                      )
-                      setFieldValue('dobDay', e.target.value)
+                    onChange={(e) => {
+                      setFieldValue('Birth date', `${values.dobMonth}/${e.target.value}/${values.dobYear}`);
+                      setFieldValue('dobDay', e.target.value);
                     }}
                   >
                     <option value="">---</option>
@@ -306,12 +277,9 @@ const ContactForm = props => {
                     id="dobYear"
                     name="dobYear"
                     value={values.dobYear}
-                    onChange={e => {
-                      setFieldValue(
-                        'Birth date',
-                        `${values.dobMonth}/${values.dobDay}/${e.target.value}`
-                      )
-                      setFieldValue('dobYear', e.target.value)
+                    onChange={(e) => {
+                      setFieldValue('Birth date', `${values.dobMonth}/${values.dobDay}/${e.target.value}`);
+                      setFieldValue('dobYear', e.target.value);
                     }}
                   >
                     <option value="">---</option>
@@ -335,17 +303,14 @@ const ContactForm = props => {
           {values.success && (
             <InputField>
               <Center>
-                <h4>
-                  Thank you for submitting your infomation! We will be in touch
-                  with you soon!
-                </h4>
+                <h4>Thank you for submitting your infomation! We will be in touch with you soon!</h4>
               </Center>
             </InputField>
           )}
         </Form>
       )}
     </Formik>
-  )
-}
+  );
+};
 
-export default ContactForm
+export default ContactForm;
