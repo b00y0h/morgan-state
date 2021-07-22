@@ -54,6 +54,7 @@ module.exports = {
     'gatsby-plugin-sass',
     `gatsby-plugin-catch-links`,
     `gatsby-plugin-image`,
+    `gatsby-plugin-sharp`,
     {
       resolve: 'gatsby-source-contentful',
       options: contentfulConfig,
