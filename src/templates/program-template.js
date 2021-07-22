@@ -1,7 +1,6 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 import '@brainhubeu/react-carousel/lib/style.css'
-// import Img from 'gatsby-image'
 import { GatsbyImage as Img } from 'gatsby-plugin-image'
 
 import { renderRichText } from 'gatsby-source-contentful/rich-text'
@@ -98,7 +97,6 @@ const ProgramTemplate = ({ data, pageContext }) => {
     carouselContent.map((item) => ({
       id: item.id,
       title: item.title,
-      src: item.image,
       image: item.image,
       description: item.description,
     }))
@@ -108,7 +106,7 @@ const ProgramTemplate = ({ data, pageContext }) => {
     relatedPrograms.map((item) => ({
       id: item.id,
       title: item.fullProgramName,
-      src: item.heroImage,
+      image: item.heroImage,
       description: item.metaDescription ? item.metaDescription.metaDescription : null,
     }))
 
@@ -242,9 +240,8 @@ export const query = graphql`
         }
       }
       heroImage {
-        fluid(maxWidth: 400) {
-          ...GatsbyContentfulFluid_withWebp_noBase64
-        }
+        gatsbyImageData(layout: FULL_WIDTH)
+        title
       }
       availableMethodsOfStudy
       creditHours
@@ -328,9 +325,8 @@ export const query = graphql`
           metaDescription
         }
         heroImage {
-          fluid(maxWidth: 350, maxHeight: 196, resizingBehavior: SCALE) {
-            ...GatsbyContentfulFluid_withWebp_noBase64
-          }
+          gatsbyImageData(layout: CONSTRAINED, placeholder: BLURRED, width: 350)
+          title
         }
       }
     }

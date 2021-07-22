@@ -1,16 +1,16 @@
 import React from 'react'
-import Img from 'gatsby-image'
+import { GatsbyImage as Img } from 'gatsby-plugin-image'
 import styled from '@emotion/styled'
 
 const BgImg = styled(Img)`
-  position: absolute;
   width: 100%;
   height: 100%;
 `
 
 const Hero = ({ image }) => (
   <div className="hero">
-    <BgImg fluid={image && image.fluid} />
+    <BgImg image={image && image.gatsbyImageData} alt={image.title} />
+    {/* <GatsbyImage image={image && image.gatsbyImageData} alt={image.title} /> */}
   </div>
 )
 

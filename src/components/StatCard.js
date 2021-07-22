@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from '@emotion/styled'
-// import Img from 'gatsby-image'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { BLOCKS, INLINES } from '@contentful/rich-text-types'
 import { GatsbyImage as Img } from 'gatsby-plugin-image'

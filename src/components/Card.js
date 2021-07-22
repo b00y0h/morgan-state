@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from '@emotion/styled'
 import { Link } from 'gatsby'
-import Img from 'gatsby-image'
+import { GatsbyImage as Img } from 'gatsby-plugin-image'
 
 const Post = styled.li`
   position: relative;

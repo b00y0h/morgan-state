@@ -1,5 +1,5 @@
-import React from 'react';
+import React from 'react'
 
-const CardList = (props) => <ul className="statsList">{props.children}</ul>;
+const CardList = ({ children }) => <ul className="statsList">{children}</ul>
 
-export default CardList;
+export default CardList
