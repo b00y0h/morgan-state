@@ -57,7 +57,7 @@
     width: 100%;
   }
 
-  button[class*="Button"] {
+  button[class*='Button'] {
     padding: 0.85em 2em 0.85em 1.1em;
     @include buttons($c-cta);
     border-radius: 0;
@@ -75,7 +75,7 @@
   margin: 0 0 0 auto;
 
   &::before {
-    content: "+";
+    content: '+';
     display: block;
     font-family: $f-sans;
     font-size: 3rem;
@@ -110,4 +110,48 @@
 
 .ReactModal__Body--open {
   overflow-y: hidden;
+}
+
+// ==========================
+//! Slick Carousel
+.slick-slider {
+  padding: 0 1rem;
+  .slick-arrow {
+    &::before {
+      display: block;
+      content: $i-chevron;
+      font-family: $f-icons;
+      color: $c-primary-02;
+    }
+    &.slick-prev {
+      &::before {
+        transform: rotate(180deg);
+      }
+    }
+    &.slick-next {
+    }
+  }
+
+  .slick-slide {
+    img {
+      display: block;
+      width: 100%;
+      // height: 30rem;
+      @include fluidRem(height, 20rem, 30rem);
+      object-fit: cover;
+    }
+    .slick-caption {
+      text-align: center;
+      width: 90%;
+      max-width: $mq-800;
+      margin: 0 auto;
+      @include fluidRem(padding, 1rem, 2rem);
+      h3 {
+        margin-bottom: 0.5rem;
+      }
+      // p {
+
+      // }
+    }
+  }
 }

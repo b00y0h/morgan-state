@@ -1,115 +1,57 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import styled from 'styled-components'
 import '@brainhubeu/react-carousel/lib/style.css'
+import { GatsbyImage as Img } from 'gatsby-plugin-image'
 
+import { renderRichText } from 'gatsby-source-contentful/rich-text'
+
+import { BLOCKS, INLINES } from '@contentful/rich-text-types'
+import { Button } from 'theme-ui'
 import Layout from '../components/Layout'
 import Hero from '../components/Hero'
 import Container from '../components/Container'
-import PageBody from '../components/PageBody'
+// import PageBody from '../components/PageBody'
 import TagList from '../components/TagList'
-import PostLinks from '../components/PostLinks'
 import SEO from '../components/SEO'
-import Card from '../components/Card'
 import CardList from '../components/CardList'
 import Testimonial from '../components/Testimonial'
 import ImageSlider from '../components/Slider'
-import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
-import { BLOCKS, INLINES } from '@contentful/rich-text-types'
+
+import ProgramStat from '../components/ProgramStat'
+
 import StatCard from '../components/StatCard'
-import { Button } from '@theme-ui/components'
-import ContactForm from '../components/Contact/ContactForm'
+import Group from '../components/common/Container/Group'
 
 const carouselSettings = {
   dot: true,
   infinite: true,
   speed: 500,
   arrows: true,
-  slidesToShow: 4,
-  slidesToScroll: 4,
+  slidesToShow: 1,
+  slidesToScroll: 1,
   cssEase: 'linear',
 }
 
-const StatBlock = styled.div`
-  padding: 1rem;
-  background: lightblue;
-  float: left;
-  & span {
-    display: block;
-  }
-`
-const Description = styled.div`
-  background: lightcoral;
-`
-const WhyMorganState = styled.div`
-  background: lightcyan;
-`
-const SkillsAndJobs = styled.div`
-  background: lightsteelblue;
-`
-const AchieveSuccess = styled.div`
-  background: lightslategray;
-`
-const DiscoverProgramCTA = styled.div`
-  background: lightskyblue;
-`
-const RelatedPrograms = styled.div`
-  background: lightsalmon;
-`
-const CareerDetails = styled.div`
-  background: lightpink;
-`
-const PreContentBlock = styled.div`
-  background: plum;
-`
-const CarouselPreText = styled.div`
-  background: grey;
-`
+const carouselSettings2 = {
+  dot: true,
+  infinite: true,
+  speed: 500,
+  arrows: true,
+  slidesToShow: 3,
+  slidesToScroll: 1,
+  cssEase: 'linear',
+}
 
 const RICHTEXT_OPTIONS = {
   renderNode: {
-    [INLINES.HYPERLINK]: (node, children) => {
-      return (
-        <a className="link" href={node.data.uri}>
-          {children}
-        </a>
-      )
-    },
-    [BLOCKS.PARAGRAPH]: (node, children) => {
-      return <p>{children}</p>
-    },
-    [BLOCKS.LIST_ITEM]: (node, children) => {
-      const UnTaggedChildren = documentToReactComponents(node, {
-        renderNode: {
-          [BLOCKS.PARAGRAPH]: (node, children) => children,
-          [BLOCKS.LIST_ITEM]: (node, children) => children,
-        },
-      })
-
-      return <li>{UnTaggedChildren}</li>
-    },
-    [BLOCKS.EMBEDDED_ASSET]: node => {
-      const { title, description, file } = node.data.target.fields
-      const mimeType = file['en-US'].contentType
-      const mimeGroup = mimeType.split('/')[0]
-      switch (mimeGroup) {
-        case 'image':
-          return (
-            <img
-              title={title ? title['en-US'] : null}
-              alt={description ? description['en-US'] : null}
-              src={file['en-US'].url}
-            />
-          )
-        default:
-          return (
-            <span style={{ backgroundColor: 'red', color: 'white' }}>
-              {' '}
-              {mimeType} embedded asset{' '}
-            </span>
-          )
-      }
-    },
+    [INLINES.HYPERLINK]: ({ data }, children) => (
+      <a className="link" href={data.uri}>
+        {children}
+      </a>
+    ),
+    [BLOCKS.PARAGRAPH]: (node, children) => <p>{children}</p>,
+    [BLOCKS.LIST_ITEM]: (node, children) => <li>{children}</li>,
+    [BLOCKS.EMBEDDED_ASSET]: ({ data }) => <Img image={data.target.gatsbyImageData} alt={data.target.title} />,
   },
 }
 
@@ -133,12 +75,14 @@ const ProgramTemplate = ({ data, pageContext }) => {
     skillsAndJobs,
     careerDetails,
     carouselPreText,
+    testimonialPreText,
     carouselContent,
     testimonial,
+    financialAidOptions,
     relatedPrograms,
   } = data.contentfulProgram
   const previous = pageContext.prev
-  const next = pageContext.next
+  const { next } = pageContext
   const { basePath } = pageContext
 
   let ogImage
@@ -150,168 +94,130 @@ const ProgramTemplate = ({ data, pageContext }) => {
 
   const normalizedCarousel =
     carouselContent &&
-    carouselContent.map(item => ({
+    carouselContent.map((item) => ({
       id: item.id,
       title: item.title,
-      src: item.image.fluid.src,
+      image: item.image,
       description: item.description,
     }))
 
   const normalizedRelated =
     relatedPrograms &&
-    relatedPrograms.map(item => ({
+    relatedPrograms.map((item) => ({
       id: item.id,
       title: item.fullProgramName,
-      src: item.thumbnail ? item.thumbnail.fixed.src : null,
-      description: item.metaDescription
-        ? item.metaDescription.metaDescription
-        : null,
+      image: item.heroImage,
+      description: item.metaDescription ? item.metaDescription.metaDescription : null,
     }))
 
   return (
     <Layout>
       <SEO
         title={title}
-        description={
-          metaDescription ? metaDescription.metaDescription : 'Title Needed'
-        }
+        description={metaDescription ? metaDescription.metaDescription : 'Title Needed'}
         image={ogImage}
       />
-      <Hero title={title} image={heroImage} height={'50vh'} />
-      <Container>
-        {tags && <TagList tags={tags} basePath={basePath} />}
-        <PageBody body="xxxxxxxxx">
-          <h1>
-            {typeOfDegree} in {fullProgramName}
-          </h1>
-          <ul>
-            {availableMethodsOfStudy &&
-              availableMethodsOfStudy.map(method => (
-                <>
-                  <b>Learning Mode: </b>
-                  <span key={method}>{method}</span>
-                </>
-              ))}
+      <Hero title={title} image={heroImage} />
+
+      {tags && <TagList tags={tags} basePath={basePath} />}
+      <Container id="programDetails" constraints="narrow">
+        <h1>
+          {typeOfDegree} in {fullProgramName}
+        </h1>
+        <div className="learningMode">
+          <p>Learning Mode:</p>
+          <ul className="no-list">
+            {availableMethodsOfStudy && availableMethodsOfStudy.map((method) => <li key={method}>{method}</li>)}
           </ul>
-          {creditHours && (
-            <StatBlock>
-              <span>{creditHours}</span>
-              Credit Hours
-            </StatBlock>
-          )}
-          {monthsToComplete && (
-            <StatBlock>
-              <span>{monthsToComplete}</span>
-              Months to Complete
-            </StatBlock>
-          )}
-          {programTracks && (
-            <StatBlock>
-              <span>{programTracks}</span>
-              Program Tracks
-            </StatBlock>
-          )}
-          <h2>
-            Change Your Future with a {typeOfDegree} in {fullProgramName}
-          </h2>
-          <Description>
-            {description &&
-              documentToReactComponents(description.json, RICHTEXT_OPTIONS)}
-          </Description>
-          <h2>Why Morgan State?</h2>
-          <WhyMorganState>
-            <CardList>
-              {whyMorganStateStats &&
-                whyMorganStateStats.map(node => (
-                  <StatCard key={node.id} {...node} />
-                ))}
-            </CardList>
-          </WhyMorganState>
-
-          {preContentBlock && (
-            <PreContentBlock>
-              {documentToReactComponents(
-                preContentBlock.json,
-                RICHTEXT_OPTIONS
-              )}
-            </PreContentBlock>
-          )}
-          {skillsAndJobs && (
-            <SkillsAndJobs>
-              {/* <h2>Content block 1</h2> */}
-              {documentToReactComponents(skillsAndJobs.json, RICHTEXT_OPTIONS)}
-            </SkillsAndJobs>
-          )}
-
-          {careerDetails && (
-            <CareerDetails>
-              {/* <h2>Content block 2</h2> */}
-              {documentToReactComponents(careerDetails.json, RICHTEXT_OPTIONS)}
-            </CareerDetails>
-          )}
-
-          {carouselPreText && (
-            <CarouselPreText>
-              {documentToReactComponents(
-                carouselPreText.json,
-                RICHTEXT_OPTIONS
-              )}
-            </CarouselPreText>
-          )}
-          {normalizedCarousel && (
-            <ImageSlider
-              data={normalizedCarousel}
-              settings={carouselSettings}
-            />
-          )}
-
-          <AchieveSuccess>
-            <h2>Achieve Success Like Our Alumni</h2>
-            <p>
-              Lorem ipsum dolor sit amet nunc diam curabitur pretium lectus non
-              sodales. Ut risus a lacus curabitur turpis incididunt quisque quam
-              aliquet. Est orci aliqua pharetra mi senectus quisque volutpat
-              laoreet. Velit arcu facilisis enim eu curabitur quam augue
-              sodales. At hac luctus aliqua mattis nullam semper neque posuere
-              nisi dapibus nulla sollicitudin.
-            </p>
-          </AchieveSuccess>
-          {testimonial && (
-            <Testimonial
-              image={testimonial.image}
-              quote={testimonial.quote}
-              author={testimonial.author}
-            ></Testimonial>
-          )}
-
-          <DiscoverProgramCTA>
-            <h3>
-              Discover the {typeOfDegree} in {fullProgramName}
-            </h3>
-            <p>Lorem ipsum dolor sit amet ac urna ullamcorper nisi.</p>
-            <Button>Request Information</Button>
-            <ContactForm
-              campaign="eab"
-              program={`${typeOfDegree} in ${fullProgramName}`}
-              sendToUrl={programDetailUrl}
-            />
-          </DiscoverProgramCTA>
-          {normalizedRelated && (
-            <RelatedPrograms>
-              <h2>Explore Related Programs</h2>
-              <ImageSlider
-                data={normalizedRelated}
-                settings={carouselSettings}
-              />
-            </RelatedPrograms>
-          )}
-        </PageBody>
+        </div>
+        <div className="programIntro">
+          <p>
+            Sit in molestie facilisis quisque nisl. Elementum sed ut sed risus porttitor. Quis volutpat viverra lacus
+            leo pellentesque. Diam integer massa molestie in. Morbi neque a, praesent eros, mi iaculis a magna. Commodo,
+            ipsum pretium donec condimentum nulla non vitae enim. Ipsum tellus imperdiet arcu nec, mattis elit est
+            integer. Eleifend egestas orci, vivamus diam massa enim consequat, non augue. Volutpat et sodales vestibulum
+            placerat.
+          </p>
+        </div>
+        <div className="programStats">
+          {creditHours && <ProgramStat stat={creditHours} description="Credit Hours" />}
+          {monthsToComplete && <ProgramStat stat={monthsToComplete} description="Months to Complete" />}
+          {programTracks && <ProgramStat stat={programTracks} description="Program Tracks" />}
+        </div>
       </Container>
-      {/* <PostLinks
-        previous={previous}
-        next={next}
-        basePath={`${basePath}/program`}
-      /> */}
+      <Container id="requestInfoCta">
+        <div className="ctaContent narrow">
+          <p>
+            In enim sem orci adipiscing cras tempus.{' '}
+            <strong>Malesuada odio egestas aliquet sed neque lectus cras.</strong>
+          </p>
+          <button>Request Information</button>
+        </div>
+      </Container>
+      <Container className="cols" constraints="center">
+        <Group className="programDescription cols">
+          {description && renderRichText(description, RICHTEXT_OPTIONS)}
+        </Group>
+      </Container>
+      <Container id="whyMorganState" className="drkbg">
+        <Container constraints="center">
+          <h2>Why Morgan State?</h2>
+          <CardList>
+            {whyMorganStateStats &&
+              whyMorganStateStats.map((node) => (
+                <StatCard key={node.id} description={node.description} statisticImage={node.statisticImage} />
+              ))}
+          </CardList>
+        </Container>
+      </Container>
+      <Container constraints="center" className="cols-container">
+        {skillsAndJobs && <Group className="cols">{renderRichText(skillsAndJobs, RICHTEXT_OPTIONS)}</Group>}
+
+        {careerDetails && <Group className="cols">{renderRichText(careerDetails, RICHTEXT_OPTIONS)}</Group>}
+      </Container>
+
+      <Container constraints="center">
+        {carouselPreText && (
+          <Group className="wrapper centered narrow">{renderRichText(carouselPreText, RICHTEXT_OPTIONS)}</Group>
+        )}
+        {normalizedCarousel && <ImageSlider data={normalizedCarousel} settings={carouselSettings} />}
+      </Container>
+
+      <Container id="testimonials">
+        {testimonialPreText && (
+          <Group className="wrapper centered narrow">{renderRichText(testimonialPreText, RICHTEXT_OPTIONS)}</Group>
+        )}
+        {testimonial && (
+          <Testimonial
+            image={testimonial.image}
+            quote={renderRichText(testimonial.quote, RICHTEXT_OPTIONS)}
+            author={testimonial.author}
+          />
+        )}
+      </Container>
+
+      <Container constraints="center" className="cols-container">
+        {financialAidOptions && <Group>{renderRichText(financialAidOptions, RICHTEXT_OPTIONS)}</Group>}
+      </Container>
+
+      <Container id="discoverProgram">
+        <div className="wrapper centered">
+          <h3>
+            Discover the {typeOfDegree} in {fullProgramName}
+          </h3>
+          <p>Lorem ipsum dolor sit amet ac urna ullamcorper nisi.</p>
+          <Button>Request Information</Button>
+        </div>
+      </Container>
+
+      <Container id="relatedPrograms" constraints="center">
+        {normalizedRelated && (
+          <div>
+            <h2>Explore Related Programs</h2>
+            <ImageSlider data={normalizedRelated} settings={carouselSettings2} />
+          </div>
+        )}
+      </Container>
     </Layout>
   )
 }
@@ -321,12 +227,19 @@ export const query = graphql`
     contentfulProgram(slug: { eq: $slug }) {
       fullProgramName
       description {
-        json
+        raw
+        references {
+          ... on ContentfulAsset {
+            __typename
+            contentful_id
+            title
+            gatsbyImageData(layout: CONSTRAINED, placeholder: BLURRED, width: 600)
+          }
+        }
       }
       heroImage {
-        fluid(maxWidth: 400) {
-          ...GatsbyContentfulFluid_withWebp_noBase64
-        }
+        gatsbyImageData(layout: FULL_WIDTH)
+        title
       }
       availableMethodsOfStudy
       creditHours
@@ -342,44 +255,66 @@ export const query = graphql`
       whyMorganStateStats {
         title
         id
+        description {
+          raw
+        }
         statisticImage {
-          fluid(maxWidth: 400) {
-            ...GatsbyContentfulFluid_withWebp_noBase64
-          }
+          title
+          gatsbyImageData(layout: CONSTRAINED, placeholder: BLURRED, width: 400)
         }
       }
       programDetailUrl
       skillsAndJobs {
-        json
+        raw
+        references {
+          ... on ContentfulAsset {
+            __typename
+            contentful_id
+            title
+            gatsbyImageData(layout: CONSTRAINED, placeholder: BLURRED, width: 640)
+          }
+        }
       }
       preContentBlock {
-        json
+        raw
       }
       careerDetails {
-        json
+        raw
+        references {
+          ... on ContentfulAsset {
+            __typename
+            contentful_id
+            title
+            gatsbyImageData(layout: CONSTRAINED, placeholder: BLURRED, width: 640)
+          }
+        }
       }
       carouselPreText {
-        json
+        raw
+      }
+      financialAidOptions {
+        raw
       }
       carouselContent {
         id
         title
         description
         image {
-          fluid(maxWidth: 800) {
-            ...GatsbyContentfulFluid_withWebp_noBase64
-          }
+          gatsbyImageData(layout: CONSTRAINED, placeholder: BLURRED, width: 1080)
+          title
         }
+      }
+      testimonialPreText {
+        raw
       }
       testimonial {
         author
         quote {
-          json
+          raw
         }
         image {
-          fluid(maxWidth: 800) {
-            ...GatsbyContentfulFluid_withWebp_noBase64
-          }
+          gatsbyImageData(layout: CONSTRAINED, placeholder: BLURRED, width: 800)
+          title
         }
       }
       metaDescription {
@@ -399,9 +334,8 @@ export const query = graphql`
           metaDescription
         }
         heroImage {
-          fluid(maxWidth: 350, maxHeight: 196, resizingBehavior: SCALE) {
-            ...GatsbyContentfulFluid_withWebp_noBase64
-          }
+          gatsbyImageData(layout: CONSTRAINED, placeholder: BLURRED, width: 350)
+          title
         }
       }
     }

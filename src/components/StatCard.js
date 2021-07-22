@@ -1,49 +1,37 @@
 import React from 'react'
-import styled from '@emotion/styled'
-import Img from 'gatsby-image'
+import { Link as GatsbyLink } from 'gatsby'
 
-const Stat = styled.li`
-  position: relative;
-  border: 1px solid red;
-  border-radius: 2px;
-  margin: 0 0 1em 0;
-  width: 100%;
-  transition: background 0.2s;
-  @media screen and (min-width: ${props => props.theme.responsive.small}) {
-    flex: ${props => (props.featured ? '0 0 100%' : '0 0 49%')};
-    margin: 0 0 2vw 0;
-  }
-  @media screen and (min-width: ${props => props.theme.responsive.medium}) {
-    flex: ${props => (props.featured ? '0 0 100%' : '0 0 32%')};
-  }
-  &:hover {
-    background: green;
-  }
-`
+import { renderRichText } from 'gatsby-source-contentful/rich-text'
+import { BLOCKS, INLINES } from '@contentful/rich-text-types'
+import { GatsbyImage as Img } from 'gatsby-plugin-image'
 
-const StyledImg = styled(Img)`
-  border-top-left-radius: 1px;
-  border-top-right-radius: 1px;
-`
+// TODO: I think the answer lies somewhere here. https://www.contentful.com/blog/2021/04/14/rendering-linked-assets-entries-in-contentful/
 
-const Title = styled.h2`
-  font-size: 1.5em;
-  font-weight: 600;
-  text-transform: capitalize;
-  margin: 1rem 1rem 0.5rem 1rem;
-`
-
-const StatCard = ({ statisticImage, title, ...props }) => {
-  return (
-    <>
-      {statisticImage && (
-        <Stat featured={props.featured}>
-          <StyledImg fluid={statisticImage.fluid} backgroundColor={'#eeeeee'} />
-          <Title>{title}</Title>
-        </Stat>
-      )}
-    </>
-  )
+const RICHTEXT_OPTIONS = {
+  renderNode: {
+    // [INLINES.ENTRY_HYPERLINK]: ({ data }) => <Link to="/">{console.log(data)}</Link>,
+    [BLOCKS.PARAGRAPH]: (node, children) => <p>{children}</p>,
+    [BLOCKS.LIST_ITEM]: (node, children) => <li>{children}</li>,
+    // [BLOCKS.EMBEDDED_ASSET]: ({ data }) => <Img image={data.target.gatsbyImageData} alt={data.target.title} />,
+    [INLINES.HYPERLINK]: ({ data }, children) => (
+      <a href={data.uri} target="_blank" rel="noreferrer">
+        {children}
+      </a>
+    ),
+    [INLINES.ENTRY_HYPERLINK]: ({ data }, children) => <GatsbyLink to={data.target?.slug}>{children}</GatsbyLink>,
+  },
 }
+
+const StatCard = ({ statisticImage, title, description, ...props }) => (
+  <>
+    <li className={`col-30 ${statisticImage ? 'graphicStat' : 'textStat'}`}>
+      {statisticImage && (
+        <Img image={statisticImage.gatsbyImageData} alt={statisticImage.title} backgroundColor="#eeeeee" />
+      )}
+      <h3>{title}</h3>
+      {description && <div className="statDescription">{renderRichText(description, RICHTEXT_OPTIONS)}</div>}
+    </li>
+  </>
+)
 
 export default StatCard

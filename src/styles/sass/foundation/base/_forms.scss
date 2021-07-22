@@ -8,33 +8,33 @@ label {
   font-size: 0.875rem;
   // text-transform: uppercase;
 
-  span[role="alert"] {
+  span[role='alert'] {
     text-transform: initial;
     font-size: 0.9em;
   }
 }
 
-input[type="text"],
-input[type="email"],
-input[type="url"],
-input[type="password"],
-input[type="search"],
-input[type="number"],
-input[type="tel"],
-input[type="range"],
-input[type="date"],
-input[type="month"],
-input[type="week"],
-input[type="time"],
-input[type="datetime"],
-input[type="datetime-local"],
-input[type="color"],
-input[type="numeric"],
+input[type='text'],
+input[type='email'],
+input[type='url'],
+input[type='password'],
+input[type='search'],
+input[type='number'],
+input[type='tel'],
+input[type='range'],
+input[type='date'],
+input[type='month'],
+input[type='week'],
+input[type='time'],
+input[type='datetime'],
+input[type='datetime-local'],
+input[type='color'],
+input[type='numeric'],
 textarea,
 select {
   display: block;
   width: 100%;
-  color: $c-darkgrey;
+  color: $c-darkgray;
   border: 1px solid #cbd1d4;
   border-radius: 3px;
   background: #eceff1;
@@ -47,7 +47,7 @@ select {
 select {
   display: block !important;
   // width: 100% !important;
-  color: $c-darkgrey !important;
+  color: $c-darkgray !important;
   border: 1px solid #cbd1d4 !important;
   border-radius: 3px !important;
   background: #eceff1 !important;
@@ -57,29 +57,29 @@ select {
   transition: all 0.2s;
 }
 
-input[type="text"]:focus,
-input[type="text"]:hover,
-input[type="email"]:focus,
-input[type="email"]:hover,
-input[type="url"]:focus,
-input[type="url"]:hover,
-input[type="password"]:focus,
-input[type="password"]:hover,
-input[type="search"]:focus,
-input[type="search"]:hover,
-input[type="number"]:focus,
-input[type="number"]:hover,
-input[type="numeric"]:hover,
-input[type="numeric"]:focus,
-input[type="tel"]:focus,
-input[type="range"]:focus,
-input[type="date"]:focus,
-input[type="month"]:focus,
-input[type="week"]:focus,
-input[type="time"]:focus,
-input[type="datetime"]:focus,
-input[type="datetime-local"]:focus,
-input[type="color"]:focus,
+input[type='text']:focus,
+input[type='text']:hover,
+input[type='email']:focus,
+input[type='email']:hover,
+input[type='url']:focus,
+input[type='url']:hover,
+input[type='password']:focus,
+input[type='password']:hover,
+input[type='search']:focus,
+input[type='search']:hover,
+input[type='number']:focus,
+input[type='number']:hover,
+input[type='numeric']:hover,
+input[type='numeric']:focus,
+input[type='tel']:focus,
+input[type='range']:focus,
+input[type='date']:focus,
+input[type='month']:focus,
+input[type='week']:focus,
+input[type='time']:focus,
+input[type='datetime']:focus,
+input[type='datetime-local']:focus,
+input[type='color']:focus,
 input:hover,
 textarea:focus,
 textarea:hover,
@@ -87,7 +87,7 @@ select:focus,
 select:hover {
   outline: none !important;
   background: lighten($c-gray, 72%) !important;
-  color: $c-darkgrey !important;
+  color: $c-darkgray !important;
   border-color: $c-gray !important;
 }
 
@@ -178,7 +178,7 @@ textarea {
       select {
         margin-right: 0.5em;
 
-        &[name="dobMonth"] {
+        &[name='dobMonth'] {
           width: 8em;
         }
 
@@ -219,7 +219,7 @@ textarea {
       select {
         margin-right: 0.5em;
 
-        &[name="dobMonth"] {
+        &[name='dobMonth'] {
           width: 8em;
         }
 
@@ -238,8 +238,8 @@ textarea {
     }
   }
 
-  span[class*="Error"],
-  div[class*="Error"] {
+  span[class*='Error'],
+  div[class*='Error'] {
     display: block;
     width: 100%;
     text-align: right;
@@ -268,8 +268,8 @@ select {
 .button-type {
   justify-content: space-between;
 
-  input[type="submit"],
-  input[type="button"] {
+  input[type='submit'],
+  input[type='button'] {
     margin: 0.5em 0;
   }
 }

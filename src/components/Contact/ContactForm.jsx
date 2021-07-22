@@ -63,28 +63,15 @@ const MultiSelect = ({ label, ...props }) => {
   )
 }
 
-const phoneNumberMask = [
-  /[1-9]/,
-  /\d/,
-  /\d/,
-  '-',
-  /\d/,
-  /\d/,
-  /\d/,
-  '-',
-  /\d/,
-  /\d/,
-  /\d/,
-  /\d/,
-]
+const phoneNumberMask = [/[1-9]/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]
 
 // encoding required for netlify to correctly capture data
-const encode = data =>
+const encode = (data) =>
   Object.keys(data)
-    .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`)
+    .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`)
     .join('&')
 
-const ContactForm = props => {
+const ContactForm = (props) => {
   const { campaign, program, sendToUrl } = props
   console.log('program', program)
   return (
@@ -101,9 +88,7 @@ const ContactForm = props => {
       validationSchema={Yup.object().shape({
         'First Name': Yup.string().required('Your first name is required'),
         'Last Name': Yup.string().required('Your last name is required'),
-        Email: Yup.string()
-          .email('Invalid email')
-          .required('Your email address is required'),
+        Email: Yup.string().email('Invalid email').required('Your email address is required'),
       })}
       onSubmit={(values, actions) => {
         actions.setFieldValue(values.Campaign, campaign)
@@ -137,15 +122,7 @@ const ContactForm = props => {
           .finally(() => actions.setSubmitting(false))
       }}
     >
-      {({
-        values,
-        touched,
-        errors,
-        isSubmitting,
-        setFieldValue,
-        handleChange,
-        handleBlur,
-      }) => (
+      {({ values, touched, errors, isSubmitting, setFieldValue, handleChange, handleBlur }) => (
         <Form name="unlv-contact" className="form" data-netlify>
           <input type="hidden" name="form-name" value="unlv-contact" />
           <input type="hidden" name="Campaign" value={campaign} />
@@ -238,12 +215,9 @@ const ContactForm = props => {
                     id="dobMonth"
                     name="dobMonth"
                     value={values.dobMonth}
-                    onChange={e => {
-                      setFieldValue(
-                        'Birth date',
-                        `${e.target.value}/${values.dobDay}/${values.dobYear}`
-                      )
-                      setFieldValue('dobMonth', e.target.value)
+                    onChange={(e) => {
+                      setFieldValue('Birth date', `${e.target.value}/${values.dobDay}/${values.dobYear}`);
+                      setFieldValue('dobMonth', e.target.value);
                     }}
                   >
                     <option value="">---</option>
@@ -266,12 +240,9 @@ const ContactForm = props => {
                     name="dobDay"
                     as="select"
                     value={values.dobDay}
-                    onChange={e => {
-                      setFieldValue(
-                        'Birth date',
-                        `${values.dobMonth}/${e.target.value}/${values.dobYear}`
-                      )
-                      setFieldValue('dobDay', e.target.value)
+                    onChange={(e) => {
+                      setFieldValue('Birth date', `${values.dobMonth}/${e.target.value}/${values.dobYear}`);
+                      setFieldValue('dobDay', e.target.value);
                     }}
                   >
                     <option value="">---</option>
@@ -312,12 +283,9 @@ const ContactForm = props => {
                     id="dobYear"
                     name="dobYear"
                     value={values.dobYear}
-                    onChange={e => {
-                      setFieldValue(
-                        'Birth date',
-                        `${values.dobMonth}/${values.dobDay}/${e.target.value}`
-                      )
-                      setFieldValue('dobYear', e.target.value)
+                    onChange={(e) => {
+                      setFieldValue('Birth date', `${values.dobMonth}/${values.dobDay}/${e.target.value}`);
+                      setFieldValue('dobYear', e.target.value);
                     }}
                   >
                     <option value="">---</option>
@@ -342,12 +310,9 @@ const ContactForm = props => {
             <InputField>
               <Center>
                 <h4>
-                  Thank you for submitting your infomation! We will be in touch
-                  with you soon!
+                  Thank you for submitting your infomation! We will be in touch with you soon!
                   <Button>
-                    <a href={sendToUrl ? sendToUrl : 'https://www.morgan.edu'}>
-                      See Program Details
-                    </a>
+                    <a href={sendToUrl || 'https://www.morgan.edu'}>See Program Details</a>
                   </Button>
                 </h4>
               </Center>

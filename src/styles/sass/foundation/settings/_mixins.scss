@@ -1,3 +1,4 @@
+@use "sass:math";
 ///////////////////
 //MIXINS
 ///////////////////
@@ -65,12 +66,13 @@
   background: $primary-color;
   color: $text-color;
   text-decoration: none;
-  padding: 0.85em 2em 0.85em 1.1em;
+  padding: 0.85em 2.7em 0.85em 1.1em;
   font-size: 1rem;
   font-weight: bold;
   font-family: $f-sans;
   text-align: center;
   border: 1px solid $border-color;
+  border-radius: 10rem;
   margin: 0.5em auto;
   line-height: 1;
   transition: all 0.2s;
@@ -90,19 +92,20 @@
     // @include arrownav($icon-color);
   }
 
-  &::after {
-    content: "";
-    display: block;
-    position: absolute;
-    width: 0.6em;
-    height: 0.6em;
-    border-right: 3px solid $icon-color;
-    border-top: 3px solid $icon-color;
-    right: 0.8em;
-    top: 50%;
-    transform: translateY(-50%) rotate(45deg);
-    transition: all 0.2s;
-  }
+  @include arrownav($icon-color);
+  // &::after {
+  //   content: '';
+  //   display: block;
+  //   position: absolute;
+  //   width: 0.6em;
+  //   height: 0.6em;
+  //   border-right: 3px solid $icon-color;
+  //   border-top: 3px solid $icon-color;
+  //   right: 0.8em;
+  //   top: 50%;
+  //   transform: translateY(-50%) rotate(45deg);
+  //   transition: all 0.2s;
+  // }
 }
 
 @mixin arrownav($icon-color) {
@@ -110,20 +113,16 @@
     // content: $i-arrow;
     // font-family: $f-icons;
     // color: $icon-color !important;
-    content: "";
+    content: $i-rightArrow1;
+    font-family: $f-icons;
+    color: $icon-color;
+    font-size: 0.8em;
     display: block;
     position: absolute;
-    width: 1.5em;
-    height: 1.5em;
-    border-right: 2px solid $icon-color;
-    border-bottom: 2px solid $icon-color;
+    width: 1.8em;
     right: 0.8em;
     top: 50%;
-    transform: translateY(-50%) rotate(45deg);
-    // @include transform(translateY(-50%));
-    // font-size: 1.5em;
-    // font-weight: normal;
-    // line-height: 0;
+    transform: translateY(-50%);
     transition: all 0.2s;
   }
 }
@@ -225,9 +224,13 @@ $x-fontFix: 0;
 
     $_d-iMid: calc(
       #{$_d-iMin} +
-        #{($_d-iMax - $_d-iMin) /
-        1rem} *
-        ((100vw - #{$_mq-min}) / #{($_mq-max - $_mq-min) / 1rem})
+        #{math.div(($_d-iMax - $_d-iMin), 1rem)} *
+        (
+          math.div(
+            (100vw - #{$_mq-min}),
+            #{math.div(($_mq-max - $_mq-min), 1rem)}
+          )
+        )
     );
 
     @if ($_x-i > 1) {
@@ -256,6 +259,93 @@ $x-fontFix: 0;
 
     @media (min-width: #{$_mq-max}) {
       #{$_x-prop}: #{$_d-maxRem};
+    }
+  }
+}
+
+// =============================================================
+// Slick Buttons
+
+@mixin slickNavBtns($mainSlickColor) {
+  .slick-slider {
+    position: relative;
+
+    .slick-arrow {
+      display: none !important  ;
+      position: absolute;
+      width: 2em;
+      height: 2em;
+      padding: 0;
+      text-indent: -999em;
+      background: transparent !important;
+      border: none !important;
+      z-index: 100;
+      top: 50%;
+      @include transform(translateY(-50%));
+
+      &::before {
+        content: $i-arrow;
+        font-family: $f-icons;
+        display: block;
+        color: rgba($mainSlickColor, 0.6);
+        text-indent: 0;
+        font-size: 2em;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        @include transform(translateY(-50%) translateX(-50%));
+      }
+
+      @media (min-width: $mq-900) {
+        display: block !important;
+      }
+
+      &:hover {
+        &::before {
+          color: $mainSlickColor;
+        }
+      }
+    }
+    .slick-prev {
+      left: 1em;
+      &::before {
+        @include transform(translateY(-50%) translateX(-50%) rotate(180deg));
+      }
+    }
+    .slick-next {
+      right: 1em;
+    }
+    .slick-dots {
+      display: block;
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      @include transform(translateX(-50%));
+      @include flexbox();
+
+      li {
+        margin-right: 0.3em;
+
+        &:last-child {
+          margin-right: 0;
+        }
+
+        button {
+          text-indent: -999em;
+          border-radius: 100% !important;
+          width: 1em !important;
+          height: 1em !important;
+          padding: 0 !important;
+          border: 1px solid $mainSlickColor !important;
+          background: rgba($mainSlickColor, 0.5) !important;
+        }
+
+        &.slick-active {
+          button {
+            background: $mainSlickColor !important;
+          }
+        }
+      }
     }
   }
 }

@@ -37,36 +37,59 @@ h6 {
   clear: both;
 }
 
-h1 {
-  font-family: $f-sans-condensed;
-  @include fluidRem("font-size", 1.5rem, 3rem);
-}
+// =========
+// Deco title
 
-h2 {
-  font-family: $f-sans-condensed;
-  font-weight: normal;
-  line-height: 1.1;
-  @include fluidRem("font-size", 1.2rem, 2rem);
-  strong {
-    font-weight: bold;
+%colorBar {
+  &::after {
+    content: '';
+    display: block;
+    @include fluidRem(width, 5rem, 10rem);
+    height: 0.3rem;
+    background: $c-primary-02;
+    margin-top: 0.5rem;
   }
 }
 
+// =========
+
+h1 {
+  font-family: $f-sans !important;
+  @include fluidRem('font-size', 1.5rem, 4.25rem);
+  line-height: 1.1;
+  font-weight: normal;
+  letter-spacing: -0.02em;
+
+  @extend %colorBar;
+}
+
+h2 {
+  font-family: $f-sans;
+  font-weight: normal;
+  line-height: 1.1;
+  @include fluidRem('font-size', 1.3rem, 3rem);
+  strong {
+    font-weight: bold;
+  }
+
+  @extend %colorBar;
+}
+
 h3 {
-  font-family: $f-sans-condensed;
-  @include fluidRem("font-size", 1.5rem, 2.5rem);
+  font-family: $f-sans;
+  @include fluidRem('font-size', 1.5rem, 2.5rem);
   font-weight: 600;
   line-height: 1.1;
 }
 
 h4 {
-  font-family: $f-sans-condensed;
+  font-family: $f-sans;
   @include fluidRem(font-size, 1rem, 1.5rem);
   margin-bottom: 0.5em;
 }
 
 h5 {
-  font-family: $f-sans-condensed;
+  font-family: $f-sans;
   @include fluidRem(font-size, 1rem, 1.25rem);
   line-height: 1.2;
 }
@@ -83,7 +106,7 @@ blockquote,
 address {
   font-family: $f-copyblocks;
   margin: 0 0 1.5em;
-  // font-size: 1rem;
+
   @include fluidRem(font-size, 0.95rem, 1.125rem);
   color: $c-basecopyblack;
 }
@@ -100,18 +123,17 @@ ul {
   list-style: none;
   padding: 0;
   li {
-    padding-left: 1em;
+    padding-left: 1.7em;
     position: relative;
     &::before {
-      content: "";
+      content: $i-checkmark;
+      font-family: $f-icons;
       display: block;
-      width: 3px;
-      height: 3px;
-      border-radius: 50%;
-      background: $c-darkgrey;
+      color: $c-primary-02;
       position: absolute;
-      left: 0.3em;
-      top: 0.7em;
+      left: 0em;
+      top: 0.3em;
+      font-size: 0.8em;
     }
   }
 }
@@ -119,10 +141,10 @@ ul {
 ul,
 ol {
   li {
-    margin-bottom: 0.5em;
+    margin-bottom: 0.8em;
   }
 
-  &[class*="menu"],
+  &[class*='menu'],
   &.extra-info-links {
     margin: 0;
     padding: 0;
@@ -154,7 +176,7 @@ i {
 
 pre {
   background: #eee;
-  font-family: "Courier 10 Pitch", Courier, monospace;
+  font-family: 'Courier 10 Pitch', Courier, monospace;
   font-size: 15px;
   font-size: 0.9375rem;
   line-height: 1.6;
@@ -168,7 +190,7 @@ code,
 kbd,
 tt,
 var {
-  font-family: Monaco, Consolas, "Andale Mono", "DejaVu Sans Mono", monospace;
+  font-family: Monaco, Consolas, 'Andale Mono', 'DejaVu Sans Mono', monospace;
   font-size: 15px;
   font-size: 0.9375rem;
 }

@@ -10,17 +10,26 @@
 // @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&display=swap');
 // @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap');
 
-// @include fontFace("eab-sales-icons", "eab-sales-icons", normal, normal);
+// @include fontFace(
+//   'eab-sales-icons',
+//   'eab-sales-icons',
+//   normal,
+//   normal
+// );
+
+@font-face {
+  font-family: 'Icomoon';
+  src: url('./icomoon.woff');
+}
 
 // ===========================
 // VARIABLES
 // ===========================
 
-$f-serif: "Times", serif;
-$f-sans: "Lato", sans-serif;
-$f-sans-condensed: "Roboto Condensed", sans-serif;
-$f-sans-slab: "Roboto Slab", serif;
-$f-icons: "icomoon", sans-serif;
+$f-serif: 'Times', serif;
+$f-sans: 'Roboto', sans-serif;
+$f-sans-slab: 'Roboto Slab', serif;
+$f-icons: 'icomoon', sans-serif;
 
 $f-copyblocks: $f-sans;
 
@@ -28,13 +37,48 @@ $f-copyblocks: $f-sans;
 // ICONS
 // ===========================
 
+$i-link: '\e903';
+$i-close: '\e900';
+$i-checkmark: '\e901';
+$i-chevron: '\e902';
+$i-quote: '\e904';
+$i-rightArrow2: '\e905';
+$i-rightArrow1: '\e906';
+
+// $i-calendar: '\e900';
+// $i-chatteo: '\e901';
+// $i-checkmark: '\e902';
+// $i-chevron: '\e903';
+// $i-cross: '\e904';
+// $i-facebook: '\e905';
+// $i-instagram: '\e906';
+// $i-linkedin: '\e907';
+// $i-location: '\e908';
+// $i-mail: '\e909';
+// $i-medicalservice: '\e90a';
+// $i-phone: '\e90b';
+// $i-plus: '\e90c';
+// $i-programs: '\e90d';
+// $i-star: '\e90e';
+// $i-support: '\e90f';
+// $i-twitter: '\e910';
+// $i-youtube: '\e911';
+
 // ===========================
 // COLORS
 // ===========================
 
+$c-blue: #004684;
+$c-orange: #f47936;
 $c-red: #c10202;
-$c-gray: #51575c;
-$c-darkgrey: #30363a;
+$c-gray: #f3f1f2;
+$c-darkgray: #444444;
+
+$c-primary-01: $c-blue;
+$c-primary-02: $c-orange;
+
+$c-secondary-01: $c-gray;
+$c-secondary-02: $c-darkgray;
 
 // Social colors
 $c-facebook: #3b5998;
@@ -47,12 +91,12 @@ $c-selection: lighten(
   45%
 ); // Change it to a contrast color per branding guidelines.
 $c-basecopyblack: darken(
-  $c-darkgrey,
+  $c-darkgray,
   10%
 ); // Base color for all copy blocks and regular text.
-$c-links: $c-red; // Base color for all links.
-$c-cta: $c-red; // Base color for all CTAs
-$c-ctahover: darken($c-red, 20%);
+$c-links: $c-primary-01; // Base color for all links.
+$c-cta: white; // Base color for all CTAs
+$c-ctahover: darken($c-primary-01, 20%);
 
 // ===========================
 // BREAKPOINTS

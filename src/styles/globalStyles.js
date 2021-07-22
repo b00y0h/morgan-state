@@ -1,4 +1,5 @@
-import { css } from '@emotion/core'
+import { css } from '@emotion/css'
+
 export const globalStyles = css`
   /* http://meyerweb.com/eric/tools/css/reset/
  v2.0 | 20110126
