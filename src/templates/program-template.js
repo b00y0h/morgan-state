@@ -236,7 +236,7 @@ const ProgramTemplate = ({ data, pageContext }) => {
   }
 
   return (
-    <Layout>
+    <Layout className="programTemplate">
       <SEO
         title={title}
         description={

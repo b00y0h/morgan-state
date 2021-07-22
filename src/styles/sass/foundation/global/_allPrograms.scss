@@ -1,0 +1,50 @@
+//====================
+// All programs page
+
+.allPrograms {
+  .hero {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    @include fluidRem(height, 10rem, 40rem);
+
+    &::after {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      z-index: 2;
+      background-image: linear-gradient(
+        to top,
+        rgba(black, 0.9),
+        rgba(black, 0.5),
+        rgba(black, 0)
+      );
+    }
+  }
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+    position: absolute;
+  }
+
+  .heroContent {
+    position: relative;
+    z-index: 3;
+    @extend %wrapper;
+    @extend %padding;
+    max-width: $mq-1000;
+    margin: 0 auto;
+    h2 {
+      color: white;
+    }
+  }
+}

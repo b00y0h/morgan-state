@@ -7,45 +7,59 @@ import Layout from '../components/Layout'
 import Container from '../components/Container'
 import ProgramPreview from '../components/ProgramPreview'
 import '../styles/sass/styles.scss'
+import Img from 'gatsby-image'
+import AllProgramsHero from './../assets/all-programs-hero.jpg'
 
 const ProgramIndex = ({ data }) => {
   const schools = data.allContentfulPartner.edges[0].node.school
   const programs = data.allContentfulProgram.edges
 
   return (
-    <Layout>
-      <SEO
-        title={data.site.siteMetadata.title}
-        description={data.site.siteMetadata.description}
-        image="{ogImage}"
-      />
-      <Container data={data} schools={schools}>
-        {schools.map(school => (
-          <>
-            <h2>{school.title}</h2>
-            {school.program &&
-              school.program.map(program => {
-                return (
-                  <li key={program.slug}>
-                    <ProgramPreview program={program} />
-                  </li>
-                )
-              })}
-          </>
-        ))}
-        <h2>***** Programs that don't have a college associated yet *****</h2>
-        <p>this is for dev work only so that you can see all the programs</p>
-        {programs.map(({ node: program }) => {
-          if (!program.relatedSchoolCollege) {
-            return (
-              <li key={program.slug}>
-                <ProgramPreview program={program} />
-              </li>
-            )
-          }
-        })}
-      </Container>
-    </Layout>
+    <>
+      <Layout className="allPrograms">
+        <SEO
+          title={data.site.siteMetadata.title}
+          description={data.site.siteMetadata.description}
+          image="{ogImage}"
+        />
+        <div className="hero">
+          <img src={`${AllProgramsHero}`} />
+          <div className="heroContent">
+            <h2>Discover Graduate Programs at Morgan State</h2>
+            <button>Request information</button>
+          </div>
+        </div>
+        <Container>
+          <h2>Move Forward in Your Professional Career</h2>
+        </Container>
+        <Container data={data} schools={schools}>
+          {schools.map(school => (
+            <>
+              <h2>{school.title}</h2>
+              {school.program &&
+                school.program.map(program => {
+                  return (
+                    <li key={program.slug}>
+                      <ProgramPreview program={program} />
+                    </li>
+                  )
+                })}
+            </>
+          ))}
+          <h2>***** Programs that don't have a college associated yet *****</h2>
+          <p>this is for dev work only so that you can see all the programs</p>
+          {programs.map(({ node: program }) => {
+            if (!program.relatedSchoolCollege) {
+              return (
+                <li key={program.slug}>
+                  <ProgramPreview program={program} />
+                </li>
+              )
+            }
+          })}
+        </Container>
+      </Layout>
+    </>
   )
 }
 

@@ -9,6 +9,7 @@
   text-indent: -999em;
   position: relative;
   background: $c-primary-01;
+  margin: 0;
 
   &::before {
     content: '';

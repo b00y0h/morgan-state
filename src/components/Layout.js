@@ -28,7 +28,7 @@ const Skip = styled.a`
 const Layout = props => {
   return (
     <>
-      <div className="siteContent">
+      <div className={`siteContent ${props.className}`}>
         <Skip href="#main" id="skip-navigation">
           Skip to content
         </Skip>
