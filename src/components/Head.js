@@ -4,7 +4,7 @@ import lottie from 'lottie-web'
 import logoAnimation from './../assets/msu-logo-anim.json'
 
 function Logo() {
-  const pageUrl = window.location.href.indexOf('program')
+  const pageUrl = typeof window !== 'undefined' ? window.location.href.indexOf('program') : ''
   if (pageUrl != -1) {
     return <div className="logo">Morgan State University</div>
   } else {
