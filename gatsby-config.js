@@ -1,12 +1,11 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`,
 })
 
 const contentfulConfig = {
   spaceId: process.env.CONTENTFUL_SPACE_ID,
-  accessToken:
-    process.env.CONTENTFUL_ACCESS_TOKEN ||
-    process.env.CONTENTFUL_DELIVERY_TOKEN,
+  accessToken: process.env.CONTENTFUL_ACCESS_TOKEN || process.env.CONTENTFUL_DELIVERY_TOKEN,
 }
 
 // If you want to use the preview API please define
@@ -29,9 +28,7 @@ if (process.env.CONTENTFUL_HOST) {
 const { spaceId, accessToken } = contentfulConfig
 
 if (!spaceId || !accessToken) {
-  throw new Error(
-    'Contentful spaceId and the access token need to be provided.'
-  )
+  throw new Error('Contentful spaceId and the access token need to be provided.')
 }
 
 module.exports = {
@@ -55,17 +52,9 @@ module.exports = {
     'gatsby-plugin-theme-ui',
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-sass',
-    {
-      resolve: `gatsby-plugin-modal-routing`,
-      options: {
-        appElement: '#___gatsby',
-        modalProps: {
-          className: 'modalClass',
-          ariaHideApp: false,
-        },
-      },
-    },
     `gatsby-plugin-catch-links`,
+    `gatsby-plugin-image`,
+    `gatsby-plugin-sharp`,
     {
       resolve: 'gatsby-source-contentful',
       options: contentfulConfig,

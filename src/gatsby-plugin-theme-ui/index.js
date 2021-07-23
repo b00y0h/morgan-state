@@ -19,4 +19,4 @@ export default {
     medium: '50em',
     large: '70em',
   },
-}
+};

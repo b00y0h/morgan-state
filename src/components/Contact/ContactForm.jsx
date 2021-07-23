@@ -63,27 +63,17 @@ const MultiSelect = ({ label, ...props }) => {
   )
 }
 
-const phoneNumberMask = [
-  /[1-9]/,
-  /\d/,
-  /\d/,
-  '-',
-  /\d/,
-  /\d/,
-  /\d/,
-  '-',
-  /\d/,
-  /\d/,
-  /\d/,
-  /\d/,
-]
-const encode = data =>
+const phoneNumberMask = [/[1-9]/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]
+
+// encoding required for netlify to correctly capture data
+const encode = (data) =>
   Object.keys(data)
-    .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`)
+    .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`)
     .join('&')
 
-const ContactForm = props => {
-  const { campaign } = props
+const ContactForm = (props) => {
+  const { campaign, program, sendToUrl } = props
+  console.log('program', program)
   return (
     <Formik
       initialValues={{
@@ -98,15 +88,15 @@ const ContactForm = props => {
       validationSchema={Yup.object().shape({
         'First Name': Yup.string().required('Your first name is required'),
         'Last Name': Yup.string().required('Your last name is required'),
-        Email: Yup.string()
-          .email('Invalid email')
-          .required('Your email address is required'),
+        Email: Yup.string().email('Invalid email').required('Your email address is required'),
       })}
       onSubmit={(values, actions) => {
         actions.setFieldValue(values.Campaign, campaign)
+        actions.setFieldValue(values.Program, program)
         const payload = {
           ...values,
           Campaign: campaign,
+          Program: program,
         } // Construct the new payload
         actions.setValues(payload)
         // console.log('payloadpayloadpayload', payload);
@@ -132,24 +122,17 @@ const ContactForm = props => {
           .finally(() => actions.setSubmitting(false))
       }}
     >
-      {({
-        values,
-        touched,
-        errors,
-        isSubmitting,
-        setFieldValue,
-        handleChange,
-        handleBlur,
-      }) => (
+      {({ values, touched, errors, isSubmitting, setFieldValue, handleChange, handleBlur }) => (
         <Form name="unlv-contact" className="form" data-netlify>
           <input type="hidden" name="form-name" value="unlv-contact" />
           <input type="hidden" name="Campaign" value={campaign} />
-          <input type="hidden" name="Birth date" />
+          <input type="hidden" name="Program" value={program} />
+          {/* <input type="hidden" name="Birth date" /> */}
           {!values.success && (
             <div className="form-fields">
               <div className="contact-header">
-                <h1>Learn More About Degree Options and Financial Aid </h1>
-                <p>Share your information and we’ll be in touch soon.</p>
+                <h1>Request Information</h1>
+                <p>{program}</p>
               </div>
               <TextInput
                 label="First Name"
@@ -179,7 +162,7 @@ const ContactForm = props => {
                 placeholder="Email Address"
                 error={touched.Email && errors.Email}
               />
-              <div className="gradyear-question">
+              {/* <div className="gradyear-question">
                 <label htmlFor="gradYear">High School Graduation Year</label>
                 <div className="grad-select">
                   <MultiSelect
@@ -197,8 +180,8 @@ const ContactForm = props => {
                     <option value="2024">2024</option>
                   </MultiSelect>
                 </div>
-              </div>
-              <label htmlFor="Home Phone">
+              </div> */}
+              {/* <label htmlFor="Home Phone">
                 Phone Number
                 <MaskedInput
                   label="Phone Number"
@@ -213,7 +196,7 @@ const ContactForm = props => {
                   onBlur={handleBlur}
                   autocomplete="autocomplete_off_hack_xfr4!k"
                 />
-              </label>
+              </label> */}
               {/* <TextInput
                 label="Phone Number"
                 id="phoneNumber"
@@ -224,7 +207,7 @@ const ContactForm = props => {
                 placeholder="Phone Number"
                 error={touched['Home Phone'] && errors['Home Phone']}
               /> */}
-              <div className="dob-question">
+              {/* <div className="dob-question">
                 <label>Date of Birth</label>
                 <div className="dob-selects">
                   <MultiSelect
@@ -232,12 +215,9 @@ const ContactForm = props => {
                     id="dobMonth"
                     name="dobMonth"
                     value={values.dobMonth}
-                    onChange={e => {
-                      setFieldValue(
-                        'Birth date',
-                        `${e.target.value}/${values.dobDay}/${values.dobYear}`
-                      )
-                      setFieldValue('dobMonth', e.target.value)
+                    onChange={(e) => {
+                      setFieldValue('Birth date', `${e.target.value}/${values.dobDay}/${values.dobYear}`);
+                      setFieldValue('dobMonth', e.target.value);
                     }}
                   >
                     <option value="">---</option>
@@ -260,12 +240,9 @@ const ContactForm = props => {
                     name="dobDay"
                     as="select"
                     value={values.dobDay}
-                    onChange={e => {
-                      setFieldValue(
-                        'Birth date',
-                        `${values.dobMonth}/${e.target.value}/${values.dobYear}`
-                      )
-                      setFieldValue('dobDay', e.target.value)
+                    onChange={(e) => {
+                      setFieldValue('Birth date', `${values.dobMonth}/${e.target.value}/${values.dobYear}`);
+                      setFieldValue('dobDay', e.target.value);
                     }}
                   >
                     <option value="">---</option>
@@ -306,12 +283,9 @@ const ContactForm = props => {
                     id="dobYear"
                     name="dobYear"
                     value={values.dobYear}
-                    onChange={e => {
-                      setFieldValue(
-                        'Birth date',
-                        `${values.dobMonth}/${values.dobDay}/${e.target.value}`
-                      )
-                      setFieldValue('dobYear', e.target.value)
+                    onChange={(e) => {
+                      setFieldValue('Birth date', `${values.dobMonth}/${values.dobDay}/${e.target.value}`);
+                      setFieldValue('dobYear', e.target.value);
                     }}
                   >
                     <option value="">---</option>
@@ -323,7 +297,7 @@ const ContactForm = props => {
                     <option value="2007">2007</option>
                   </MultiSelect>
                 </div>
-              </div>
+              </div> */}
               {/* <Debug /> */}
               <Center className="type-button">
                 <Button secondary type="submit" disabled={isSubmitting}>
@@ -336,8 +310,10 @@ const ContactForm = props => {
             <InputField>
               <Center>
                 <h4>
-                  Thank you for submitting your infomation! We will be in touch
-                  with you soon!
+                  Thank you for submitting your infomation! We will be in touch with you soon!
+                  <Button>
+                    <a href={sendToUrl || 'https://www.morgan.edu'}>See Program Details</a>
+                  </Button>
                 </h4>
               </Center>
             </InputField>

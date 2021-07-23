@@ -1,35 +1,27 @@
 import React, { useState, useEffect } from 'react'
-import { graphql } from 'gatsby'
-import styled from 'styled-components'
+import { graphql, Link } from 'gatsby'
 import '@brainhubeu/react-carousel/lib/style.css'
+import { GatsbyImage as Img } from 'gatsby-plugin-image'
 
+import { renderRichText } from 'gatsby-source-contentful/rich-text'
+
+import { BLOCKS, INLINES } from '@contentful/rich-text-types'
+import { Button } from 'theme-ui'
+import handleViewport from 'react-in-viewport'
 import Layout from '../components/Layout'
 import Hero from '../components/Hero'
 import Container from '../components/Container'
 // import PageBody from '../components/PageBody'
 import TagList from '../components/TagList'
-import PostLinks from '../components/PostLinks'
 import SEO from '../components/SEO'
-import Card from '../components/Card'
 import CardList from '../components/CardList'
 import Testimonial from '../components/Testimonial'
 import ImageSlider from '../components/Slider'
-import Img from 'gatsby-image'
 
 import ProgramStat from '../components/ProgramStat'
 
-import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
-import { BLOCKS, INLINES } from '@contentful/rich-text-types'
 import StatCard from '../components/StatCard'
-import { Button } from '@theme-ui/components'
 import Group from '../components/common/Container/Group'
-
-import 'slick-carousel/slick/slick.css'
-import 'slick-carousel/slick/slick-theme.css'
-import Slider from 'react-slick'
-
-import { Link } from 'gatsby'
-import handleViewport from 'react-in-viewport'
 
 const carouselSettings = {
   dot: true,
@@ -53,48 +45,14 @@ const relatedProgramSettings = {
 
 const RICHTEXT_OPTIONS = {
   renderNode: {
-    [INLINES.HYPERLINK]: (node, children) => {
-      return (
-        <a className="link" href={node.data.uri}>
-          {children}
-        </a>
-      )
-    },
-    [BLOCKS.PARAGRAPH]: (node, children) => {
-      return <p>{children}</p>
-    },
-    [BLOCKS.LIST_ITEM]: (node, children) => {
-      const UnTaggedChildren = documentToReactComponents(node, {
-        renderNode: {
-          [BLOCKS.PARAGRAPH]: (node, children) => children,
-          [BLOCKS.LIST_ITEM]: (node, children) => children,
-        },
-      })
-
-      return <li>{UnTaggedChildren}</li>
-    },
-    [BLOCKS.EMBEDDED_ASSET]: node => {
-      const { title, description, file } = node.data.target.fields
-      const mimeType = file['en-US'].contentType
-      const mimeGroup = mimeType.split('/')[0]
-      switch (mimeGroup) {
-        case 'image':
-          return (
-            <img
-              title={title ? title['en-US'] : null}
-              alt={description ? description['en-US'] : null}
-              src={file['en-US'].url}
-            />
-          )
-        default:
-          return (
-            <span style={{ backgroundColor: 'red', color: 'white' }}>
-              {' '}
-              {mimeType} embedded asset{' '}
-            </span>
-          )
-      }
-    },
+    [INLINES.HYPERLINK]: ({ data }, children) => (
+      <a className="link" href={data.uri}>
+        {children}
+      </a>
+    ),
+    [BLOCKS.PARAGRAPH]: (node, children) => <p>{children}</p>,
+    [BLOCKS.LIST_ITEM]: (node, children) => <li>{children}</li>,
+    [BLOCKS.EMBEDDED_ASSET]: ({ data }) => <Img image={data.target.gatsbyImageData} alt={data.target.title} />,
   },
 }
 
@@ -112,9 +70,6 @@ const ProgramTemplate = ({ data, pageContext }) => {
     programTracks,
     typeOfDegree,
     whyMorganStateStats,
-    relatedSchoolCollege,
-    programDetailUrl,
-    preContentBlock,
     skillsAndJobs,
     careerDetails,
     carouselPreText,
@@ -125,8 +80,8 @@ const ProgramTemplate = ({ data, pageContext }) => {
     discoverProgramImage,
     relatedPrograms,
   } = data.contentfulProgram
-  const previous = pageContext.prev
-  const next = pageContext.next
+  // const previous = pageContext.prev
+  // const { next } = pageContext
   const { basePath } = pageContext
 
   let ogImage
@@ -138,29 +93,27 @@ const ProgramTemplate = ({ data, pageContext }) => {
 
   const normalizedCarousel =
     carouselContent &&
-    carouselContent.map(item => ({
+    carouselContent.map((item) => ({
       id: item.id,
       title: item.title,
-      src: item.image,
+      image: item.image,
       description: item.description,
     }))
 
   const normalizedRelated =
     relatedPrograms &&
-    relatedPrograms.map(item => ({
+    relatedPrograms.map((item) => ({
       id: item.id,
       title: item.fullProgramName,
-      src: item.heroImage,
-      description: item.metaDescription
-        ? item.metaDescription.metaDescription
-        : null,
+      image: item.heroImage,
+      description: item.metaDescription ? item.metaDescription.metaDescription : null,
     }))
 
   const [pos, setPos] = useState('top')
 
   useEffect(() => {
-    document.addEventListener('scroll', e => {
-      let scrolled = document.scrollingElement.scrollTop
+    document.addEventListener('scroll', (e) => {
+      const scrolled = document.scrollingElement.scrollTop
       if (scrolled >= 1150) {
         setPos('sticky')
       } else {
@@ -172,23 +125,19 @@ const ProgramTemplate = ({ data, pageContext }) => {
 
   const statsCardsAmount = whyMorganStateStats && whyMorganStateStats.length
 
-  const CtaSectionTopC = props => {
+  const CtaSectionTopC = (props) => {
     const { inViewport, forwardedRef } = props
     return (
       <div
         id="requestInfoCta"
-        className={`viewport-block ${
-          pos === 'sticky' ? ' sticked' : 'site-header'
-        }`}
+        className={`viewport-block ${pos === 'sticky' ? ' sticked' : 'site-header'}`}
         ref={forwardedRef}
       >
         <Container>
           <div className="ctaContent narrow">
             <p>
               In enim sem orci adipiscing cras tempus.{' '}
-              <strong>
-                Malesuada odio egestas aliquet sed neque lectus cras.
-              </strong>
+              <strong>Malesuada odio egestas aliquet sed neque lectus cras.</strong>
             </p>
             <button>Request Information</button>
           </div>
@@ -197,11 +146,9 @@ const ProgramTemplate = ({ data, pageContext }) => {
     )
   }
 
-  const CtaSectionTop = handleViewport(
-    CtaSectionTopC /** options: {}, config: {} **/
-  )
+  const CtaSectionTop = handleViewport(CtaSectionTopC /** options: {}, config: {} * */)
   console.log(availableMethodsOfStudy)
-  const CtaSectionBottomC = props => {
+  const CtaSectionBottomC = (props) => {
     const { inViewport, forwardedRef } = props
     return (
       <div className="viewport-block" ref={forwardedRef}>
@@ -212,12 +159,10 @@ const ProgramTemplate = ({ data, pageContext }) => {
               Discover the {typeOfDegree} in {fullProgramName}
             </h3>
             <p>
-              Find meaningful success-both personally and professionally-width
-              the {availableMethodsOfStudy && availableMethodsOfStudy.join(' or ')} {typeOfDegree} in{' '}
-              {fullProgramName}. If you're ready to learn valuable skills for a
-              more rewarding career, why wait?{' '}
-              <strong>Request more information today</strong> and we'll reach
-              out to you with all the details you need.
+              Find meaningful success-both personally and professionally-width the{' '}
+              {availableMethodsOfStudy && availableMethodsOfStudy.join(' or ')} {typeOfDegree} in {fullProgramName}. If
+              you're ready to learn valuable skills for a more rewarding career, why wait?{' '}
+              <strong>Request more information today</strong> and we'll reach out to you with all the details you need.
             </p>
             <button>Request Information</button>
           </div>
@@ -226,12 +171,10 @@ const ProgramTemplate = ({ data, pageContext }) => {
     )
   }
 
-  const CtaSectionBottom = handleViewport(
-    CtaSectionBottomC /** options: {}, config: {} **/
-  )
+  const CtaSectionBottom = handleViewport(CtaSectionBottomC /** options: {}, config: {} * */)
 
   const ChangeClassBottom = () => {
-    let topCta = document.getElementById('requestInfoCta')
+    const topCta = document.getElementById('requestInfoCta')
     topCta.classList.toggle('hidden')
   }
 
@@ -239,9 +182,7 @@ const ProgramTemplate = ({ data, pageContext }) => {
     <Layout className="programTemplate">
       <SEO
         title={title}
-        description={
-          metaDescription ? metaDescription.metaDescription : 'Title Needed'
-        }
+        description={metaDescription ? metaDescription.metaDescription : 'Title Needed'}
         image={ogImage}
       />
       <Hero title={title} image={heroImage} />
@@ -254,32 +195,14 @@ const ProgramTemplate = ({ data, pageContext }) => {
         <div className="learningMode">
           <p>Learning Mode:</p>
           <ul className="no-list">
-            {availableMethodsOfStudy &&
-              availableMethodsOfStudy.map(method => (
-                <>
-                  <li key={method}>{method}</li>
-                </>
-              ))}
+            {availableMethodsOfStudy && availableMethodsOfStudy.map((method) => <li key={method}>{method}</li>)}
           </ul>
         </div>
-        <div className="programIntro">
-          {metaDescription && (
-            <p>{metaDescription.metaDescription}</p>
-          )}
-        </div>
+        <div className="programIntro">{metaDescription && <p>{metaDescription.metaDescription}</p>}</div>
         <div className="programStats">
-          {creditHours && (
-            <ProgramStat stat={creditHours} description="Credit Hours" />
-          )}
-          {monthsToComplete && (
-            <ProgramStat
-              stat={monthsToComplete}
-              description="Months to Complete"
-            />
-          )}
-          {programTracks && (
-            <ProgramStat stat={programTracks} description="Program Tracks" />
-          )}
+          {creditHours && <ProgramStat stat={creditHours} description="Credit Hours" />}
+          {monthsToComplete && <ProgramStat stat={monthsToComplete} description="Months to Complete" />}
+          {programTracks && <ProgramStat stat={programTracks} description="Program Tracks" />}
         </div>
       </Container>
 
@@ -294,10 +217,18 @@ const ProgramTemplate = ({ data, pageContext }) => {
         }}
       />
 
+      <Container id="requestInfoCta">
+        <div className="ctaContent narrow">
+          <p>
+            In enim sem orci adipiscing cras tempus.{' '}
+            <strong>Malesuada odio egestas aliquet sed neque lectus cras.</strong>
+          </p>
+          <button type="submit">Request Information</button>
+        </div>
+      </Container>
       <Container className="cols" constraints="center">
         <Group className="programDescription cols">
-          {description &&
-            documentToReactComponents(description.json, RICHTEXT_OPTIONS)}
+          {description && renderRichText(description, RICHTEXT_OPTIONS)}
         </Group>
       </Container>
       <Container id="whyMorganState" className="drkbg">
@@ -305,73 +236,42 @@ const ProgramTemplate = ({ data, pageContext }) => {
           <h2>Why Morgan State?</h2>
           <CardList rows={`${statsCardsAmount <= 4 ? 'one-row' : 'two-rows'}`}>
             {whyMorganStateStats &&
-              whyMorganStateStats.map(node => (
-                <StatCard key={node.id} {...node} />
+              whyMorganStateStats.map((node) => (
+                <StatCard key={node.id} description={node.description} statisticImage={node.statisticImage} />
               ))}
           </CardList>
         </Container>
       </Container>
       <Container constraints="center" className="cols-container">
-        {preContentBlock && (
-          <Group>
-            {documentToReactComponents(preContentBlock.json, RICHTEXT_OPTIONS)}
-          </Group>
-        )}
-        {skillsAndJobs && (
-          <Group className="cols">
-            {documentToReactComponents(skillsAndJobs.json, RICHTEXT_OPTIONS)}
-          </Group>
-        )}
+        {skillsAndJobs && <Group className="cols">{renderRichText(skillsAndJobs, RICHTEXT_OPTIONS)}</Group>}
 
-        {careerDetails && (
-          <Group className="cols">
-            {documentToReactComponents(careerDetails.json, RICHTEXT_OPTIONS)}
-          </Group>
-        )}
+        {careerDetails && <Group className="cols">{renderRichText(careerDetails, RICHTEXT_OPTIONS)}</Group>}
       </Container>
 
       <Container constraints="center">
         {carouselPreText && (
-          <Group className="wrapper centered narrow">
-            {documentToReactComponents(carouselPreText.json, RICHTEXT_OPTIONS)}
-          </Group>
+          <Group className="wrapper centered narrow">{renderRichText(carouselPreText, RICHTEXT_OPTIONS)}</Group>
         )}
         {normalizedCarousel && (
-          <ImageSlider
-            className="research-interships"
-            data={normalizedCarousel}
-            settings={carouselSettings}
-          />
+          <ImageSlider className="research-interships" data={normalizedCarousel} settings={carouselSettings} />
         )}
       </Container>
 
       <Container id="testimonials">
         {testimonialPreText && (
-          <Group className="wrapper centered narrow">
-            {documentToReactComponents(
-              testimonialPreText.json,
-              RICHTEXT_OPTIONS
-            )}
-          </Group>
+          <Group className="wrapper centered narrow">{renderRichText(testimonialPreText, RICHTEXT_OPTIONS)}</Group>
         )}
         {testimonial && (
           <Testimonial
             image={testimonial.image}
-            quote={testimonial.quote}
+            quote={renderRichText(testimonial.quote, RICHTEXT_OPTIONS)}
             author={testimonial.author}
-          ></Testimonial>
+          />
         )}
       </Container>
 
       <Container constraints="center" className="cols-container">
-        {financialAidOptions && (
-          <Group>
-            {documentToReactComponents(
-              financialAidOptions.json,
-              RICHTEXT_OPTIONS
-            )}
-          </Group>
-        )}
+        {financialAidOptions && <Group>{renderRichText(financialAidOptions, RICHTEXT_OPTIONS)}</Group>}
       </Container>
 
       <CtaSectionBottom
@@ -388,11 +288,7 @@ const ProgramTemplate = ({ data, pageContext }) => {
           {normalizedRelated && (
             <div>
               <h2>Explore Related Programs</h2>
-              <ImageSlider
-                className="related-programs"
-                data={normalizedRelated}
-                settings={relatedProgramSettings}
-              />
+              <ImageSlider className="related-programs" data={normalizedRelated} settings={relatedProgramSettings} />
             </div>
           )}
         </Group>
@@ -411,68 +307,94 @@ export const query = graphql`
     contentfulProgram(slug: { eq: $slug }) {
       fullProgramName
       description {
-        json
+        raw
+        references {
+          ... on ContentfulAsset {
+            __typename
+            contentful_id
+            title
+            gatsbyImageData(layout: CONSTRAINED, placeholder: BLURRED, width: 600)
+          }
+        }
       }
       heroImage {
-        fluid(maxWidth: 400) {
-          ...GatsbyContentfulFluid_withWebp_noBase64
-        }
+        gatsbyImageData(layout: FULL_WIDTH)
+        title
       }
       availableMethodsOfStudy
       creditHours
       monthsToComplete
       programTracks
+      programDetailUrl
+      thumbnail {
+        fixed {
+          src
+        }
+      }
       typeOfDegree
       whyMorganStateStats {
         title
         id
         description {
-          json
+          raw
         }
         statisticImage {
-          fluid(maxWidth: 400) {
-            ...GatsbyContentfulFluid_withWebp_noBase64
-          }
+          title
+          gatsbyImageData(layout: CONSTRAINED, placeholder: BLURRED, width: 400)
         }
       }
       programDetailUrl
       skillsAndJobs {
-        json
+        raw
+        references {
+          ... on ContentfulAsset {
+            __typename
+            contentful_id
+            title
+            gatsbyImageData(layout: CONSTRAINED, placeholder: BLURRED, width: 640)
+          }
+        }
       }
       preContentBlock {
-        json
+        raw
       }
       careerDetails {
-        json
+        raw
+        references {
+          ... on ContentfulAsset {
+            __typename
+            contentful_id
+            title
+            gatsbyImageData(layout: CONSTRAINED, placeholder: BLURRED, width: 640)
+          }
+        }
       }
       carouselPreText {
-        json
+        raw
       }
       financialAidOptions {
-        json
+        raw
       }
       carouselContent {
         id
         title
         description
         image {
-          fluid(maxWidth: 800) {
-            ...GatsbyContentfulFluid_withWebp_noBase64
-          }
+          gatsbyImageData(layout: CONSTRAINED, placeholder: BLURRED, width: 1080)
+          title
         }
       }
       testimonialPreText {
-        json
+        raw
       }
       testimonial {
         author
         quote {
-          json
+          raw
         }
         image {
-          fluid(maxWidth: 800) {
-            ...GatsbyContentfulFluid_withWebp_noBase64
-          }
+          gatsbyImageData(layout: CONSTRAINED, placeholder: BLURRED, width: 800)
+          title
         }
       }
       metaDescription {
@@ -482,14 +404,18 @@ export const query = graphql`
         fullProgramName
         id
         slug
+        thumbnail {
+          fixed {
+            src
+          }
+        }
         typeOfDegree
         metaDescription {
           metaDescription
         }
         heroImage {
-          fluid(maxWidth: 350, maxHeight: 196, resizingBehavior: SCALE) {
-            ...GatsbyContentfulFluid_withWebp_noBase64
-          }
+          gatsbyImageData(layout: CONSTRAINED, placeholder: BLURRED, width: 350)
+          title
         }
       }
       discoverProgramImage {

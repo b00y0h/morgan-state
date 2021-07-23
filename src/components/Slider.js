@@ -2,6 +2,7 @@ import React from 'react'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
+import { GatsbyImage as Img } from 'gatsby-plugin-image'
 
 const ImageSlider = ({ data, settings, className }) => {
   const internalSettings = {
@@ -33,14 +34,13 @@ const ImageSlider = ({ data, settings, className }) => {
       {data.map(item => {
         return (
           <div className="slick-slide-content" key={item.id}>
-            {item.src && <img src={item.src.fluid.src} alt={item.title} />}
+            {item.image && <Img image={item.image.gatsbyImageData} alt={item.image.title} />}
             <div className="slick-caption">
               <h4>{item.title}</h4>
               <p>{item.description}</p>
             </div>
           </div>
-        )
-      })}
+      )})}
     </Slider>
   )
 }

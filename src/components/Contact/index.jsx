@@ -1,10 +1,10 @@
-import React from 'react';
-import { Container } from 'components/common';
-import { Wrapper } from './styles';
-import ContactForm from './ContactForm';
+import React from 'react'
+import { Container } from 'components/common'
+import { Wrapper } from './styles'
+import ContactForm from './ContactForm'
 
-export const Contact = props => {
-  const { campaign } = props;
+export const Contact = (props) => {
+  const { campaign } = props
   return (
     <Wrapper as={Container} id="contact" className="contact">
       {/* <div className="contact-header">
@@ -13,5 +13,5 @@ export const Contact = props => {
     </div> */}
       <ContactForm campaign={campaign} />
     </Wrapper>
-  );
-};
+  )
+}
