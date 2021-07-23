@@ -8,10 +8,7 @@ const BgImg = styled(Img)`
 `
 
 const Hero = ({ image }) => (
-  <div className="hero">
-    <BgImg image={image && image.gatsbyImageData} alt={image.title} />
-    {/* <GatsbyImage image={image && image.gatsbyImageData} alt={image.title} /> */}
-  </div>
+  <div className="hero">{image && <BgImg image={image.gatsbyImageData} alt={image.title} />}</div>
 )
 
 export default Hero

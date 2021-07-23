@@ -46,6 +46,7 @@
     "react-slick": "^0.28.1",
     "react-text-mask": "^5.4.3",
     "sass": "^1.32.8",
+    "sharp": "^0.28.3",
     "slick-carousel": "^1.8.1",
     "styled-components": "^5.2.3",
     "theme-ui": "^0.10.0",

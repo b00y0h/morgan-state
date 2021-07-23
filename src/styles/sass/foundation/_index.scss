@@ -11,11 +11,11 @@
 }
 
 //! Import any configuration SASS (fonts, variables, mixins, extends, etc.)
-@import 'settings/mixins', 'settings/settings';
+@import "settings/mixins", "settings/settings";
 
 //! Import base element styles
-@import 'base/type', 'base/buttons', 'base/forms';
+@import "base/type", "base/buttons", "base/forms";
 
 //! Import globally shared styles
-@import 'global/branding', 'global/head', 'global/layout', 'global/nav',
-  'global/sections', 'global/modals';
+@import "global/branding", "global/head", "global/layout", "global/nav",
+  "global/sections", "global/modals";

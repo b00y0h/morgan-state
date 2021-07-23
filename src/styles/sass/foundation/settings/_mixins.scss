@@ -1,4 +1,3 @@
-@use "sass:math";
 ///////////////////
 //MIXINS
 ///////////////////
@@ -222,16 +221,7 @@ $x-fontFix: 0;
       $_d-iMax: 0rem;
     }
 
-    $_d-iMid: calc(
-      #{$_d-iMin} +
-        #{math.div(($_d-iMax - $_d-iMin), 1rem)} *
-        (
-          math.div(
-            (100vw - #{$_mq-min}),
-            #{math.div(($_mq-max - $_mq-min), 1rem)}
-          )
-        )
-    );
+    $_d-iMid: calc();
 
     @if ($_x-i > 1) {
       $_d-mid: $_d-mid + " ";
