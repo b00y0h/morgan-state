@@ -7,7 +7,7 @@ import { Link } from 'gatsby'
 import { useSiteMetadata } from '../hooks/use-site-metadata'
 
 function Logo() {
-  const pageUrl = window.location.href.indexOf('program')
+  const pageUrl = typeof window !== 'undefined' ? window.location.href.indexOf('program') : ''
   if (pageUrl != -1) {
     return <div className="logo">Morgan State University</div>
   } else {

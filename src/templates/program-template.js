@@ -206,14 +206,14 @@ const ProgramTemplate = ({ data, pageContext }) => {
     return (
       <div className="viewport-block" ref={forwardedRef}>
         <Container id="discoverProgram">
-          <Img fluid={discoverProgramImage.fluid} className="discoverBgImg" />
+          {discoverProgramImage && <Img fluid={discoverProgramImage.fluid} className="discoverBgImg" />}
           <div className="wrapper centered">
             <h3>
               Discover the {typeOfDegree} in {fullProgramName}
             </h3>
             <p>
               Find meaningful success-both personally and professionally-width
-              the {availableMethodsOfStudy.join(' or ')} {typeOfDegree} in{' '}
+              the {availableMethodsOfStudy && availableMethodsOfStudy.join(' or ')} {typeOfDegree} in{' '}
               {fullProgramName}. If you're ready to learn valuable skills for a
               more rewarding career, why wait?{' '}
               <strong>Request more information today</strong> and we'll reach
@@ -263,7 +263,9 @@ const ProgramTemplate = ({ data, pageContext }) => {
           </ul>
         </div>
         <div className="programIntro">
-          <p>{metaDescription.metaDescription}</p>
+          {metaDescription && (
+            <p>{metaDescription.metaDescription}</p>
+          )}
         </div>
         <div className="programStats">
           {creditHours && (
