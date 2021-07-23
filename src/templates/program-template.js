@@ -67,11 +67,8 @@ const ProgramTemplate = ({ data, pageContext }) => {
     creditHours,
     monthsToComplete,
     programTracks,
-    thumbnail,
     typeOfDegree,
     whyMorganStateStats,
-    programDetailUrl,
-    preContentBlock,
     skillsAndJobs,
     careerDetails,
     carouselPreText,
@@ -81,8 +78,8 @@ const ProgramTemplate = ({ data, pageContext }) => {
     financialAidOptions,
     relatedPrograms,
   } = data.contentfulProgram
-  const previous = pageContext.prev
-  const { next } = pageContext
+  // const previous = pageContext.prev
+  // const { next } = pageContext
   const { basePath } = pageContext
 
   let ogImage
@@ -151,7 +148,7 @@ const ProgramTemplate = ({ data, pageContext }) => {
             In enim sem orci adipiscing cras tempus.{' '}
             <strong>Malesuada odio egestas aliquet sed neque lectus cras.</strong>
           </p>
-          <button>Request Information</button>
+          <button type="submit">Request Information</button>
         </div>
       </Container>
       <Container className="cols" constraints="center">
