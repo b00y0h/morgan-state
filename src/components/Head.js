@@ -3,9 +3,6 @@ import React, { useEffect, useState, useRef } from 'react'
 import lottie from 'lottie-web'
 import logoAnimation from './../assets/msu-logo-anim.json'
 
-import { Link } from 'gatsby'
-import { useSiteMetadata } from '../hooks/use-site-metadata'
-
 function Logo() {
   const pageUrl = window.location.href.indexOf('program')
   if (pageUrl != -1) {

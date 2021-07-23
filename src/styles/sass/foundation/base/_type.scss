@@ -123,9 +123,12 @@ p.featured {
 ul {
   list-style: none;
   padding: 0;
-  li {
+  li,
+  &.checkmark > li {
     padding-left: 1.7em;
     position: relative;
+    margin-bottom: 0.8em;
+
     &::before {
       content: $i-checkmark;
       font-family: $f-icons;
@@ -135,6 +138,45 @@ ul {
       left: 0em;
       top: 0.3em;
       font-size: 0.8em;
+      width: initial;
+      height: initial;
+      background: none;
+      border-radius: initial;
+    }
+
+    ul {
+      margin-top: 0.5em;
+    }
+  }
+
+  &.circle {
+    & > li {
+      &::before {
+        content: '';
+        color: $c-primary-02;
+        left: 0.5em;
+        top: 0.5em;
+        background: $c-primary-01;
+        border-radius: 50%;
+        width: 0.6rem;
+        height: 0.6rem;
+      }
+    }
+  }
+
+  &.square {
+    & > li {
+      &::before {
+        content: '';
+        display: block;
+        left: 0.5em;
+        top: 0.5em;
+        width: 0.6rem;
+        height: 0.6rem;
+        border-radius: initial;
+        background: $c-primary-02;
+        box-shadow: 0.2rem 0.2rem 0 #e1e1e1;
+      }
     }
   }
 }

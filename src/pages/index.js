@@ -29,8 +29,42 @@ const ProgramIndex = ({ data }) => {
             <button>Request information</button>
           </div>
         </div>
-        <Container>
+        <Container className="intro">
           <h2>Move Forward in Your Professional Career</h2>
+          <p>
+            Id non pellentesque ante eu mi lacus in fermentum. Vestibulum ante
+            consequat, volutpat a lorem. Aliquet lectus velit tincidunt et
+            etiam. Enim at egestas tristique purus adipiscing ut. Adipiscing
+            varius sapien blandit ultrices scelerisque vestibulum. Consequat
+            vitae habitasse consectetur vitae maecenas. Felis, sed fermentum
+            varius integer augue libero turpis eget tristique. Morbi eget porta
+            porttitor cursus eu nunc bibendum.
+          </p>
+          <p>
+            Vestibulum ante consequat, volutpat a lorem. Aliquet lectus velit
+            tincidunt et etiam. Enim at egestas tristique purus adipiscing ut.
+            Adipiscing varius sapien blandit ultrices scelerisque vestibulum.
+            Consequat vitae habitasse consectetur vitae maecenas. Felis, sed
+            fermentum varius integer augue libero turpis eget tristique. Morbi
+            eget porta porttitor cursus eu nunc bibendum.{' '}
+          </p>
+          <ul className="square">
+            <li>
+              Commited to excellence in teaching, research, and service
+              <ul className="circle">
+                <li>Preeminent public urban research university</li>
+                <li>Doctoral research institution since 2007</li>
+              </ul>
+            </li>
+            <li>
+              Preparing students to be competitive for real world success
+              <ul className="circle">
+                <li>Academics fostering a community of scholars</li>
+                <li>Hands-on experiences for professional growth</li>
+              </ul>
+            </li>
+            <li>Impacting the larger urban community</li>
+          </ul>
         </Container>
         <Container data={data} schools={schools}>
           {schools.map(school => (

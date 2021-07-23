@@ -43,8 +43,10 @@
     @extend %padding;
     max-width: $mq-1000;
     margin: 0 auto;
+    width: 90%;
     h2 {
       color: white;
+      font-weight: 600;
     }
   }
 }

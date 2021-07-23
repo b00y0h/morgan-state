@@ -7,7 +7,12 @@ button,
 input[type='button'],
 input[type='reset'],
 input[type='submit'] {
-  @include buttons($c-cta, $c-primary-01, $c-secondary-01, $c-primary-02);
+  @include buttons(
+    $c-cta,
+    $c-primary-01,
+    lighten($c-secondary-02, 50%),
+    $c-primary-02
+  );
 }
 
 %minor-button {
