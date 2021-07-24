@@ -213,7 +213,8 @@
     column-gap: 2rem;
   }
 
-  img {
+  img,
+  .gatsby-image-wrapper {
     width: 10rem;
     margin-bottom: 2rem;
     @media (min-width: $mq-700) {
@@ -257,7 +258,8 @@
 
 .cols-container {
   .cols:nth-child(odd) {
-    img {
+    img,
+    .gatsby-image-wrapper {
       @media (min-width: $mq-700) {
         grid-column-start: 7;
         grid-column-end: 9;
@@ -361,7 +363,7 @@
   position: relative;
 
   &::before {
-    content: '';
+    content: "";
     display: block;
     position: absolute;
     width: 100%;
