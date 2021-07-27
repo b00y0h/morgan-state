@@ -81,7 +81,7 @@ body {
     }
   }
 
-  & [class*='col'] {
+  & [class*="col"] {
     margin-bottom: 1em;
 
     @media (min-width: $mq-800) {

@@ -21,13 +21,13 @@
 //////////////
 @mixin animation($animate...) {
   $max: length($animate);
-  $animations: '';
+  $animations: "";
 
   @for $i from 1 through $max {
     $animations: #{$animations + nth($animate, $i)};
 
     @if $i < $max {
-      $animations: #{$animations + ', '};
+      $animations: #{$animations + ", "};
     }
   }
   -webkit-animation: $animations;
@@ -195,8 +195,8 @@ $x-fontFix: 0;
   // - must be a REM value
   ////
 
-  $_d-mid: '';
-  $_importantx: '';
+  $_d-mid: "";
+  $_importantx: "";
 
   @for $_x-i from 1 through length($_d-maxRem) {
     $_d-iMin: nth($_d-minRem, $_x-i);
@@ -217,7 +217,7 @@ $x-fontFix: 0;
     );
 
     @if ($_x-i > 1) {
-      $_d-mid: $_d-mid + ' ';
+      $_d-mid: $_d-mid + " ";
     }
 
     $_d-mid: $_d-mid + $_d-iMid;

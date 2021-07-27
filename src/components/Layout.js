@@ -1,13 +1,12 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import { Global } from '@emotion/core'
 import Head from './Head'
-import Footer from '../components/Footer'
+import Footer from './Footer'
 // import { globalStyles } from '../styles/globalStyles.js'
 import 'styles/sass/styles.scss'
 
 const Skip = styled.a`
-  font-family: ${props => props.theme.fonts.body};
+  font-family: ${(props) => props.theme.fonts.body};
   padding: 0 1rem;
   line-height: 60px;
   background: #2867cf;
