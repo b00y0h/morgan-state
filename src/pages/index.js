@@ -7,8 +7,9 @@ import Layout from '../components/Layout'
 import Container from '../components/Container'
 import ProgramPreview from '../components/ProgramPreview'
 import '../styles/sass/styles.scss'
-import Img from 'gatsby-image'
+import { StaticImage } from 'gatsby-plugin-image'
 import AllProgramsHero from './../assets/all-programs-hero.jpg'
+import CoreValues from '../components/CoreValues'
 
 const ProgramIndex = ({ data }) => {
   const schools = data.allContentfulPartner.edges[0].node.school
@@ -23,13 +24,18 @@ const ProgramIndex = ({ data }) => {
           image="{ogImage}"
         />
         <div className="hero">
-          <img src={`${AllProgramsHero}`} />
+          {/* <img src={`${AllProgramsHero}`} /> */}
+          <StaticImage
+            src="./../assets/all-programs-hero.jpg"
+            layout="fullWidth"
+            placeholder="blurred"
+          />
           <div className="heroContent">
-            <h2>Discover Graduate Programs at Morgan State</h2>
+            <h1>Discover Graduate Programs at Morgan State</h1>
             <button>Request information</button>
           </div>
         </div>
-        <Container className="intro">
+        <Container constraints="center" className="intro">
           <h2>Move Forward in Your Professional Career</h2>
           <p>
             Id non pellentesque ante eu mi lacus in fermentum. Vestibulum ante
@@ -66,6 +72,7 @@ const ProgramIndex = ({ data }) => {
             <li>Impacting the larger urban community</li>
           </ul>
         </Container>
+        <CoreValues />
         <Container data={data} schools={schools}>
           {schools.map(school => (
             <>
@@ -73,9 +80,11 @@ const ProgramIndex = ({ data }) => {
               {school.program &&
                 school.program.map(program => {
                   return (
-                    <li key={program.slug}>
-                      <ProgramPreview program={program} />
-                    </li>
+                    <ul>
+                      <li key={program.slug}>
+                        <ProgramPreview program={program} />
+                      </li>
+                    </ul>
                   )
                 })}
             </>
