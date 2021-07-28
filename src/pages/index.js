@@ -1,23 +1,25 @@
-import React from 'react'
-import { graphql } from 'gatsby'
-import SEO from '../components/SEO'
-import Layout from '../components/Layout'
-import Container from '../components/Container'
-import ProgramPreview from '../components/ProgramPreview'
-import '../styles/sass/styles.scss'
-import { StaticImage } from 'gatsby-plugin-image'
-import AllProgramsHero from './../assets/all-programs-hero.jpg'
-import CoreValues from '../components/CoreValues'
-import AllProgramsHero from '../assets/all-programs-hero.jpg'
+import React from "react";
+import { graphql } from "gatsby";
+import SEO from "../components/SEO";
+import Layout from "../components/Layout";
+import Container from "../components/Container";
+import ProgramPreview from "../components/ProgramPreview";
+import "../styles/sass/styles.scss";
+import { StaticImage } from "gatsby-plugin-image";
+import CoreValues from "../components/CoreValues";
 
 const ProgramIndex = ({ data }) => {
-  const schools = data.allContentfulPartner.edges[0].node.school
-  const programs = data.allContentfulProgram.edges
+  const schools = data.allContentfulPartner.edges[0].node.school;
+  const programs = data.allContentfulProgram.edges;
 
   return (
     <>
       <Layout className="allPrograms">
-        <SEO title={data.site.siteMetadata.title} description={data.site.siteMetadata.description} image="{ogImage}" />
+        <SEO
+          title={data.site.siteMetadata.title}
+          description={data.site.siteMetadata.description}
+          image="{ogImage}"
+        />
         <div className="hero">
           {/* <img src={`${AllProgramsHero}`} /> */}
           <StaticImage
@@ -33,17 +35,21 @@ const ProgramIndex = ({ data }) => {
         <Container constraints="center" className="intro">
           <h2>Move Forward in Your Professional Career</h2>
           <p>
-            Id non pellentesque ante eu mi lacus in fermentum. Vestibulum ante consequat, volutpat a lorem. Aliquet
-            lectus velit tincidunt et etiam. Enim at egestas tristique purus adipiscing ut. Adipiscing varius sapien
-            blandit ultrices scelerisque vestibulum. Consequat vitae habitasse consectetur vitae maecenas. Felis, sed
-            fermentum varius integer augue libero turpis eget tristique. Morbi eget porta porttitor cursus eu nunc
-            bibendum.
+            Id non pellentesque ante eu mi lacus in fermentum. Vestibulum ante
+            consequat, volutpat a lorem. Aliquet lectus velit tincidunt et
+            etiam. Enim at egestas tristique purus adipiscing ut. Adipiscing
+            varius sapien blandit ultrices scelerisque vestibulum. Consequat
+            vitae habitasse consectetur vitae maecenas. Felis, sed fermentum
+            varius integer augue libero turpis eget tristique. Morbi eget porta
+            porttitor cursus eu nunc bibendum.
           </p>
           <p>
-            Vestibulum ante consequat, volutpat a lorem. Aliquet lectus velit tincidunt et etiam. Enim at egestas
-            tristique purus adipiscing ut. Adipiscing varius sapien blandit ultrices scelerisque vestibulum. Consequat
-            vitae habitasse consectetur vitae maecenas. Felis, sed fermentum varius integer augue libero turpis eget
-            tristique. Morbi eget porta porttitor cursus eu nunc bibendum.{' '}
+            Vestibulum ante consequat, volutpat a lorem. Aliquet lectus velit
+            tincidunt et etiam. Enim at egestas tristique purus adipiscing ut.
+            Adipiscing varius sapien blandit ultrices scelerisque vestibulum.
+            Consequat vitae habitasse consectetur vitae maecenas. Felis, sed
+            fermentum varius integer augue libero turpis eget tristique. Morbi
+            eget porta porttitor cursus eu nunc bibendum.{" "}
           </p>
           <ul className="square">
             <li>
@@ -84,16 +90,16 @@ const ProgramIndex = ({ data }) => {
                 <li key={program.slug}>
                   <ProgramPreview program={program} />
                 </li>
-              )
+              );
             }
           })}
         </Container>
       </Layout>
     </>
-  )
-}
+  );
+};
 
-export default ProgramIndex
+export default ProgramIndex;
 
 export const pageQuery = graphql`
   query ProgramIndexQuery {
@@ -120,7 +126,11 @@ export const pageQuery = graphql`
       }
     }
 
-    allContentfulProgram(filter: { partner: { id: { eq: "ecd6a28f-36c2-5596-a5f1-e03afa6e09ed" } } }) {
+    allContentfulProgram(
+      filter: {
+        partner: { id: { eq: "ecd6a28f-36c2-5596-a5f1-e03afa6e09ed" } }
+      }
+    ) {
       edges {
         node {
           fullProgramName
@@ -138,4 +148,4 @@ export const pageQuery = graphql`
       }
     }
   }
-`
+`;
