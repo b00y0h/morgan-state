@@ -1,9 +1,9 @@
-import React from 'react'
-import { Link as GatsbyLink } from 'gatsby'
+import React from "react";
+import { Link as GatsbyLink } from "gatsby";
 
-import { renderRichText } from 'gatsby-source-contentful/rich-text'
-import { BLOCKS, INLINES } from '@contentful/rich-text-types'
-import { GatsbyImage as Img } from 'gatsby-plugin-image'
+import { renderRichText } from "gatsby-source-contentful/rich-text";
+import { BLOCKS, INLINES } from "@contentful/rich-text-types";
+import { GatsbyImage as Img } from "gatsby-plugin-image";
 
 // TODO: I think the answer lies somewhere here. https://www.contentful.com/blog/2021/04/14/rendering-linked-assets-entries-in-contentful/
 
@@ -18,20 +18,29 @@ const RICHTEXT_OPTIONS = {
         {children}
       </a>
     ),
-    [INLINES.ENTRY_HYPERLINK]: ({ data }, children) => <GatsbyLink to={data.target?.slug}>{children}</GatsbyLink>,
+    [INLINES.ENTRY_HYPERLINK]: ({ data }, children) => (
+      <GatsbyLink to={data.target?.slug}>{children}</GatsbyLink>
+    ),
   },
-}
+};
 
 const StatCard = ({ statisticImage, title, description, ...props }) => (
   <>
-    <li className={`col-30 ${statisticImage ? 'graphicStat' : 'textStat'}`}>
+    <li className={`col-30 ${statisticImage ? "graphicStat" : "textStat"}`}>
       {statisticImage && (
-        <Img image={statisticImage.gatsbyImageData} alt={statisticImage.title} backgroundColor="#eeeeee" />
+        <Img
+          image={statisticImage.gatsbyImageData}
+          alt={statisticImage.title}
+        />
       )}
       <h3>{title}</h3>
-      {description && <div className="statDescription">{renderRichText(description, RICHTEXT_OPTIONS)}</div>}
+      {description && (
+        <div className="statDescription">
+          {renderRichText(description, RICHTEXT_OPTIONS)}
+        </div>
+      )}
     </li>
   </>
-)
+);
 
-export default StatCard
+export default StatCard;

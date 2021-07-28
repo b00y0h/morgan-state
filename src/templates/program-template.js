@@ -6,7 +6,6 @@ import { GatsbyImage as Img } from "gatsby-plugin-image";
 import { renderRichText } from "gatsby-source-contentful/rich-text";
 
 import { BLOCKS, INLINES } from "@contentful/rich-text-types";
-import { Button } from "theme-ui";
 import handleViewport from "react-in-viewport";
 import Layout from "../components/Layout";
 import Hero from "../components/Hero";
@@ -165,9 +164,10 @@ const ProgramTemplate = ({ data, pageContext }) => {
         <Container id="discoverProgram">
           {discoverProgramImage && (
             <Img
-              fluid={discoverProgramImage.fluid}
+              image={discoverProgramImage.fluid}
               className="discoverBgImg"
               alt=""
+              fluid={discoverProgramImage.fluid}
             />
           )}
           <div className="wrapper centered">
