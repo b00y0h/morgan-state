@@ -32,40 +32,33 @@ const ProgramIndex = ({ data }) => {
           </div>
         </div>
         <Container constraints="center" className="page-intro">
-          <h2>Move Forward in Your Professional Career</h2>
+          <h2>Growing the Future, Leading the World</h2>
           <p>
-            Id non pellentesque ante eu mi lacus in fermentum. Vestibulum ante
-            consequat, volutpat a lorem. Aliquet lectus velit tincidunt et
-            etiam. Enim at egestas tristique purus adipiscing ut. Adipiscing
-            varius sapien blandit ultrices scelerisque vestibulum. Consequat
-            vitae habitasse consectetur vitae maecenas. Felis, sed fermentum
-            varius integer augue libero turpis eget tristique. Morbi eget porta
-            porttitor cursus eu nunc bibendum.
+            The School of Graduate Studies at Morgan State University will
+            prepare you to be competitive in the real world. If you’re looking
+            for professors who care, a world-class education, and hands-on
+            experiences that grow your career, Morgan State is it. From 1964 to
+            now, we’ve created a community of high-achieving scholars that lead
+            the way in research, service, and their careers.
           </p>
           <p>
-            Vestibulum ante consequat, volutpat a lorem. Aliquet lectus velit
-            tincidunt et etiam. Enim at egestas tristique purus adipiscing ut.
-            Adipiscing varius sapien blandit ultrices scelerisque vestibulum.
-            Consequat vitae habitasse consectetur vitae maecenas. Felis, sed
-            fermentum varius integer augue libero turpis eget tristique. Morbi
-            eget porta porttitor cursus eu nunc bibendum.{" "}
+            With our flexible, multidisciplinary programs in both STEM and
+            non-STEM fields, we give students like you the foundation for
+            success. You’ll collaborate closely with your professors and peers,
+            all while gaining expertise in your field. Engage in impactful
+            research, career-minded internships, and other rewarding learning
+            opportunities that shape your future.
+          </p>
+          <p>
+            Get the education you need for today’s most sought-after jobs and
+            careers. At Morgan, we’ll support your growth and show you that the
+            sky’s the limit.
           </p>
           <ul className="square">
-            <li>
-              Commited to excellence in teaching, research, and service
-              <ul className="circle">
-                <li>Preeminent public urban research university</li>
-                <li>Doctoral research institution since 2007</li>
-              </ul>
-            </li>
-            <li>
-              Preparing students to be competitive for real world success
-              <ul className="circle">
-                <li>Academics fostering a community of scholars</li>
-                <li>Hands-on experiences for professional growth</li>
-              </ul>
-            </li>
-            <li>Impacting the larger urban community</li>
+            <li>Improve your skills</li>
+            <li>Gain specialized knowledge</li>
+            <li>Find success in your career</li>
+            <li>Achieve your wildest dreams</li>
           </ul>
         </Container>
         <CoreValues />
@@ -78,14 +71,13 @@ const ProgramIndex = ({ data }) => {
             <div className="wrapper centered">
               <h2>Find Your Graduate Program</h2>
               <p>
-                Id non pellentesque ante eu mi lacus in fermentum. Vestibulum
-                ante consequat, volutpat a lorem. Aliquet lectus velit tincidunt
-                et etiam. Enim at egestas tristique purus adipiscing ut.
-                Adipiscing varius sapien blandit ultrices scelerisque
-                vestibulum. Consequat vitae habitasse consectetur vitae
-                maecenas. Felis, sed fermentum varius integer augue libero
-                turpis eget tristique. Morbi eget porta porttitor cursus eu nunc
-                bibendum. Posuere nunc sit ut nibh eget lectus sed.
+                With more than 50 programs leading to graduate degrees, you can
+                study what really matters. Whether you’re pursuing an MA or MS,
+                a specialized Master’s degree, or a PhD, a Morgan State
+                education delivers results. Get the experience of a lifetime
+                that combines academic enhancement with professional growth.
+                Explore our wide range of graduate programs offered on campus
+                and online.
               </p>
             </div>
           </div>
@@ -126,6 +118,16 @@ const ProgramIndex = ({ data }) => {
                 );
               }
             })}
+          </div>
+        </Container>
+        <Container className="ctaSection">
+          <div className="ctaContent narrow">
+            <p>
+              Take the next step in your academic and professional career with a
+              graduate degree from Morgan State.{" "}
+              <strong>Pursue your future&mdash;today.</strong>
+            </p>
+            <button>Request Information</button>
           </div>
         </Container>
       </Layout>
