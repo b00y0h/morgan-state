@@ -1,11 +1,9 @@
-import React from 'react'
-import Container from './Container'
-import { GatsbyImage, StaticImage, getImage } from 'gatsby-plugin-image'
-import LeadershipBgImage from './../assets/leadership.jpg'
-import InnovationBgImage from './../assets/innovation.jpg'
+import React from "react";
+import Container from "./Container";
+import { GatsbyImage, StaticImage, getImage } from "gatsby-plugin-image";
 
 const CoreValues = () => {
-  const valueImage2 = getImage('./../assets/innovation.jpg')
+  const valueImage2 = getImage("./../assets/innovation.jpg");
   return (
     <Container id="corevalues" className="coreValues">
       <ul className="no-list">
@@ -44,7 +42,7 @@ const CoreValues = () => {
         </li>
       </ul>
     </Container>
-  )
-}
+  );
+};
 
-export default CoreValues
+export default CoreValues;

@@ -62,11 +62,7 @@ const ProgramIndex = ({ data }) => {
           </ul>
         </Container>
         <CoreValues />
-        <Container
-          id="programs"
-          // data={data}
-          // schools={schools}
-        >
+        <Container id="programs">
           <div className="intro">
             <div className="wrapper centered">
               <h2>Find Your Graduate Program</h2>
@@ -87,9 +83,9 @@ const ProgramIndex = ({ data }) => {
                 <h3>{school.title}</h3>
                 <ul className="no-list schoolProgramList">
                   <div className="listHead">
-                    <div>Program</div>
-                    <div>Degree</div>
-                    <div>Learning Mode</div>
+                    <span>Program</span>
+                    <span>Degree</span>
+                    <span>Learning Mode</span>
                   </div>
                   {school.program &&
                     school.program.map((program) => (
@@ -103,21 +99,23 @@ const ProgramIndex = ({ data }) => {
                 </ul>
               </div>
             ))}
-            <h2>
+            <h3>
               ***** Programs that don't have a college associated yet *****
-            </h2>
+            </h3>
             <p>
               this is for dev work only so that you can see all the programs
             </p>
-            {programs.map(({ node: program }) => {
-              if (!program.relatedSchoolCollege) {
-                return (
-                  <li key={program.slug}>
-                    <ProgramPreview program={program} />
-                  </li>
-                );
-              }
-            })}
+            <ul>
+              {programs.map(({ node: program }) => {
+                if (!program.relatedSchoolCollege) {
+                  return (
+                    <li key={program.slug}>
+                      <ProgramPreview program={program} />
+                    </li>
+                  );
+                }
+              })}
+            </ul>
           </div>
         </Container>
         <Container className="ctaSection">
