@@ -1,26 +1,26 @@
-import React, { useState, useEffect } from "react";
-import { graphql, Link } from "gatsby";
-import "@brainhubeu/react-carousel/lib/style.css";
-import { GatsbyImage as Img } from "gatsby-plugin-image";
+import React, { useState, useEffect } from 'react';
+import { graphql, Link } from 'gatsby';
+import '@brainhubeu/react-carousel/lib/style.css';
+import { GatsbyImage as Img } from 'gatsby-plugin-image';
 
-import { renderRichText } from "gatsby-source-contentful/rich-text";
+import { renderRichText } from 'gatsby-source-contentful/rich-text';
 
-import { BLOCKS, INLINES } from "@contentful/rich-text-types";
-import handleViewport from "react-in-viewport";
-import Layout from "../components/Layout";
-import Hero from "../components/Hero";
-import Container from "../components/Container";
+import { BLOCKS, INLINES } from '@contentful/rich-text-types';
+import handleViewport from 'react-in-viewport';
+import Layout from '../components/Layout';
+import Hero from '../components/Hero';
+import Container from '../components/Container';
 // import PageBody from '../components/PageBody'
-import TagList from "../components/TagList";
-import SEO from "../components/SEO";
-import CardList from "../components/CardList";
-import Testimonial from "../components/Testimonial";
-import ImageSlider from "../components/Slider";
+import TagList from '../components/TagList';
+import SEO from '../components/SEO';
+import CardList from '../components/CardList';
+import Testimonial from '../components/Testimonial';
+import ImageSlider from '../components/Slider';
 
-import ProgramStat from "../components/ProgramStat";
+import ProgramStat from '../components/ProgramStat';
 
-import StatCard from "../components/StatCard";
-import Group from "../components/common/Container/Group";
+import StatCard from '../components/StatCard';
+import Group from '../components/common/Container/Group';
 
 const carouselSettings = {
   dot: true,
@@ -29,7 +29,7 @@ const carouselSettings = {
   arrows: true,
   slidesToShow: 1,
   slidesToScroll: 1,
-  cssEase: "linear",
+  cssEase: 'linear',
 };
 
 const relatedProgramSettings = {
@@ -39,7 +39,7 @@ const relatedProgramSettings = {
   arrows: true,
   slidesToShow: 3,
   slidesToScroll: 1,
-  cssEase: "linear",
+  cssEase: 'linear',
 };
 
 const RICHTEXT_OPTIONS = {
@@ -51,9 +51,7 @@ const RICHTEXT_OPTIONS = {
     ),
     [BLOCKS.PARAGRAPH]: (node, children) => <p>{children}</p>,
     [BLOCKS.LIST_ITEM]: (node, children) => <li>{children}</li>,
-    [BLOCKS.EMBEDDED_ASSET]: ({ data }) => (
-      <Img image={data.target.gatsbyImageData} alt={data.target.title} />
-    ),
+    [BLOCKS.EMBEDDED_ASSET]: ({ data }) => <Img image={data.target.gatsbyImageData} alt={data.target.title} />,
   },
 };
 
@@ -107,20 +105,18 @@ const ProgramTemplate = ({ data, pageContext }) => {
       id: item.id,
       title: item.fullProgramName,
       image: item.heroImage,
-      description: item.metaDescription
-        ? item.metaDescription.metaDescription
-        : null,
+      description: item.metaDescription ? item.metaDescription.metaDescription : null,
     }));
 
-  const [pos, setPos] = useState("top");
+  const [pos, setPos] = useState('top');
 
   useEffect(() => {
-    document.addEventListener("scroll", (e) => {
+    document.addEventListener('scroll', (e) => {
       const scrolled = document.scrollingElement.scrollTop;
       if (scrolled >= 1150) {
-        setPos("sticky");
+        setPos('sticky');
       } else {
-        setPos("top");
+        setPos('top');
       }
     }),
       [];
@@ -133,18 +129,14 @@ const ProgramTemplate = ({ data, pageContext }) => {
     return (
       <div
         id="requestInfoCta"
-        className={`viewport-block ${
-          pos === "sticky" ? " sticked" : "site-header"
-        }`}
+        className={`viewport-block ${pos === 'sticky' ? ' sticked' : 'site-header'}`}
         ref={forwardedRef}
       >
         <Container>
           <div className="ctaContent narrow">
             <p>
-              In enim sem orci adipiscing cras tempus.{" "}
-              <strong>
-                Malesuada odio egestas aliquet sed neque lectus cras.
-              </strong>
+              In enim sem orci adipiscing cras tempus.{' '}
+              <strong>Malesuada odio egestas aliquet sed neque lectus cras.</strong>
             </p>
             <button>Request Information</button>
           </div>
@@ -153,9 +145,7 @@ const ProgramTemplate = ({ data, pageContext }) => {
     );
   };
 
-  const CtaSectionTop = handleViewport(
-    CtaSectionTopC /** options: {}, config: {} * */
-  );
+  const CtaSectionTop = handleViewport(CtaSectionTopC /** options: {}, config: {} * */);
 
   const CtaSectionBottomC = (props) => {
     const { forwardedRef } = props;
@@ -164,10 +154,9 @@ const ProgramTemplate = ({ data, pageContext }) => {
         <Container id="discoverProgram">
           {discoverProgramImage && (
             <Img
-              image={discoverProgramImage.fluid}
+              image={discoverProgramImage.gatsbyImageData}
               className="discoverBgImg"
-              alt=""
-              fluid={discoverProgramImage.fluid}
+              alt={discoverProgramImage.title}
             />
           )}
           <div className="wrapper centered">
@@ -175,13 +164,10 @@ const ProgramTemplate = ({ data, pageContext }) => {
               Discover the {typeOfDegree} in {fullProgramName}
             </h3>
             <p>
-              Find meaningful success-both personally and professionally-width
-              the{" "}
-              {availableMethodsOfStudy && availableMethodsOfStudy.join(" or ")}{" "}
-              {typeOfDegree} in {fullProgramName}. If you're ready to learn
-              valuable skills for a more rewarding career, why wait?{" "}
-              <strong>Request more information today</strong> and we'll reach
-              out to you with all the details you need.
+              Find meaningful success-both personally and professionally-width the{' '}
+              {availableMethodsOfStudy && availableMethodsOfStudy.join(' or ')} {typeOfDegree} in {fullProgramName}. If
+              you're ready to learn valuable skills for a more rewarding career, why wait?{' '}
+              <strong>Request more information today</strong> and we'll reach out to you with all the details you need.
             </p>
             <button>Request Information</button>
           </div>
@@ -190,22 +176,18 @@ const ProgramTemplate = ({ data, pageContext }) => {
     );
   };
 
-  const CtaSectionBottom = handleViewport(
-    CtaSectionBottomC /** options: {}, config: {} * */
-  );
+  const CtaSectionBottom = handleViewport(CtaSectionBottomC /** options: {}, config: {} * */);
 
   const ChangeClassBottom = () => {
-    const topCta = document.querySelector("#requestInfoCta");
-    topCta.classList.toggle("hidden");
+    const topCta = document.querySelector('#requestInfoCta');
+    topCta.classList.toggle('hidden');
   };
 
   return (
     <Layout className="programTemplate">
       <SEO
         title={title}
-        description={
-          metaDescription ? metaDescription.metaDescription : "Title Needed"
-        }
+        description={metaDescription ? metaDescription.metaDescription : 'Title Needed'}
         image={ogImage}
       />
       <Hero title={title} image={heroImage} />
@@ -218,38 +200,24 @@ const ProgramTemplate = ({ data, pageContext }) => {
         <div className="learningMode">
           <p>Learning Mode:</p>
           <ul className="no-list">
-            {availableMethodsOfStudy &&
-              availableMethodsOfStudy.map((method) => (
-                <li key={method}>{method}</li>
-              ))}
+            {availableMethodsOfStudy && availableMethodsOfStudy.map((method) => <li key={method}>{method}</li>)}
           </ul>
         </div>
-        <div className="programIntro">
-          {metaDescription && <p>{metaDescription.metaDescription}</p>}
-        </div>
+        <div className="programIntro">{metaDescription && <p>{metaDescription.metaDescription}</p>}</div>
         <div className="programStats">
-          {creditHours && (
-            <ProgramStat stat={creditHours} description="Credit Hours" />
-          )}
-          {monthsToComplete && (
-            <ProgramStat
-              stat={monthsToComplete}
-              description="Months to Complete"
-            />
-          )}
-          {programTracks && (
-            <ProgramStat stat={programTracks} description="Program Tracks" />
-          )}
+          {creditHours && <ProgramStat stat={creditHours} description="Credit Hours" />}
+          {monthsToComplete && <ProgramStat stat={monthsToComplete} description="Months to Complete" />}
+          {programTracks && <ProgramStat stat={programTracks} description="Program Tracks" />}
         </div>
       </Container>
 
       <CtaSectionTop
         onEnterViewport={() => {
-          console.log("enter trigger");
+          console.log('enter trigger');
           // ChangeClass()
         }}
         onLeaveViewport={() => {
-          console.log("leave trigger");
+          console.log('leave trigger');
           // ChangeClass()
         }}
       />
@@ -262,52 +230,32 @@ const ProgramTemplate = ({ data, pageContext }) => {
       <Container id="whyMorganState" className="drkbg">
         <Container constraints="center">
           <h2>Why Morgan State?</h2>
-          <CardList rows={`${statsCardsAmount <= 4 ? "one-row" : "two-rows"}`}>
+          <CardList rows={`${statsCardsAmount <= 4 ? 'one-row' : 'two-rows'}`}>
             {whyMorganStateStats &&
               whyMorganStateStats.map((node) => (
-                <StatCard
-                  key={node.id}
-                  description={node.description}
-                  statisticImage={node.statisticImage}
-                />
+                <StatCard key={node.id} description={node.description} statisticImage={node.statisticImage} />
               ))}
           </CardList>
         </Container>
       </Container>
       <Container constraints="center" className="cols-container">
-        {skillsAndJobs && (
-          <Group className="cols">
-            {renderRichText(skillsAndJobs, RICHTEXT_OPTIONS)}
-          </Group>
-        )}
+        {skillsAndJobs && <Group className="cols">{renderRichText(skillsAndJobs, RICHTEXT_OPTIONS)}</Group>}
 
-        {careerDetails && (
-          <Group className="cols">
-            {renderRichText(careerDetails, RICHTEXT_OPTIONS)}
-          </Group>
-        )}
+        {careerDetails && <Group className="cols">{renderRichText(careerDetails, RICHTEXT_OPTIONS)}</Group>}
       </Container>
 
       <Container constraints="center">
         {carouselPreText && (
-          <Group className="wrapper centered narrow">
-            {renderRichText(carouselPreText, RICHTEXT_OPTIONS)}
-          </Group>
+          <Group className="wrapper centered narrow">{renderRichText(carouselPreText, RICHTEXT_OPTIONS)}</Group>
         )}
         {normalizedCarousel && (
-          <ImageSlider
-            className="research-interships"
-            data={normalizedCarousel}
-            settings={carouselSettings}
-          />
+          <ImageSlider className="research-interships" data={normalizedCarousel} settings={carouselSettings} />
         )}
       </Container>
 
       <Container id="testimonials">
         {testimonialPreText && (
-          <Group className="wrapper centered narrow">
-            {renderRichText(testimonialPreText, RICHTEXT_OPTIONS)}
-          </Group>
+          <Group className="wrapper centered narrow">{renderRichText(testimonialPreText, RICHTEXT_OPTIONS)}</Group>
         )}
         {testimonial && (
           <Testimonial
@@ -319,9 +267,7 @@ const ProgramTemplate = ({ data, pageContext }) => {
       </Container>
 
       <Container constraints="center" className="cols-container">
-        {financialAidOptions && (
-          <Group>{renderRichText(financialAidOptions, RICHTEXT_OPTIONS)}</Group>
-        )}
+        {financialAidOptions && <Group>{renderRichText(financialAidOptions, RICHTEXT_OPTIONS)}</Group>}
       </Container>
 
       <CtaSectionBottom
@@ -338,11 +284,7 @@ const ProgramTemplate = ({ data, pageContext }) => {
           {normalizedRelated && (
             <div>
               <h2>Explore Related Programs</h2>
-              <ImageSlider
-                className="related-programs"
-                data={normalizedRelated}
-                settings={relatedProgramSettings}
-              />
+              <ImageSlider className="related-programs" data={normalizedRelated} settings={relatedProgramSettings} />
             </div>
           )}
         </Group>
@@ -367,11 +309,7 @@ export const query = graphql`
             __typename
             contentful_id
             title
-            gatsbyImageData(
-              layout: CONSTRAINED
-              placeholder: BLURRED
-              width: 600
-            )
+            gatsbyImageData(layout: CONSTRAINED, placeholder: BLURRED, width: 600)
           }
         }
       }
@@ -409,11 +347,7 @@ export const query = graphql`
             __typename
             contentful_id
             title
-            gatsbyImageData(
-              layout: CONSTRAINED
-              placeholder: BLURRED
-              width: 640
-            )
+            gatsbyImageData(layout: CONSTRAINED, placeholder: BLURRED, width: 640)
           }
         }
       }
@@ -427,11 +361,7 @@ export const query = graphql`
             __typename
             contentful_id
             title
-            gatsbyImageData(
-              layout: CONSTRAINED
-              placeholder: BLURRED
-              width: 640
-            )
+            gatsbyImageData(layout: CONSTRAINED, placeholder: BLURRED, width: 640)
           }
         }
       }
@@ -446,11 +376,7 @@ export const query = graphql`
         title
         description
         image {
-          gatsbyImageData(
-            layout: CONSTRAINED
-            placeholder: BLURRED
-            width: 1080
-          )
+          gatsbyImageData(layout: CONSTRAINED, placeholder: BLURRED, width: 1080)
           title
         }
       }
@@ -489,9 +415,8 @@ export const query = graphql`
         }
       }
       discoverProgramImage {
-        fluid(maxWidth: 800) {
-          ...GatsbyContentfulFluid_withWebp_noBase64
-        }
+        gatsbyImageData(placeholder: BLURRED, width: 800)
+        title
       }
     }
   }
