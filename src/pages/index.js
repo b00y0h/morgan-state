@@ -71,15 +71,36 @@ const ProgramIndex = ({ data }) => {
         </Container>
         <CoreValues />
         <Container data={data} schools={schools}>
+          <h2>Find Your Graduate Program</h2>
+          <p>
+            Id non pellentesque ante eu mi lacus in fermentum. Vestibulum ante
+            consequat, volutpat a lorem. Aliquet lectus velit tincidunt et
+            etiam. Enim at egestas tristique purus adipiscing ut. Adipiscing
+            varius sapien blandit ultrices scelerisque vestibulum. Consequat
+            vitae habitasse consectetur vitae maecenas. Felis, sed fermentum
+            varius integer augue libero turpis eget tristique. Morbi eget porta
+            porttitor cursus eu nunc bibendum. Posuere nunc sit ut nibh eget
+            lectus sed.
+          </p>
           {schools.map((school) => (
             <>
-              <h2>{school.title}</h2>
-              {school.program &&
-                school.program.map((program) => (
-                  <li key={program.slug}>
-                    <ProgramPreview program={program} />
-                  </li>
-                ))}
+              <h3>{school.title}</h3>
+              <ul className="schoolProgramList">
+                <div className="listHead">
+                  <div>Program</div>
+                  <div>Degree</div>
+                  <div>Learning Mode</div>
+                </div>
+                {school.program &&
+                  school.program.map((program) => (
+                    <li
+                      key={program.slug}
+                      className={`program ${program.slug}`}
+                    >
+                      <ProgramPreview program={program} />
+                    </li>
+                  ))}
+              </ul>
             </>
           ))}
           <h2>***** Programs that don't have a college associated yet *****</h2>
@@ -120,6 +141,7 @@ export const pageQuery = graphql`
               fullProgramName
               slug
               availableMethodsOfStudy
+              typeOfDegree
             }
           }
         }
@@ -136,6 +158,7 @@ export const pageQuery = graphql`
           fullProgramName
           slug
           availableMethodsOfStudy
+          typeOfDegree
           heroImage {
             fluid(maxWidth: 350, maxHeight: 196, resizingBehavior: SCALE) {
               ...GatsbyContentfulFluid_withWebp_noBase64

@@ -10,7 +10,7 @@
     @include fluidRem(height, 10rem, 40rem);
 
     &::after {
-      content: '';
+      content: "";
       display: block;
       width: 100%;
       height: 100%;
@@ -94,7 +94,7 @@
         display: block;
 
         &::after {
-          content: '';
+          content: "";
           position: absolute;
           top: 0;
           left: 0;
@@ -106,4 +106,9 @@
       }
     }
   }
+}
+
+.listHead {
+  display: flex;
+  flex-direction: row;
 }
