@@ -21,7 +21,6 @@ const ProgramIndex = ({ data }) => {
           image="{ogImage}"
         />
         <div className="hero">
-          {/* <img src={`${AllProgramsHero}`} /> */}
           <StaticImage
             src="./../assets/all-programs-hero.jpg"
             layout="fullWidth"
@@ -32,7 +31,7 @@ const ProgramIndex = ({ data }) => {
             <button>Request information</button>
           </div>
         </div>
-        <Container constraints="center" className="intro">
+        <Container constraints="center" className="page-intro">
           <h2>Move Forward in Your Professional Career</h2>
           <p>
             Id non pellentesque ante eu mi lacus in fermentum. Vestibulum ante
@@ -70,50 +69,64 @@ const ProgramIndex = ({ data }) => {
           </ul>
         </Container>
         <CoreValues />
-        <Container data={data} schools={schools}>
-          <h2>Find Your Graduate Program</h2>
-          <p>
-            Id non pellentesque ante eu mi lacus in fermentum. Vestibulum ante
-            consequat, volutpat a lorem. Aliquet lectus velit tincidunt et
-            etiam. Enim at egestas tristique purus adipiscing ut. Adipiscing
-            varius sapien blandit ultrices scelerisque vestibulum. Consequat
-            vitae habitasse consectetur vitae maecenas. Felis, sed fermentum
-            varius integer augue libero turpis eget tristique. Morbi eget porta
-            porttitor cursus eu nunc bibendum. Posuere nunc sit ut nibh eget
-            lectus sed.
-          </p>
-          {schools.map((school) => (
-            <>
-              <h3>{school.title}</h3>
-              <ul className="schoolProgramList">
-                <div className="listHead">
-                  <div>Program</div>
-                  <div>Degree</div>
-                  <div>Learning Mode</div>
-                </div>
-                {school.program &&
-                  school.program.map((program) => (
-                    <li
-                      key={program.slug}
-                      className={`program ${program.slug}`}
-                    >
-                      <ProgramPreview program={program} />
-                    </li>
-                  ))}
-              </ul>
-            </>
-          ))}
-          <h2>***** Programs that don't have a college associated yet *****</h2>
-          <p>this is for dev work only so that you can see all the programs</p>
-          {programs.map(({ node: program }) => {
-            if (!program.relatedSchoolCollege) {
-              return (
-                <li key={program.slug}>
-                  <ProgramPreview program={program} />
-                </li>
-              );
-            }
-          })}
+        <Container
+          id="programs"
+          // data={data}
+          // schools={schools}
+        >
+          <div className="intro">
+            <div className="wrapper centered">
+              <h2>Find Your Graduate Program</h2>
+              <p>
+                Id non pellentesque ante eu mi lacus in fermentum. Vestibulum
+                ante consequat, volutpat a lorem. Aliquet lectus velit tincidunt
+                et etiam. Enim at egestas tristique purus adipiscing ut.
+                Adipiscing varius sapien blandit ultrices scelerisque
+                vestibulum. Consequat vitae habitasse consectetur vitae
+                maecenas. Felis, sed fermentum varius integer augue libero
+                turpis eget tristique. Morbi eget porta porttitor cursus eu nunc
+                bibendum. Posuere nunc sit ut nibh eget lectus sed.
+              </p>
+            </div>
+          </div>
+          <div id="programList" className="wrapper centered">
+            {schools.map((school) => (
+              <div className="programs">
+                <h3>{school.title}</h3>
+                <ul className="no-list schoolProgramList">
+                  <div className="listHead">
+                    <div>Program</div>
+                    <div>Degree</div>
+                    <div>Learning Mode</div>
+                  </div>
+                  {school.program &&
+                    school.program.map((program) => (
+                      <li
+                        key={program.slug}
+                        className={`program ${program.slug}`}
+                      >
+                        <ProgramPreview program={program} />
+                      </li>
+                    ))}
+                </ul>
+              </div>
+            ))}
+            <h2>
+              ***** Programs that don't have a college associated yet *****
+            </h2>
+            <p>
+              this is for dev work only so that you can see all the programs
+            </p>
+            {programs.map(({ node: program }) => {
+              if (!program.relatedSchoolCollege) {
+                return (
+                  <li key={program.slug}>
+                    <ProgramPreview program={program} />
+                  </li>
+                );
+              }
+            })}
+          </div>
         </Container>
       </Layout>
     </>

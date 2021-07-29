@@ -7,8 +7,10 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    @include fluidRem(height, 10rem, 40rem);
-
+    height: 25rem;
+    @media (min-width: $mq-700) {
+      @include fluidRem(height, 10rem, 40rem);
+    }
     &::after {
       content: "";
       display: block;
@@ -20,10 +22,18 @@
       z-index: 2;
       background-image: linear-gradient(
         to top,
-        rgba(black, 0.9),
-        rgba(black, 0.5),
+        rgba(black, 0.95),
+        rgba(black, 0.8),
         rgba(black, 0)
       );
+      @media (min-width: $mq-700) {
+        background-image: linear-gradient(
+          to top,
+          rgba(black, 0.95),
+          rgba(black, 0.6),
+          rgba(black, 0)
+        );
+      }
     }
 
     img,
@@ -44,15 +54,16 @@
     @extend %padding;
     max-width: $mq-1000;
     margin: 0 auto;
-    width: 90%;
+    // width: 90%;
     h1 {
       color: white;
       font-weight: 600;
     }
   }
 
-  .intro {
+  .page-intro {
     display: block;
+    @include fluidRem(padding, 2rem 3rem, 3rem 3rem);
 
     @media (min-width: $mq-700) {
       display: grid;
@@ -108,7 +119,197 @@
   }
 }
 
-.listHead {
-  display: flex;
-  flex-direction: row;
+#programs {
+  padding-top: 0;
+  overflow: hidden;
+  .intro {
+    display: block;
+    background: $c-secondary-01;
+    position: relative;
+    @include fluidRem(padding, 1rem 0 4rem, 3rem 0 4rem);
+
+    &::before {
+      content: "";
+      display: block;
+      position: absolute;
+      background: $c-secondary-01;
+      width: 100vw;
+      height: 100%;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1;
+    }
+
+    h2,
+    p {
+      position: relative;
+      z-index: 10;
+      &::after {
+        display: none;
+      }
+    }
+  }
+}
+
+#programList {
+  background: white;
+  margin-top: -4rem;
+  position: relative;
+  z-index: 10;
+
+  .programs {
+    @include fluidRem(margin-bottom, 3rem, 6rem);
+  }
+
+  h3 {
+    @extend %colorBar;
+  }
+
+  .listHead {
+    display: none;
+    @media (min-width: $mq-600) {
+      display: grid;
+      grid-template-columns: 55% 15% 30%;
+      align-items: center;
+      width: 100%;
+      border-bottom: 1px solid $c-primary-01;
+      margin-bottom: 0.5em;
+      text-transform: uppercase;
+      padding: 0.5em;
+    }
+  }
+
+  .schoolProgramList {
+    li {
+      display: block;
+      border-bottom: 1px solid darken($c-secondary-01, 5%);
+      margin: 0;
+
+      &:nth-child(odd) {
+        background: lighten($c-primary-01, 71%);
+      }
+      .container {
+        display: grid;
+        grid-template-columns: 100%;
+        align-items: center;
+
+        @media (min-width: $mq-600) {
+          grid-template-columns: 55% 15% 30%;
+        }
+
+        h4 {
+          display: block;
+          width: 100%;
+          font-weight: normal;
+          margin: 0;
+          @include fluidRem(font-size, 1rem, 1.2rem);
+          a {
+            display: block;
+            text-decoration: none;
+            padding: 0.8em 1em;
+
+            &::before {
+              content: "";
+              display: block;
+              width: 30%;
+              height: 100%;
+              opacity: 0;
+              transition: all 0.2s ease-in-out;
+              position: absolute;
+              left: 0;
+              top: 0;
+              background: lighten($c-primary-02, 38%);
+              z-index: 1;
+              pointer-events: none;
+            }
+            span {
+              position: relative;
+              z-index: 9;
+              text-decoration: underline;
+            }
+            &::after {
+              content: $i-rightArrow2;
+              font-family: $f-icons;
+              font-size: 0.6em;
+              margin-left: 1em;
+              position: relative;
+              z-index: 10;
+              transition: all 0.2s ease-out;
+            }
+
+            &:hover,
+            &:focus {
+              &::before {
+                opacity: 1;
+                width: 100%;
+              }
+              span {
+                text-decoration: none;
+              }
+              &::after {
+                content: $i-link;
+                color: $c-primary-02;
+                font-size: 0.7em;
+                margin-left: 1.3em;
+              }
+            }
+          }
+        }
+
+        .typeOfDegree {
+          display: block;
+          margin: 0;
+          position: relative;
+          z-index: 10;
+          @media (max-width: $mq-600) {
+            padding: 0 1em;
+            // border-bottom: 1px solid #dfdfdf;
+            // border-top: 1px solid #dfdfdf;
+            &::before {
+              content: "Degree:";
+              display: block;
+              font-size: 0.7em;
+              margin-bottom: 0em;
+              text-transform: uppercase;
+            }
+          }
+        }
+        .methodOfStudy {
+          display: flex;
+          flex-flow: row wrap;
+          margin: 0;
+          position: relative;
+          z-index: 10;
+
+          @media (max-width: $mq-600) {
+            padding: 1em;
+            margin-top: 0.4em;
+            &::before {
+              content: "Learning Mode:";
+              display: block;
+              font-size: 0.7em;
+              margin-bottom: 0em;
+              text-transform: uppercase;
+              position: absolute;
+              top: 0;
+            }
+          }
+
+          span {
+            &::after {
+              content: ",";
+              margin-right: 0.25em;
+            }
+
+            &:last-child {
+              &::after {
+                display: none;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }
