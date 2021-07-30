@@ -337,3 +337,76 @@
     }
   }
 }
+
+.coreValues {
+  position: relative;
+
+  .valuesButtons {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    bottom: 2rem;
+    left: 0rem;
+    padding: 0.5rem;
+    background: rgba(darken($c-primary-01, 20%), 0.9);
+    position: absolute;
+    z-index: 10;
+
+    button {
+      display: block;
+      width: 100%;
+      border-radius: 0;
+      border: 1px solid rgba(white, 0.5);
+      background: transparent;
+      padding: 0.5em 0.8em;
+      color: white;
+      margin: 0.8rem 0.4rem;
+      font-weight: normal;
+      @include fluidRem(font-size, 0.9rem, 1.5rem);
+
+      &::first-letter {
+        font-weight: bold;
+      }
+
+      &::after {
+        display: none;
+      }
+
+      &:hover {
+        color: $c-primary-02;
+        border-color: $c-primary-02;
+      }
+
+      &.active {
+        color: $c-primary-02;
+        border-color: $c-primary-02;
+      }
+    }
+  }
+
+  .gatsby-image-wrapper {
+    @include fluidRem(height, 20rem, 38rem);
+  }
+
+  .valueContent {
+    display: block;
+    background: rgba(darken($c-primary-01, 20%), 0.95);
+    @include fluidRem(padding, 1rem, 2rem);
+    width: 45%;
+    max-width: 35rem;
+    position: absolute;
+    color: white;
+    left: 2rem;
+    top: 2rem;
+
+    h3 {
+      font-weight: bold;
+      @include fluidRem(font-size, 1.3rem, 3.5rem);
+      margin-bottom: 0.3rem;
+    }
+
+    p {
+      color: white;
+    }
+  }
+}
