@@ -23,7 +23,6 @@ const ProgramIndex = ({ data }) => {
         <div className="hero">
           <StaticImage
             src="./../assets/all-programs-hero.jpg"
-            layout="fullWidth"
             placeholder="blurred"
           />
           <div className="heroContent">

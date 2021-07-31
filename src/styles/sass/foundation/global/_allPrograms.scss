@@ -340,22 +340,33 @@
 
 .coreValues {
   position: relative;
+  display: flex;
+  flex-direction: column;
 
   .valuesButtons {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     width: 100%;
-    bottom: 2rem;
-    left: 0rem;
-    padding: 0.5rem;
+    padding: 0rem 0.5rem;
     background: rgba(darken($c-primary-01, 20%), 0.9);
-    position: absolute;
+    position: relative;
     z-index: 10;
+    order: 1;
+
+    @media (min-width: $mq-800) {
+      flex-direction: row;
+      position: absolute;
+      bottom: 2rem;
+      left: 0rem;
+      z-index: 10;
+    }
 
     button {
       display: block;
       width: 100%;
       border-radius: 0;
+      flex-direction: row;
       border: 1px solid rgba(white, 0.5);
       background: transparent;
       padding: 0.5em 0.8em;
@@ -385,19 +396,35 @@
   }
 
   .gatsby-image-wrapper {
-    @include fluidRem(height, 20rem, 38rem);
+    margin: 0;
+    // position: absolute;
+    // width: 100%;
+    // height: 100%;
+    // top: 0;
+    // left: 0;
+    // z-index: 1;
+    @media (min-width: $mq-800) {
+      position: relative;
+      @include fluidRem(height, 20rem, 38rem);
+    }
   }
 
   .valueContent {
     display: block;
     background: rgba(darken($c-primary-01, 20%), 0.95);
     @include fluidRem(padding, 1rem, 2rem);
-    width: 45%;
-    max-width: 35rem;
-    position: absolute;
+    width: 100%;
     color: white;
-    left: 2rem;
-    top: 2rem;
+    position: relative;
+    z-index: 10;
+
+    @media (min-width: $mq-800) {
+      position: absolute;
+      width: 45%;
+      max-width: 35rem;
+      left: 2rem;
+      top: 2rem;
+    }
 
     h3 {
       font-weight: bold;

@@ -92,9 +92,8 @@ const CoreValues = () => {
           <div>
             <StaticImage
               src="./../../assets/all-programs-hero.jpg"
-              placeholder="Blurred"
+              // placeholder="Blurred"
               alt="Innovation image"
-              layout="fullWidth"
               as="figure"
             />
             <div className="valueContent">
