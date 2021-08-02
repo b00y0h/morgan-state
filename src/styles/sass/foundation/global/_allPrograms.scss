@@ -52,7 +52,7 @@
     z-index: 3;
     @extend %wrapper;
     @extend %padding;
-    max-width: $mq-1000;
+    max-width: $mq-1200;
     margin: 0 auto;
     // width: 90%;
     h1 {
@@ -65,9 +65,9 @@
     display: block;
     @include fluidRem(padding, 2rem 3rem, 3rem 3rem);
 
-    @media (min-width: $mq-700) {
+    @media (min-width: $mq-800) {
       display: grid;
-      grid-template-columns: 48% 48%;
+      grid-template-columns: 60% 34%;
       grid-column-gap: 4%;
       grid-template-rows: repeat(10, auto);
     }
@@ -344,75 +344,88 @@
   flex-direction: column;
 
   .valuesButtons {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    display: block;
     width: 100%;
-    padding: 0rem 0.5rem;
-    background: rgba(darken($c-primary-01, 20%), 0.9);
-    position: relative;
-    z-index: 10;
+    background: rgba(darken($c-primary-01, 20%), 1);
     order: 1;
-
     @media (min-width: $mq-800) {
-      flex-direction: row;
       position: absolute;
-      bottom: 2rem;
+      bottom: 1rem;
       left: 0rem;
+      background: rgba(darken($c-primary-01, 20%), 0.9);
       z-index: 10;
     }
 
-    button {
-      display: block;
+    .buttons-container {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: center;
       width: 100%;
-      border-radius: 0;
-      flex-direction: row;
-      border: 1px solid rgba(white, 0.5);
-      background: transparent;
-      padding: 0.5em 0.8em;
-      color: white;
-      margin: 0.8rem 0.4rem;
-      font-weight: normal;
-      @include fluidRem(font-size, 0.9rem, 1.5rem);
+      max-width: $mq-1200;
+      margin: 0 auto;
+      @include fluidRem(padding, 0rem 2rem 1rem, 0rem 0.5rem 0rem);
+      position: relative;
+      z-index: 10;
+      order: 1;
 
-      &::first-letter {
-        font-weight: bold;
+      @media (min-width: $mq-800) {
+        flex-direction: row;
+        flex-flow: row nowrap;
       }
 
-      &::after {
-        display: none;
-      }
+      button {
+        display: block;
+        width: calc(50% - 0.4rem);
+        border-radius: 0;
+        flex-direction: row;
+        border: 1px solid rgba(white, 0.5);
+        background: transparent;
+        padding: 0.5em 0.8em;
+        color: white;
+        margin: 0.4rem 0.2rem;
+        font-weight: normal;
+        @include fluidRem(font-size, 0.9rem, 1.5rem);
 
-      &:hover {
-        color: $c-primary-02;
-        border-color: $c-primary-02;
-      }
+        @media (min-width: $mq-800) {
+          width: 100%;
+          margin: 0.8rem 0.4rem;
+        }
 
-      &.active {
-        color: $c-primary-02;
-        border-color: $c-primary-02;
+        &::first-letter {
+          font-weight: bold;
+        }
+
+        &::after {
+          display: none;
+        }
+
+        &:hover {
+          color: $c-primary-02;
+          border-color: $c-primary-02;
+        }
+
+        &.active {
+          color: $c-primary-02;
+          border-color: $c-primary-02;
+        }
       }
     }
   }
 
   .gatsby-image-wrapper {
+    background: $c-primary-01;
     margin: 0;
-    // position: absolute;
-    // width: 100%;
-    // height: 100%;
-    // top: 0;
-    // left: 0;
-    // z-index: 1;
     @media (min-width: $mq-800) {
       position: relative;
-      @include fluidRem(height, 20rem, 38rem);
+      width: 100%;
+      @include fluidRem(height, 20rem, 40rem);
     }
   }
 
   .valueContent {
     display: block;
-    background: rgba(darken($c-primary-01, 20%), 0.95);
-    @include fluidRem(padding, 1rem, 2rem);
+    background: rgba(darken($c-primary-01, 20%), 1);
+    @include fluidRem(padding, 1rem 2rem, 2rem 2rem);
     width: 100%;
     color: white;
     position: relative;
@@ -421,9 +434,10 @@
     @media (min-width: $mq-800) {
       position: absolute;
       width: 45%;
-      max-width: 35rem;
+      max-width: 30rem;
       left: 2rem;
       top: 2rem;
+      background: rgba(darken($c-primary-01, 20%), 0.95);
     }
 
     h3 {

@@ -6,47 +6,49 @@ const CoreValues = () => {
   return (
     <section className="coreValues">
       <nav className="valuesButtons">
-        <button
-          onClick={() => setCoreValue("leadership")}
-          className={coreValue === "leadership" && "active"}
-        >
-          Leadership
-        </button>
+        <div className="buttons-container">
+          <button
+            onClick={() => setCoreValue("leadership")}
+            className={coreValue === "leadership" && "active"}
+          >
+            Leadership
+          </button>
 
-        <button
-          onClick={() => setCoreValue("innovation")}
-          className={coreValue === "innovation" && "active"}
-        >
-          Innovation
-        </button>
+          <button
+            onClick={() => setCoreValue("innovation")}
+            className={coreValue === "innovation" && "active"}
+          >
+            Innovation
+          </button>
 
-        <button
-          onClick={() => setCoreValue("integrity")}
-          className={coreValue === "integrity" && "active"}
-        >
-          Integrity
-        </button>
+          <button
+            onClick={() => setCoreValue("integrity")}
+            className={coreValue === "integrity" && "active"}
+          >
+            Integrity
+          </button>
 
-        <button
-          onClick={() => setCoreValue("diversity")}
-          className={coreValue === "diversity" && "active"}
-        >
-          Diversity
-        </button>
+          <button
+            onClick={() => setCoreValue("diversity")}
+            className={coreValue === "diversity" && "active"}
+          >
+            Diversity
+          </button>
 
-        <button
-          onClick={() => setCoreValue("excellence")}
-          className={coreValue === "excellence" && "active"}
-        >
-          Excellence
-        </button>
+          <button
+            onClick={() => setCoreValue("excellence")}
+            className={coreValue === "excellence" && "active"}
+          >
+            Excellence
+          </button>
 
-        <button
-          onClick={() => setCoreValue("respect")}
-          className={coreValue === "respect" && "active"}
-        >
-          Respect
-        </button>
+          <button
+            onClick={() => setCoreValue("respect")}
+            className={coreValue === "respect" && "active"}
+          >
+            Respect
+          </button>
+        </div>
       </nav>
 
       <div className="coreValueContainer">

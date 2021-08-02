@@ -40,6 +40,23 @@ const relatedProgramSettings = {
   slidesToShow: 3,
   slidesToScroll: 1,
   cssEase: "linear",
+  responsive: [
+    {
+      breakpoint: 800,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 1,
+        // initialSlide: 2,
+      },
+    },
+    {
+      breakpoint: 600,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+      },
+    },
+  ],
 };
 
 const RICHTEXT_OPTIONS = {

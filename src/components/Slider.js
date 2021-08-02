@@ -1,8 +1,8 @@
-import React from 'react'
-import Slider from 'react-slick'
-import 'slick-carousel/slick/slick.css'
-import 'slick-carousel/slick/slick-theme.css'
-import { GatsbyImage as Img } from 'gatsby-plugin-image'
+import React from "react";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import { GatsbyImage as Img } from "gatsby-plugin-image";
 
 const ImageSlider = ({ data, settings, className }) => {
   const internalSettings = {
@@ -28,20 +28,27 @@ const ImageSlider = ({ data, settings, className }) => {
       },
     ],
     ...settings,
-  }
+  };
   return (
     <Slider className={className} {...internalSettings}>
-      {data.map(item => {
+      {data.map((item) => {
         return (
           <div className="slick-slide-content" key={item.id}>
-            {item.image && <Img image={item.image.gatsbyImageData} alt={item.image.title} />}
+            {item.image && (
+              <Img
+                image={item.image.gatsbyImageData}
+                alt={item.image.title}
+                as="figure"
+              />
+            )}
             <div className="slick-caption">
               <h4>{item.title}</h4>
               <p>{item.description}</p>
             </div>
           </div>
-      )})}
+        );
+      })}
     </Slider>
-  )
-}
-export default ImageSlider
+  );
+};
+export default ImageSlider;
