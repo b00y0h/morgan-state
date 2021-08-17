@@ -1,9 +1,8 @@
-import React from 'react';
-
-const ProgramStat = (props) => (
+// TODO: Fix size styling when there's a range of numbers
+const ProgramStat = ({ stat, description }) => (
   <div className="programStat">
-    <span>{props.stat}</span>
-    {props.description}
+    <span>{stat}</span>
+    {description}
   </div>
 );
 
