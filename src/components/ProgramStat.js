@@ -1,9 +1,9 @@
 import React from 'react';
 
-const ProgramStat = (props) => (
+const ProgramStat = ({ stat, description }) => (
   <div className="programStat">
-    <span>{props.stat}</span>
-    {props.description}
+    <span>{stat}</span>
+    {description}
   </div>
 );
 

@@ -205,7 +205,7 @@
   display: block;
   display: grid;
 
-  @media (min-width: $mq-800) {
+  @media (min-width: $mq-700) {
     $_columnWidth: calc(12.5% - 1.75rem);
     display: grid;
     grid-template-columns: repeat(8, $_columnWidth);
@@ -215,18 +215,21 @@
 
   img,
   .gatsby-image-wrapper {
-    width: 10rem;
+    width: 100%;
+    max-height: 20rem;
     margin-bottom: 2rem;
-    @media (min-width: $mq-800) {
+    @media (min-width: $mq-700) {
       grid-column-start: 1;
-      grid-column-end: 3;
+      grid-column-end: 5;
       grid-row-start: 1;
-      grid-row-end: last;
-      width: auto;
+      grid-row-end: 5;
+      width: auto !important;
+      max-height: initial !important;
     }
     @media (min-width: $mq-800) {
       grid-column-start: 1;
       grid-column-end: 4;
+      grid-row-end: last;
     }
     @media (min-width: $mq-1000) {
       grid-column-start: 1;
@@ -242,7 +245,7 @@
   ul,
   p {
     @media (min-width: $mq-700) {
-      grid-column-start: 3;
+      grid-column-start: 5;
       grid-column-end: 9;
     }
     @media (min-width: $mq-800) {
