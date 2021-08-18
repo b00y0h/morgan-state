@@ -82,7 +82,7 @@ const ProgramTemplate = ({ data, pageContext }) => {
     description,
     availableMethodsOfStudy,
     creditHours,
-    monthsToComplete,
+    monthsToCompleteRange,
     programTracks,
     typeOfDegree,
     whyMorganStateStats,
@@ -155,7 +155,7 @@ const ProgramTemplate = ({ data, pageContext }) => {
               Take the next step in your academic and professional career with Morgan State.{' '}
               <strong>Pursue your future&mdash;today.</strong>
             </p>
-            <button>Request Information</button>
+            <button type="button">Request Information</button>
           </div>
         </Container>
       </div>
@@ -186,7 +186,7 @@ const ProgramTemplate = ({ data, pageContext }) => {
               you're ready to learn valuable skills for a more rewarding career, why wait?{' '}
               <strong>Request more information today</strong> and we'll reach out to you with all the details you need.
             </p>
-            <button>Request Information</button>
+            <button type="button">Request Information</button>
           </div>
         </Container>
       </div>
@@ -223,7 +223,7 @@ const ProgramTemplate = ({ data, pageContext }) => {
         <div className="programIntro">{metaDescription && <p>{metaDescription.metaDescription}</p>}</div>
         <div className="programStats">
           {creditHours && <ProgramStat stat={creditHours} description="Credit Hours" />}
-          {monthsToComplete && <ProgramStat stat={monthsToComplete} description="Months to Complete" />}
+          {monthsToCompleteRange && <ProgramStat stat={monthsToCompleteRange} description="Months to Complete" />}
           {programTracks && <ProgramStat stat={programTracks} description="Program Tracks" />}
         </div>
       </Container>
@@ -336,7 +336,7 @@ export const query = graphql`
       }
       availableMethodsOfStudy
       creditHours
-      monthsToComplete
+      monthsToCompleteRange
       programTracks
       programDetailUrl
       thumbnail {

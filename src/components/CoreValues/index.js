@@ -1,50 +1,56 @@
-import React, { useState } from "react";
-import { GatsbyImage, StaticImage } from "gatsby-plugin-image";
+import React, { useState } from 'react';
+import { GatsbyImage, StaticImage } from 'gatsby-plugin-image';
 
 const CoreValues = () => {
-  const [coreValue, setCoreValue] = useState("leadership");
+  const [coreValue, setCoreValue] = useState('leadership');
   return (
     <section className="coreValues">
       <nav className="valuesButtons">
         <div className="buttons-container">
           <button
-            onClick={() => setCoreValue("leadership")}
-            className={coreValue === "leadership" && "active"}
+            type="button"
+            onClick={() => setCoreValue('leadership')}
+            className={coreValue === 'leadership' ? 'active' : undefined}
           >
             Leadership
           </button>
 
           <button
-            onClick={() => setCoreValue("innovation")}
-            className={coreValue === "innovation" && "active"}
+            type="button"
+            onClick={() => setCoreValue('innovation')}
+            className={coreValue === 'innovation' ? 'active' : undefined}
           >
             Innovation
           </button>
 
           <button
-            onClick={() => setCoreValue("integrity")}
-            className={coreValue === "integrity" && "active"}
+            type="button"
+            onClick={() => setCoreValue('integrity')}
+            className={coreValue === 'integrity' ? 'active' : undefined}
           >
             Integrity
           </button>
 
           <button
-            onClick={() => setCoreValue("diversity")}
-            className={coreValue === "diversity" && "active"}
+            type="button"
+            onClick={() => setCoreValue('diversity')}
+            className={coreValue === 'diversity' ? 'active' : undefined}
           >
             Diversity
           </button>
 
           <button
-            onClick={() => setCoreValue("excellence")}
-            className={coreValue === "excellence" && "active"}
+            type="button"
+            onClick={() => setCoreValue('excellence')}
+            className={coreValue === 'excellence' ? 'active' : undefined}
           >
             Excellence
           </button>
 
           <button
-            onClick={() => setCoreValue("respect")}
-            className={coreValue === "respect" && "active"}
+            type="button"
+            onClick={() => setCoreValue('respect')}
+            className={coreValue === 'respect' ? 'active' : undefined}
           >
             Respect
           </button>
@@ -52,7 +58,7 @@ const CoreValues = () => {
       </nav>
 
       <div className="coreValueContainer">
-        {coreValue === "leadership" && (
+        {coreValue === 'leadership' && (
           <>
             <StaticImage
               src="./../../assets/leadership.jpg"
@@ -60,19 +66,18 @@ const CoreValues = () => {
               alt="Innovation image"
               layout="fullWidth"
               as="figure"
-              height={500}
+              // height={500}
             />
             <div className="valueContent">
               <h3>Be a Leader</h3>
               <p className="description">
-                In 2019, we produced the most Fullbright Scholars of any HBCU,
-                and we continue to lead the way for awarding advanced degrees to
-                African Americans.
+                In 2019, we produced the most Fullbright Scholars of any HBCU, and we continue to lead the way for
+                awarding advanced degrees to African Americans.
               </p>
             </div>
           </>
         )}
-        {coreValue === "innovation" && (
+        {coreValue === 'innovation' && (
           <>
             <StaticImage
               src="./../../assets/innovation.jpg"
@@ -84,13 +89,13 @@ const CoreValues = () => {
             <div className="valueContent">
               <h3>Be Creative</h3>
               <p className="description">
-                With more than 50 academic programs leading to graduate degrees,
-                you’ll get the chance to study your true passions.
+                With more than 50 academic programs leading to graduate degrees, you’ll get the chance to study your
+                true passions.
               </p>
             </div>
           </>
         )}
-        {coreValue === "integrity" && (
+        {coreValue === 'integrity' && (
           <div>
             <StaticImage
               src="./../../assets/all-programs-hero.jpg"
@@ -101,8 +106,8 @@ const CoreValues = () => {
             <div className="valueContent">
               <h3>Be Real</h3>
               <p className="description">
-                With more than 50 academic programs leading to graduate degrees,
-                you’ll get the chance to study your true passions.
+                With more than 50 academic programs leading to graduate degrees, you’ll get the chance to study your
+                true passions.
               </p>
             </div>
           </div>

@@ -1,12 +1,12 @@
-import React from "react";
-import { graphql } from "gatsby";
-import SEO from "../components/SEO";
-import Layout from "../components/Layout";
-import Container from "../components/Container";
-import ProgramPreview from "../components/ProgramPreview";
-import "../styles/sass/styles.scss";
-import { StaticImage } from "gatsby-plugin-image";
-import CoreValues from "../components/CoreValues";
+import React from 'react';
+import { graphql } from 'gatsby';
+import { StaticImage } from 'gatsby-plugin-image';
+import SEO from '../components/SEO';
+import Layout from '../components/Layout';
+import Container from '../components/Container';
+import ProgramPreview from '../components/ProgramPreview';
+import '../styles/sass/styles.scss';
+import CoreValues from '../components/CoreValues';
 
 const ProgramIndex = ({ data }) => {
   const schools = data.allContentfulPartner.edges[0].node.school;
@@ -15,43 +15,31 @@ const ProgramIndex = ({ data }) => {
   return (
     <>
       <Layout className="allPrograms">
-        <SEO
-          title={data.site.siteMetadata.title}
-          description={data.site.siteMetadata.description}
-          image="{ogImage}"
-        />
+        <SEO title={data.site.siteMetadata.title} description={data.site.siteMetadata.description} image="{ogImage}" />
         <div className="hero">
-          <StaticImage
-            src="./../assets/all-programs-hero.jpg"
-            placeholder="blurred"
-          />
+          <StaticImage src="./../assets/all-programs-hero.jpg" placeholder="blurred" alt="Morgan State Programs" />
           <div className="heroContent">
             <h1>Discover Graduate Programs at Morgan State</h1>
-            <button>Request information</button>
+            <button type="submit">Request information</button>
           </div>
         </div>
         <Container constraints="center" className="page-intro">
           <h2>Growing the Future, Leading the World</h2>
           <p>
-            The School of Graduate Studies at Morgan State University will
-            prepare you to be competitive in the real world. If you’re looking
-            for professors who care, a world-class education, and hands-on
-            experiences that grow your career, Morgan State is it. From 1964 to
-            now, we’ve created a community of high-achieving scholars that lead
-            the way in research, service, and their careers.
+            The School of Graduate Studies at Morgan State University will prepare you to be competitive in the real
+            world. If you’re looking for professors who care, a world-class education, and hands-on experiences that
+            grow your career, Morgan State is it. From 1964 to now, we’ve created a community of high-achieving scholars
+            that lead the way in research, service, and their careers.
           </p>
           <p>
-            With our flexible, multidisciplinary programs in both STEM and
-            non-STEM fields, we give students like you the foundation for
-            success. You’ll collaborate closely with your professors and peers,
-            all while gaining expertise in your field. Engage in impactful
-            research, career-minded internships, and other rewarding learning
-            opportunities that shape your future.
+            With our flexible, multidisciplinary programs in both STEM and non-STEM fields, we give students like you
+            the foundation for success. You’ll collaborate closely with your professors and peers, all while gaining
+            expertise in your field. Engage in impactful research, career-minded internships, and other rewarding
+            learning opportunities that shape your future.
           </p>
           <p>
-            Get the education you need for today’s most sought-after jobs and
-            careers. At Morgan, we’ll support your growth and show you that the
-            sky’s the limit.
+            Get the education you need for today’s most sought-after jobs and careers. At Morgan, we’ll support your
+            growth and show you that the sky’s the limit.
           </p>
           <ul className="square">
             <li>Improve your skills</li>
@@ -66,19 +54,16 @@ const ProgramIndex = ({ data }) => {
             <div className="wrapper centered">
               <h2>Find Your Graduate Program</h2>
               <p>
-                With more than 50 programs leading to graduate degrees, you can
-                study what really matters. Whether you’re pursuing an MA or MS,
-                a specialized Master’s degree, or a PhD, a Morgan State
-                education delivers results. Get the experience of a lifetime
-                that combines academic enhancement with professional growth.
-                Explore our wide range of graduate programs offered on campus
-                and online.
+                With more than 50 programs leading to graduate degrees, you can study what really matters. Whether
+                you’re pursuing an MA or MS, a specialized Master’s degree, or a PhD, a Morgan State education delivers
+                results. Get the experience of a lifetime that combines academic enhancement with professional growth.
+                Explore our wide range of graduate programs offered on campus and online.
               </p>
             </div>
           </div>
           <div id="programList" className="wrapper centered">
             {schools.map((school) => (
-              <div className="programs">
+              <div className="programs" key={school.id}>
                 <h3>{school.title}</h3>
                 <ul className="no-list schoolProgramList">
                   <div className="listHead">
@@ -88,22 +73,15 @@ const ProgramIndex = ({ data }) => {
                   </div>
                   {school.program &&
                     school.program.map((program) => (
-                      <li
-                        key={program.slug}
-                        className={`program ${program.slug}`}
-                      >
+                      <li key={program.slug} className={`program ${program.slug}`}>
                         <ProgramPreview program={program} />
                       </li>
                     ))}
                 </ul>
               </div>
             ))}
-            <h3>
-              ***** Programs that don't have a college associated yet *****
-            </h3>
-            <p>
-              this is for dev work only so that you can see all the programs
-            </p>
+            <h3>***** Programs that don't have a college associated yet *****</h3>
+            <p>this is for dev work only so that you can see all the programs</p>
             <ul>
               {programs.map(({ node: program }) => {
                 if (!program.relatedSchoolCollege) {
@@ -120,11 +98,10 @@ const ProgramIndex = ({ data }) => {
         <Container className="ctaSection">
           <div className="ctaContent narrow">
             <p>
-              Take the next step in your academic and professional career with a
-              graduate degree from Morgan State.{" "}
+              Take the next step in your academic and professional career with a graduate degree from Morgan State.{' '}
               <strong>Pursue your future&mdash;today.</strong>
             </p>
-            <button>Request Information</button>
+            <button type="submit">Request Information</button>
           </div>
         </Container>
       </Layout>
@@ -148,6 +125,7 @@ export const pageQuery = graphql`
           name
           id
           school {
+            id
             title
             program {
               fullProgramName
@@ -160,22 +138,13 @@ export const pageQuery = graphql`
       }
     }
 
-    allContentfulProgram(
-      filter: {
-        partner: { id: { eq: "ecd6a28f-36c2-5596-a5f1-e03afa6e09ed" } }
-      }
-    ) {
+    allContentfulProgram(filter: { partner: { id: { eq: "2b6a7fff-8086-59de-8b43-a5491b1fca0f" } } }) {
       edges {
         node {
           fullProgramName
           slug
           availableMethodsOfStudy
           typeOfDegree
-          heroImage {
-            fluid(maxWidth: 350, maxHeight: 196, resizingBehavior: SCALE) {
-              ...GatsbyContentfulFluid_withWebp_noBase64
-            }
-          }
           relatedSchoolCollege {
             id
           }

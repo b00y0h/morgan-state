@@ -1,5 +1,18 @@
 {
   "emmet.includeLanguages": {
     "javascript": "javascriptreact"
-  }
+  },
+  "[javascriptreact]": {
+    // "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.formatOnSave": false,
+  },
+  "[javascript]": {
+    // "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.formatOnSave": false,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true
+  },
 }

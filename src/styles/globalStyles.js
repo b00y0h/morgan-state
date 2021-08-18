@@ -1,4 +1,4 @@
-import { css } from '@emotion/css'
+import { css } from '@emotion/css';
 
 export const globalStyles = css`
   /* http://meyerweb.com/eric/tools/css/reset/
@@ -208,4 +208,4 @@ export const globalStyles = css`
   body:not(.user-is-tabbing) a:focus {
     outline: none;
   }
-`
+`;
