@@ -104,7 +104,7 @@
 }
 
 .cols {
-  & > .gatsby-image-wrapper {
+  & > .gatsby-image-wrapper picture img {
     box-shadow: -0.5em 0.5em 0 $c-primary-02;
     @media (min-width: $mq-700) {
       box-shadow: -0.8em 0.8em 0 $c-primary-02;
@@ -175,7 +175,6 @@
   }
 
   &.one-row {
-    // flex-flow: row wrap;
     li {
       @media (min-width: $mq-500) {
         width: calc(50% - 2em);
@@ -213,27 +212,22 @@
     column-gap: 2rem;
   }
 
-  img,
   .gatsby-image-wrapper {
     width: 100%;
-    max-height: 20rem;
     margin-bottom: 2rem;
+    overflow: visible;
     @media (min-width: $mq-700) {
       grid-column-start: 1;
       grid-column-end: 5;
       grid-row-start: 1;
-      grid-row-end: 5;
+      grid-row-end: last;
       width: auto !important;
       max-height: initial !important;
     }
-    @media (min-width: $mq-800) {
-      grid-column-start: 1;
-      grid-column-end: 4;
-      grid-row-end: last;
-    }
-    @media (min-width: $mq-1000) {
-      grid-column-start: 1;
-      grid-column-end: 5;
+    img {
+      @media (max-width: $mq-1000) {
+        @include fluidRem(height, 15rem, 30rem);
+      }
     }
   }
 
@@ -247,14 +241,7 @@
     @media (min-width: $mq-700) {
       grid-column-start: 5;
       grid-column-end: 9;
-    }
-    @media (min-width: $mq-800) {
-      grid-column-start: 4;
-      grid-column-end: 9;
-    }
-    @media (min-width: $mq-1000) {
-      grid-column-start: 5;
-      grid-column-end: 9;
+      grid-auto-rows: initial;
     }
   }
 }
@@ -264,14 +251,6 @@
     img,
     .gatsby-image-wrapper {
       @media (min-width: $mq-700) {
-        grid-column-start: 7;
-        grid-column-end: 9;
-      }
-      @media (min-width: $mq-800) {
-        grid-column-start: 6;
-        grid-column-end: 9;
-      }
-      @media (min-width: $mq-1000) {
         grid-column-start: 5;
         grid-column-end: 9;
       }
@@ -285,14 +264,6 @@
     ul,
     p {
       @media (min-width: $mq-700) {
-        grid-column-start: 1;
-        grid-column-end: 7;
-      }
-      @media (min-width: $mq-800) {
-        grid-column-start: 1;
-        grid-column-end: 6;
-      }
-      @media (min-width: $mq-1000) {
         grid-column-start: 1;
         grid-column-end: 5;
       }
