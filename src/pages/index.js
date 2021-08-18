@@ -17,7 +17,7 @@ const ProgramIndex = ({ data }) => {
       <Layout className="allPrograms">
         <SEO title={data.site.siteMetadata.title} description={data.site.siteMetadata.description} image="{ogImage}" />
         <div className="hero">
-          <StaticImage src="./../assets/all-programs-hero.jpg" placeholder="blurred" />
+          <StaticImage src="./../assets/all-programs-hero.jpg" placeholder="blurred" alt="Morgan State Programs" />
           <div className="heroContent">
             <h1>Discover Graduate Programs at Morgan State</h1>
             <button type="submit">Request information</button>
@@ -63,7 +63,7 @@ const ProgramIndex = ({ data }) => {
           </div>
           <div id="programList" className="wrapper centered">
             {schools.map((school) => (
-              <div className="programs">
+              <div className="programs" key={school.id}>
                 <h3>{school.title}</h3>
                 <ul className="no-list schoolProgramList">
                   <div className="listHead">
@@ -125,6 +125,7 @@ export const pageQuery = graphql`
           name
           id
           school {
+            id
             title
             program {
               fullProgramName
@@ -137,18 +138,13 @@ export const pageQuery = graphql`
       }
     }
 
-    allContentfulProgram(filter: { partner: { id: { eq: "ecd6a28f-36c2-5596-a5f1-e03afa6e09ed" } } }) {
+    allContentfulProgram(filter: { partner: { id: { eq: "2b6a7fff-8086-59de-8b43-a5491b1fca0f" } } }) {
       edges {
         node {
           fullProgramName
           slug
           availableMethodsOfStudy
           typeOfDegree
-          heroImage {
-            fluid(maxWidth: 350, maxHeight: 196, resizingBehavior: SCALE) {
-              ...GatsbyContentfulFluid_withWebp_noBase64
-            }
-          }
           relatedSchoolCollege {
             id
           }

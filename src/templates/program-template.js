@@ -155,7 +155,7 @@ const ProgramTemplate = ({ data, pageContext }) => {
               Take the next step in your academic and professional career with Morgan State.{' '}
               <strong>Pursue your future&mdash;today.</strong>
             </p>
-            <button>Request Information</button>
+            <button type="button">Request Information</button>
           </div>
         </Container>
       </div>
@@ -186,7 +186,7 @@ const ProgramTemplate = ({ data, pageContext }) => {
               you're ready to learn valuable skills for a more rewarding career, why wait?{' '}
               <strong>Request more information today</strong> and we'll reach out to you with all the details you need.
             </p>
-            <button>Request Information</button>
+            <button type="button">Request Information</button>
           </div>
         </Container>
       </div>
