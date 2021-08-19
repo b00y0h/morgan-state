@@ -128,15 +128,17 @@ const ProgramTemplate = ({ data, pageContext }) => {
   const [pos, setPos] = useState('top');
 
   useEffect(() => {
-    document.addEventListener('scroll', (e) => {
-      const scrolled = document.scrollingElement.scrollTop;
-      if (scrolled >= 1150) {
-        setPos('sticky');
-      } else {
-        setPos('top');
-      }
-    }),
-      [];
+    function scrollTracker() {
+      document.addEventListener('scroll', () => {
+        const scrolled = document.scrollingElement.scrollTop;
+        if (scrolled >= 1150) {
+          setPos('sticky');
+        } else {
+          setPos('top');
+        }
+      });
+    }
+    scrollTracker();
   });
 
   const statsCardsAmount = whyMorganStateStats && whyMorganStateStats.length;
@@ -228,16 +230,7 @@ const ProgramTemplate = ({ data, pageContext }) => {
         </div>
       </Container>
 
-      <CtaSectionTop
-        onEnterViewport={() => {
-          console.log('enter trigger');
-          // ChangeClass()
-        }}
-        onLeaveViewport={() => {
-          console.log('leave trigger');
-          // ChangeClass()
-        }}
-      />
+      <CtaSectionTop />
 
       <Container className="cols" constraints="center">
         <Group className="programDescription cols">
