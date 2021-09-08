@@ -53,8 +53,9 @@ module.exports = {
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-sass',
     `gatsby-plugin-catch-links`,
-    `gatsby-plugin-image`,
-    `gatsby-plugin-sharp`,
+    'gatsby-plugin-image',
+    'gatsby-plugin-sharp',
+    'gatsby-transformer-remark',
     {
       resolve: 'gatsby-source-contentful',
       options: contentfulConfig,

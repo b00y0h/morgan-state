@@ -5,6 +5,7 @@ import { GatsbyImage as Img } from 'gatsby-plugin-image';
 
 import { renderRichText } from 'gatsby-source-contentful/rich-text';
 
+import getContentfulModules from 'utils/getContentfulModules';
 import { BLOCKS, INLINES } from '@contentful/rich-text-types';
 import handleViewport from 'react-in-viewport';
 import Layout from '../components/Layout';
@@ -277,7 +278,8 @@ const ProgramTemplate = ({ data, pageContext }) => {
         {testimonial && (
           <Testimonial
             image={testimonial.image}
-            quote={renderRichText(testimonial.quote, RICHTEXT_OPTIONS)}
+            quote={testimonial.quoteBlock.quoteBlock}
+            // quote={renderRichText(testimonial.quote, RICHTEXT_OPTIONS)}
             author={testimonial.author}
           />
         )}
@@ -402,8 +404,8 @@ export const query = graphql`
       }
       testimonial {
         author
-        quote {
-          raw
+        quoteBlock {
+          quoteBlock
         }
         image {
           gatsbyImageData(layout: CONSTRAINED, placeholder: BLURRED, width: 800)

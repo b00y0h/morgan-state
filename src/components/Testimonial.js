@@ -1,6 +1,6 @@
-import React from 'react'
-import styled from '@emotion/styled'
-import { GatsbyImage as Img } from 'gatsby-plugin-image'
+import React from 'react';
+import styled from '@emotion/styled';
+import { GatsbyImage as Img } from 'gatsby-plugin-image';
 
 const Quote = styled.blockquote`
   position: relative;
@@ -14,21 +14,21 @@ const Quote = styled.blockquote`
   @media screen and (min-width: ${(props) => props.theme.responsive.medium}) {
     flex: ${(props) => (props.featured ? '0 0 100%' : '0 0 32%')};
   }
-`
+`;
 
 const Author = styled.figcaption`
   font-size: 1.5em;
   font-weight: 600;
   text-transform: capitalize;
   margin: 1rem 1rem 0.5rem 1rem;
-`
+`;
 
 const Testimonial = ({ quote, author, image, ...props }) => (
   <>
     {quote && (
       <figure className="testimonial">
         <Quote>
-          <Img image={image.gatsbyImageData} alt={image.title} />
+          {image && <Img image={image.gatsbyImageData} alt={image.title} />}
           <div className="description">
             {quote}
             <Author>- {author}</Author>
@@ -37,6 +37,6 @@ const Testimonial = ({ quote, author, image, ...props }) => (
       </figure>
     )}
   </>
-)
+);
 
-export default Testimonial
+export default Testimonial;
