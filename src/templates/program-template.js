@@ -182,10 +182,10 @@ const ProgramTemplate = ({ data, pageContext }) => {
               Discover the {typeOfDegree} in {fullProgramName}
             </h3>
             <p>
-              Find meaningful success-both personally and professionally-width the{' '}
+              Find meaningful success—both personally and professionally—with the{' '}
               {availableMethodsOfStudy && availableMethodsOfStudy.join(' or ')} {typeOfDegree} in {fullProgramName}. If
-              you're ready to learn valuable skills for a more rewarding career, why wait?{' '}
-              <strong>Request more information today</strong> and we'll reach out to you with all the details you need.
+              you’re ready to learn valuable skills for a more rewarding career, why wait?{' '}
+              <strong>Request more information today</strong> and we’ll reach out to you with all the details.
             </p>
             <button type="button">Request Information</button>
           </div>
