@@ -5,7 +5,6 @@ import { GatsbyImage as Img } from 'gatsby-plugin-image';
 
 import { renderRichText } from 'gatsby-source-contentful/rich-text';
 
-import getContentfulModules from 'utils/getContentfulModules';
 import { BLOCKS, INLINES } from '@contentful/rich-text-types';
 import handleViewport from 'react-in-viewport';
 import Layout from '../components/Layout';
@@ -21,6 +20,7 @@ import ImageSlider from '../components/Slider';
 import ProgramStat from '../components/ProgramStat';
 
 import StatCard from '../components/StatCard';
+import StatBlock from '../components/content-modules/StatBlock';
 import Group from '../components/common/Container/Group';
 
 const carouselSettings = {
@@ -248,11 +248,9 @@ const ProgramTemplate = ({ data, pageContext }) => {
       <Container id="whyMorganState" className="drkbg">
         <Container constraints="center">
           <h2>Why Morgan State?</h2>
+          {console.log('whymorganstatestats', whyMorganStateStats)}
           <CardList rows={`${statsCardsAmount <= 4 ? 'one-row' : 'two-rows'}`}>
-            {whyMorganStateStats &&
-              whyMorganStateStats.map((node) => (
-                <StatCard key={node.id} description={node.description} statisticImage={node.statisticImage} />
-              ))}
+            {whyMorganStateStats && whyMorganStateStats.map((node) => <StatBlock data={node} />)}
           </CardList>
         </Container>
       </Container>
@@ -348,16 +346,22 @@ export const query = graphql`
       }
       typeOfDegree
       whyMorganStateStats {
-        title
-        id
-        description {
-          raw
-        }
-        statisticImage {
-          title
-          gatsbyImageData(layout: CONSTRAINED, placeholder: BLURRED, width: 400)
+        ... on ContentfulStatBlocks {
+          internal {
+            type
+          }
+          statisticImage {
+            gatsbyImageData(layout: CONSTRAINED, placeholder: BLURRED, width: 400)
+          }
+          statistic {
+            id
+            childMarkdownRemark {
+              html
+            }
+          }
         }
       }
+
       programDetailUrl
       skillsAndJobs {
         raw

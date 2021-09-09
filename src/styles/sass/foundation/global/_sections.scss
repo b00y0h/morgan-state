@@ -158,10 +158,6 @@
       display: none;
     }
 
-    h3 {
-      display: none;
-    }
-
     h6 {
       @include fluidRem(font-size, 3rem, 6rem);
       line-height: 1;
