@@ -11,7 +11,14 @@ import CoreValues from '../components/CoreValues';
 const ProgramIndex = ({ data }) => {
   const schools = data.allContentfulPartner.edges[0].node.school;
   const programs = data.allContentfulProgram.edges;
-
+  console.log('schools 👩🏼‍🏫', schools);
+  const filterUnwanted = (arr) => {
+    const required = arr.filter((el) => el.program);
+    return required;
+  };
+  // remove the schools that don't have any programs
+  const filteredSchools = filterUnwanted(schools);
+  // console.log('filtered 🤽🏼‍♂️', filterUnwanted(schools));
   return (
     <>
       <Layout className="allPrograms">
@@ -62,7 +69,7 @@ const ProgramIndex = ({ data }) => {
             </div>
           </div>
           <div id="programList" className="wrapper centered">
-            {schools.map((school) => (
+            {filteredSchools.map((school) => (
               <div className="programs" key={school.id}>
                 <h3>{school.title}</h3>
                 <ul className="no-list schoolProgramList">
@@ -80,7 +87,7 @@ const ProgramIndex = ({ data }) => {
                 </ul>
               </div>
             ))}
-            <h3>***** Programs that don't have a college associated yet *****</h3>
+            {/* <h3>***** Programs that don't have a college associated yet *****</h3>
             <p>this is for dev work only so that you can see all the programs</p>
             <ul>
               {programs.map(({ node: program }) => {
@@ -92,7 +99,7 @@ const ProgramIndex = ({ data }) => {
                   );
                 }
               })}
-            </ul>
+            </ul> */}
           </div>
         </Container>
         <Container className="ctaSection">
