@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'gatsby';
-import { useSiteMetadata } from '../hooks/use-site-metadata';
+import { useSiteMetadata } from '../hooks/UseSiteMetadata';
 
 const activeLinkStyle = {
   color: 'white',
