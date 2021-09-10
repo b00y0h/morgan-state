@@ -19,7 +19,7 @@ const StatSource = ({ data }) => {
 };
 
 function StatBlock({ data }) {
-  console.log('data in statblock', data);
+  // console.log('data in statblock', data);
   const { source, statisticImage, statistic } = data;
   return (
     <li className={`col-30 ${statisticImage ? 'graphicStat' : 'textStat'}`}>

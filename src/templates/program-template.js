@@ -231,11 +231,11 @@ const ProgramTemplate = ({ data, pageContext }) => {
 
       <CtaSectionTop
         onEnterViewport={() => {
-          console.log('enter trigger');
+          // console.log('enter trigger');
           // ChangeClass()
         }}
         onLeaveViewport={() => {
-          console.log('leave trigger');
+          // console.log('leave trigger');
           // ChangeClass()
         }}
       />
@@ -248,7 +248,6 @@ const ProgramTemplate = ({ data, pageContext }) => {
       <Container id="whyMorganState" className="drkbg">
         <Container constraints="center">
           <h2>Why Morgan State?</h2>
-          {console.log('whymorganstatestats', whyMorganStateStats)}
           <CardList rows={`${statsCardsAmount <= 4 ? 'one-row' : 'two-rows'}`}>
             {whyMorganStateStats && whyMorganStateStats.map((node) => <StatBlock data={node} />)}
           </CardList>

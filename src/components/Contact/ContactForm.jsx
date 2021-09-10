@@ -1,20 +1,20 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable jsx-a11y/label-has-for */
-import React from 'react'
-import styled from 'styled-components'
-import { Formik, Form, ErrorMessage, useField } from 'formik'
-import * as Yup from 'yup'
-import MaskedInput from 'react-text-mask'
+import React from 'react';
+import styled from 'styled-components';
+import { Formik, Form, ErrorMessage, useField } from 'formik';
+import * as Yup from 'yup';
+import MaskedInput from 'react-text-mask';
 
-import { Button, StyledInput, StyledSelect } from 'components/common'
-import { Error, Center, InputField } from './styles'
-import { Debug } from './Debug'
+import { Button, StyledInput, StyledSelect } from 'components/common';
+import { Error, Center, InputField } from './styles';
+import { Debug } from './Debug';
 
 const TextInput = ({ label, ...props }) => {
   // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
   // which we can spread on <input> and alse replace ErrorMessage entirely.
-  const [field, meta] = useField(props)
-  const { id, name } = props
+  const [field, meta] = useField(props);
+  const { id, name } = props;
   return (
     <>
       <label htmlFor={id || name}>
@@ -25,8 +25,8 @@ const TextInput = ({ label, ...props }) => {
 
       {/* {meta.touched && meta.error ? <div className="error">{meta.error}</div> : null} */}
     </>
-  )
-}
+  );
+};
 
 // Styled components ....
 
@@ -42,17 +42,17 @@ const StyledErrorMessage = styled.div`
   @media (prefers-color-scheme: dark) {
     color: var(--red-300);
   }
-`
+`;
 
 const StyledLabel = styled.label`
   margin-top: 1rem;
-`
+`;
 
 const MultiSelect = ({ label, ...props }) => {
   // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
   // which we can spread on <input> and alse replace ErrorMessage entirely.
-  const [field, meta] = useField(props)
-  const { id, name } = props
+  const [field, meta] = useField(props);
+  const { id, name } = props;
   return (
     <>
       <StyledLabel htmlFor={id || name}>{label}</StyledLabel>
@@ -60,20 +60,20 @@ const MultiSelect = ({ label, ...props }) => {
       {/* {meta.touched && meta.error ? <StyledErrorMessage>{meta.error}</StyledErrorMessage> : null} */}
       <ErrorMessage component={Error} name={name} />
     </>
-  )
-}
+  );
+};
 
-const phoneNumberMask = [/[1-9]/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]
+const phoneNumberMask = [/[1-9]/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
 
 // encoding required for netlify to correctly capture data
 const encode = (data) =>
   Object.keys(data)
     .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`)
-    .join('&')
+    .join('&');
 
 const ContactForm = (props) => {
-  const { campaign, program, sendToUrl } = props
-  console.log('program', program)
+  const { campaign, program, sendToUrl } = props;
+  // console.log('program', program)
   return (
     <Formik
       initialValues={{
@@ -91,14 +91,14 @@ const ContactForm = (props) => {
         Email: Yup.string().email('Invalid email').required('Your email address is required'),
       })}
       onSubmit={(values, actions) => {
-        actions.setFieldValue(values.Campaign, campaign)
-        actions.setFieldValue(values.Program, program)
+        actions.setFieldValue(values.Campaign, campaign);
+        actions.setFieldValue(values.Program, program);
         const payload = {
           ...values,
           Campaign: campaign,
           Program: program,
-        } // Construct the new payload
-        actions.setValues(payload)
+        }; // Construct the new payload
+        actions.setValues(payload);
         // console.log('payloadpayloadpayload', payload);
         // console.log('valuesvaluesvalues', values);
         fetch('/?no-cache=1', {
@@ -108,18 +108,18 @@ const ContactForm = (props) => {
         })
           .then(() => {
             // alert('Success');
-            actions.setFieldValue('success', true)
+            actions.setFieldValue('success', true);
             // alert(JSON.stringify(payload, null, 2));
             // alert(encode({ 'form-name': 'unlv-contact', ...payload }));
             // actions.resetForm();
             // navigate('/continue');
           })
           .catch(() => {
-            actions.setSubmitting(false)
-            actions.setFieldValue('success', false)
-            alert('Error')
+            actions.setSubmitting(false);
+            actions.setFieldValue('success', false);
+            alert('Error');
           })
-          .finally(() => actions.setSubmitting(false))
+          .finally(() => actions.setSubmitting(false));
       }}
     >
       {({ values, touched, errors, isSubmitting, setFieldValue, handleChange, handleBlur }) => (
@@ -321,7 +321,7 @@ const ContactForm = (props) => {
         </Form>
       )}
     </Formik>
-  )
-}
+  );
+};
 
-export default ContactForm
+export default ContactForm;
